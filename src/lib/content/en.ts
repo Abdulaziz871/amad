@@ -3,8 +3,9 @@ import type { SiteContent } from "./types";
 export const en: SiteContent = {
   brandName: "Amad",
   meta: {
-    title: "Amad - Innovation & Entrepreneurship Ecosystem by Alinma Bank",
-    description: "Amad walks with you from idea to venture — IP protection, founder development, and hands-on venture support, by Alinma Bank and Falak Investment Hub. Register now.",
+    title: "Amad Innovation & Entrepreneurship Ecosystem by Alinma Bank",
+    description:
+      "Amad is an innovation and entrepreneurship ecosystem by Alinma Bank, in partnership with Falak Investment Hub. Your gateway to protecting your idea, building your founder skills, and growing your venture, through three programs: Amad IP, Future Founders, and Venture Clinic.",
   },
   nav: {
     home: "Home",
@@ -167,6 +168,8 @@ export const en: SiteContent = {
       form: {
         title: "Apply to Future Founders",
         subtitle: "Complete your details below, and the program team will reach out about the upcoming cohort.",
+        embedUrl:
+          "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__56UnJFUMlhQSTdITFpDNU45MU9OT1lPRjVIR1k4Vi4u",
         extraFields: [
           { name: "city", label: "Preferred city", type: "select", options: ["Riyadh", "Jeddah", "Khobar"] },
           {
@@ -207,6 +210,8 @@ export const en: SiteContent = {
       form: {
         title: "Book your session at Venture Clinic",
         subtitle: "Complete your venture details, and the clinic team will reach out to schedule an intro session.",
+        embedUrl:
+          "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__56UnJFUMlhQSTdITFpDNU45MU9OT1lPRjVIR1k4Vi4u",
         extraFields: [
           {
             name: "fundingStage",

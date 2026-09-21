@@ -23,7 +23,7 @@ export function ProgramsQuickLinks({ locale, content }: { locale: Locale; conten
             <IconBadge icon={programIcons[program.slug]} tone={toneForIndex(i)} size="sm" />
             <span className="flex-1">
               <span className="block text-sm font-bold text-ink">{program.title}</span>
-              <span className="block text-xs text-brown" dir="ltr">
+              <span className="block text-xs text-brown rtl:text-right ltr:text-left" dir="ltr">
                 {program.englishName}
               </span>
             </span>

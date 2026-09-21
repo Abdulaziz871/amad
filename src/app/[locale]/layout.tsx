@@ -28,10 +28,23 @@ export async function generateMetadata({
   if (!isLocale(locale)) return {};
   const content = getContent(locale);
   return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
     title: content.meta.title,
     description: content.meta.description,
     alternates: {
       languages: { ar: "/ar", en: "/en" },
+    },
+    openGraph: {
+      title: content.meta.title,
+      description: content.meta.description,
+      locale: locale === "ar" ? "ar_SA" : "en_US",
+      type: "website",
+      siteName: content.brandName,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: content.meta.title,
+      description: content.meta.description,
     },
   };
 }

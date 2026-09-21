@@ -55,7 +55,7 @@ export function ProgramDetailView({
             <h1 className="mt-6 max-w-2xl text-3xl font-extrabold leading-tight text-ink sm:text-4xl lg:text-5xl">
               <HighlightText text={detail.title} highlight={content.brandName} />
             </h1>
-            <p className="mt-1.5 text-sm font-medium text-brown/70" dir="ltr">
+            <p className="mt-1.5 text-sm font-medium text-brown/70 rtl:text-right ltr:text-left" dir="ltr">
               {detail.englishName}
             </p>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-brown sm:text-lg">{detail.intro}</p>

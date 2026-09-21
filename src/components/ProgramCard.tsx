@@ -25,7 +25,7 @@ export function ProgramCard({
       <IconBadge icon={Icon} tone={tone} />
 
       <h3 className="mt-5 text-xl font-bold leading-snug text-ink">{program.title}</h3>
-      <p className="mt-0.5 text-xs font-medium text-brown/70" dir="ltr">
+      <p className="mt-0.5 text-xs font-medium text-brown/70 rtl:text-right ltr:text-left" dir="ltr">
         {program.englishName}
       </p>
       <p className="mt-3 text-sm leading-relaxed text-brown">{program.description}</p>

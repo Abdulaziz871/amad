@@ -3,8 +3,9 @@ import type { SiteContent } from "./types";
 export const ar: SiteContent = {
   brandName: "أمد",
   meta: {
-    title: "أمد - منظومة الابتكار وريادة الأعمال من بنك الإنماء",
-    description: "أمد: منظومة متكاملة ترافقك من الفكرة إلى المشروع، حماية الملكية الفكرية، تنمية المؤسسين، ودعم المشاريع الناشئة. سجّل الآن.",
+    title: "منظومة أمد للابتكار وريادة الأعمال من مصرف الإنماء",
+    description:
+      "منظومة أمد للابتكار وريادة الأعمال من مصرف الإنماء بالشراكة مع فلك للاستثمار. بوابتك لحماية فكرتك، وبناء مهاراتك كمؤسس، ونمو مشروعك، عبر ثلاثة برامج: أمد للملكية الفكرية، روّاد المستقبل، وعيادة المشاريع.",
   },
   nav: {
     home: "الرئيسية",
@@ -167,6 +168,8 @@ export const ar: SiteContent = {
       form: {
         title: "قدّم على برنامج روّاد المستقبل",
         subtitle: "أكمل بياناتك أدناه، وسيتواصل معك فريق البرنامج بخصوص الدفعة القادمة.",
+        embedUrl:
+          "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__56UnJFUMlhQSTdITFpDNU45MU9OT1lPRjVIR1k4Vi4u",
         extraFields: [
           { name: "city", label: "المدينة المفضلة", type: "select", options: ["الرياض", "جدة", "الخبر"] },
           {
@@ -207,6 +210,8 @@ export const ar: SiteContent = {
       form: {
         title: "احجز جلستك في عيادة المشاريع",
         subtitle: "أكمل بيانات مشروعك، وسيتواصل معك فريق العيادة لتحديد موعد الجلسة التمهيدية.",
+        embedUrl:
+          "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__56UnJFUMlhQSTdITFpDNU45MU9OT1lPRjVIR1k4Vi4u",
         extraFields: [
           {
             name: "fundingStage",
