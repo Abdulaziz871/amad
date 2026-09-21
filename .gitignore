@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local working/reference files (not part of the shipped site)
+/design-reference/
+/guideline_render/
+/dev.log
+/public/content/
