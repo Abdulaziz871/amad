@@ -36,7 +36,7 @@ export function PartnersSection({ content }: { content: SiteContent }) {
               <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
                 <Image
                   src="/logos/amad-mark-white.png"
-                  alt="أمد"
+                  alt="امد"
                   width={2113}
                   height={620}
                   unoptimized

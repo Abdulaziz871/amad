@@ -26,7 +26,7 @@ export function Footer({ locale, content }: { locale: Locale; content: SiteConte
         <div>
           <Image
             src="/logos/amad-lockup-white.png"
-            alt={locale === "ar" ? "أمد — من الإنماء" : "Amad — by Alinma"}
+            alt={locale === "ar" ? "امد — من الإنماء" : "Amad — by Alinma"}
             width={2113}
             height={885}
             className="h-14 w-auto"
