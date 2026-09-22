@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_Arabic } from "next/font/google";
+import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 import { locales, isLocale, dirFor, type Locale } from "@/i18n/config";
 import { getContent } from "@/lib/content";
@@ -9,10 +9,26 @@ import { SplashScreen } from "@/components/SplashScreen";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import "../globals.css";
 
-const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
-  variable: "--font-ibm-plex-sans-arabic",
-  subsets: ["arabic", "latin"],
-  weight: ["300", "400", "500", "600", "700"],
+const alinmaDisplay = localFont({
+  variable: "--font-alinma-display",
+  src: [
+    { path: "../../fonts/AlinmaDisplay-Light.woff2", weight: "300", style: "normal" },
+    { path: "../../fonts/AlinmaDisplay-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../../fonts/AlinmaDisplay-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../../fonts/AlinmaDisplay-Bold.woff2", weight: "700", style: "normal" },
+  ],
+  display: "swap",
+});
+
+const alinmaText = localFont({
+  variable: "--font-alinma-text",
+  src: [
+    { path: "../../fonts/AlinmaText-Light.woff2", weight: "300", style: "normal" },
+    { path: "../../fonts/AlinmaText-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../../fonts/AlinmaText-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../../fonts/AlinmaText-Bold.woff2", weight: "700", style: "normal" },
+  ],
+  display: "swap",
 });
 
 export function generateStaticParams() {
@@ -65,7 +81,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={dirFor(locale)}
-      className={`${ibmPlexSansArabic.variable} h-full antialiased`}
+      className={`${alinmaDisplay.variable} ${alinmaText.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-cream text-ink" suppressHydrationWarning>
         <SmoothScroll />

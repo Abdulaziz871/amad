@@ -2,8 +2,16 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
+import { Calendar } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useMotionValueEvent, useScroll, motion } from "motion/react";
+
+export interface ScrollRevealTone {
+  text: string;
+  ghost: string;
+  frameGhost: string;
+  badge: string;
+}
 
 export interface ScrollRevealItem {
   number: string;
@@ -11,6 +19,7 @@ export interface ScrollRevealItem {
   description: string;
   icon: React.ReactNode;
   gradientClass: string;
+  tone: ScrollRevealTone;
   image?: string | null;
 }
 
@@ -30,49 +39,67 @@ export function ScrollRevealContentA({ items, className, ...props }: Props) {
   return (
     <div className={cn("bg-white", className)} ref={trackRef} {...props}>
       <div className="container-amad">
-        <div className="relative flex w-full">
-          <div className="sticky top-24 flex h-[calc(100vh-6rem)] w-full flex-col items-start justify-center">
-            <div className="grid h-full w-full items-center gap-10 lg:grid-cols-2 lg:gap-16">
-              <div className="flex h-auto w-full flex-col justify-center gap-10">
+        <div className="relative flex flex-col w-full">
+          <div className="sticky top-24 flex min-h-[calc(100vh-6rem)] w-full flex-col items-start justify-center py-6">
+            <div className="mb-6 flex w-full gap-1.5 shrink-0" aria-hidden>
+              {items.map((item, i) => (
+                <div key={item.number} className="h-1 flex-1 overflow-hidden rounded-full bg-ink/10">
+                  <motion.div
+                    className="h-full rounded-full bg-accent"
+                    style={{ width: `${getBarPercentageHeight(scrollProgress, i / n, (i + 1) / n)}%` }}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="grid w-full items-center gap-10 lg:grid-cols-2 lg:gap-16">
+              <div className="relative min-h-[220px] w-full">
                 {items.map((item, i) => (
                   <PointItem
                     key={item.number}
                     item={item}
-                    thresholdStart={i / n}
-                    thresholdEnd={(i + 1) / n}
-                    scrollProgress={scrollProgress}
+                    isActive={scrollProgress >= i / n && scrollProgress < (i + 1) / n}
                   />
                 ))}
               </div>
 
-              <div className="relative hidden h-[70%] w-full items-center justify-center lg:flex">
-                {items.map((item, i) => (
-                  <div
-                    key={item.number}
-                    className={cn(
-                      "absolute inset-0 flex items-center justify-center overflow-hidden rounded-[2rem] shadow-2xl transition-opacity duration-500",
-                      !item.image && item.gradientClass,
-                      scrollProgress >= i / n && scrollProgress < (i + 1) / n
-                        ? "opacity-100"
-                        : "opacity-0"
-                    )}
-                  >
-                    {item.image ? (
-                      <>
-                        <Image src={item.image} alt="" fill unoptimized className="object-cover" />
-                        <div
-                          className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent"
-                          aria-hidden
-                        />
-                      </>
-                    ) : (
-                      item.icon
-                    )}
-                    <span className="absolute bottom-8 start-8 text-7xl font-black text-white/30">
-                      {item.number}
-                    </span>
-                  </div>
-                ))}
+              <div className="relative hidden h-[min(55vh,22rem)] w-full items-center justify-center lg:flex">
+                {items.map((item, i) => {
+                  const active = scrollProgress >= i / n && scrollProgress < (i + 1) / n;
+                  return (
+                    <div
+                      key={item.number}
+                      className={cn(
+                        "absolute inset-0 transition-opacity duration-500",
+                        active ? "opacity-100" : "opacity-0"
+                      )}
+                    >
+                      <span
+                        aria-hidden
+                        className={cn(
+                          "pointer-events-none absolute top-1/2 -end-16 z-0 -translate-y-1/2 select-none text-[13rem] font-black leading-none",
+                          item.tone.frameGhost
+                        )}
+                      >
+                        {item.number}
+                      </span>
+                      <div className="relative z-10 flex h-full w-full items-center justify-center overflow-hidden rounded-[2rem] shadow-2xl">
+                        <div className={cn("absolute inset-0", !item.image && item.gradientClass)}>
+                          {item.image ? (
+                            <>
+                              <Image src={item.image} alt="" fill unoptimized className="object-cover" />
+                              <div
+                                className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent"
+                                aria-hidden
+                              />
+                            </>
+                          ) : (
+                            <div className="flex h-full w-full items-center justify-center">{item.icon}</div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -83,35 +110,34 @@ export function ScrollRevealContentA({ items, className, ...props }: Props) {
   );
 }
 
-function PointItem({
-  item,
-  thresholdStart,
-  thresholdEnd,
-  scrollProgress,
-}: {
-  item: ScrollRevealItem;
-  thresholdStart: number;
-  thresholdEnd: number;
-  scrollProgress: number;
-}) {
-  const barHeightPercentage = getBarPercentageHeight(scrollProgress, thresholdStart, thresholdEnd);
-  const isActive = barHeightPercentage > 0;
-
+function PointItem({ item, isActive }: { item: ScrollRevealItem; isActive: boolean }) {
   return (
-    <div className={cn("flex w-full flex-col transition-opacity duration-300", isActive ? "opacity-100" : "opacity-40")}>
-      <div className="flex items-start gap-4">
-        <div className="relative flex w-8 shrink-0 flex-col items-center">
-          <div className="absolute top-0 h-full w-[2px] bg-ink/10" />
-          <motion.div
-            className="absolute top-0 w-[2px] bg-accent"
-            style={{ height: `${barHeightPercentage}%` }}
-          />
-        </div>
-        <div className="flex flex-col gap-1.5 pb-10">
-          <span className="text-sm font-bold text-copper">{item.number}</span>
-          <h3 className="text-xl font-bold text-ink sm:text-2xl">{item.title}</h3>
-          <p className="max-w-sm text-sm leading-relaxed text-brown sm:text-base">{item.description}</p>
-        </div>
+    <div
+      className={cn(
+        "absolute inset-0 flex w-full flex-col justify-center transition-opacity duration-500",
+        isActive ? "opacity-100" : "pointer-events-none opacity-0"
+      )}
+    >
+      <span
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute -top-10 -start-3 select-none text-[8rem] font-black leading-none sm:-top-14 sm:text-[10rem]",
+          item.tone.ghost
+        )}
+      >
+        {item.number}
+      </span>
+      <div className="relative flex flex-col gap-3">
+        <span
+          className={cn(
+            "inline-flex w-fit items-center gap-2 rounded-full border px-4 py-2 text-sm font-extrabold",
+            item.tone.badge
+          )}
+        >
+          <Calendar className="h-4 w-4" aria-hidden />
+          {item.description}
+        </span>
+        <h3 className="text-2xl font-bold leading-snug text-ink sm:text-3xl">{item.title}</h3>
       </div>
     </div>
   );

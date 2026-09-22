@@ -97,6 +97,7 @@ export interface SiteContent {
   };
   programsOverview: {
     learnMore: string;
+    pathwayNote: string;
   };
   programs: ProgramSummary[];
   programDetails: Record<ProgramSlug, ProgramDetail>;
@@ -131,6 +132,8 @@ export interface SiteContent {
     subtitle: string;
     nameLabel: string;
     emailLabel: string;
+    trackLabel: string;
+    trackPlaceholder: string;
     submit: string;
     notice: string;
   };

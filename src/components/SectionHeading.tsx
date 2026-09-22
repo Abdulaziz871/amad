@@ -29,7 +29,7 @@ export function SectionHeading({
           {eyebrow}
         </span>
       )}
-      <h2 className="mt-4 text-3xl font-bold leading-tight text-ink sm:text-4xl">
+      <h2 className="mt-4 text-4xl font-bold leading-tight text-ink sm:text-5xl">
         <HighlightText text={title} highlight={highlight} />
       </h2>
       {subtitle && <p className="mt-4 text-base leading-relaxed text-brown sm:text-lg">{subtitle}</p>}

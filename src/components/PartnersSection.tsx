@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal, RevealGroup, RevealItem } from "./Reveal";
-import { PatternCross, PatternBars } from "./ui/brand-patterns";
+import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import { journeyImage, partnerLogo } from "@/lib/images";
 import type { SiteContent } from "@/lib/content";
 
@@ -14,7 +14,7 @@ export function PartnersSection({ content }: { content: SiteContent }) {
 
   return (
     <section id="partners" className="relative overflow-hidden bg-white py-14 sm:py-20">
-      <PatternBars
+      <PatternFan
         className="pointer-events-none absolute top-8 start-6 h-12 w-12 -rotate-12 text-copper opacity-[0.12] sm:h-16 sm:w-16"
         aria-hidden
       />
@@ -35,17 +35,17 @@ export function PartnersSection({ content }: { content: SiteContent }) {
             <div className="absolute inset-0 flex flex-col items-center justify-end gap-8 px-6 py-12 sm:py-16">
               <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
                 <Image
-                  src="/logos/amad-mark-white.png"
+                  src="/logos/amad-mark-white-padded.png"
                   alt="امد"
-                  width={2113}
-                  height={620}
+                  width={2547}
+                  height={1054}
                   unoptimized
                   className="h-7 w-auto"
                 />
                 <span className="hidden h-8 w-px bg-white/20 sm:block" aria-hidden />
                 <div className="flex shrink-0 items-center gap-5 border-y border-white/25 py-2.5 sm:gap-6">
                   {partners.flatMap((partner, i) => {
-                    const logo = partnerLogo(partner.key);
+                    const logo = partnerLogo(partner.key, "white");
                     const mark = logo ? (
                       <Image
                         key={partner.name}
@@ -76,7 +76,7 @@ export function PartnersSection({ content }: { content: SiteContent }) {
 
         <RevealGroup className="mt-6 grid gap-6 sm:grid-cols-2">
           {partners.map((partner) => {
-            const logo = partnerLogo(partner.key);
+            const logo = partnerLogo(partner.key, "white");
             return (
               <RevealItem
                 key={partner.name}

@@ -54,6 +54,10 @@ export function ctaImage(name: string): string | null {
   return findFile("images", "cta", name, photoExtensions);
 }
 
-export function partnerLogo(name: string): string | null {
+export function partnerLogo(name: string, tone?: "white" | "black" | "dark"): string | null {
+  if (tone) {
+    const toned = findFile("logos", "partners", `${name}-${tone}`, logoExtensions);
+    if (toned) return toned;
+  }
   return findFile("logos", "partners", name, logoExtensions);
 }

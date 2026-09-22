@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CheckCircle2, ArrowLeft } from "lucide-react";
 import { Button } from "./Button";
 import { Reveal } from "./Reveal";
-import { PatternCross, PatternBars } from "./ui/brand-patterns";
+import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import type { SiteContent } from "@/lib/content";
 
 export function FinalCta({ content, backgroundImage }: { content: SiteContent; backgroundImage?: string | null }) {
@@ -26,7 +26,7 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
               <div className="absolute inset-0 bg-ink/85" aria-hidden />
             </>
           )}
-          <PatternBars
+          <PatternFan
             className="pointer-events-none absolute top-6 end-6 h-14 w-14 text-white opacity-20 sm:h-20 sm:w-20"
             aria-hidden
           />
@@ -35,7 +35,7 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
             aria-hidden
           />
           <div className="relative mx-auto max-w-2xl text-center">
-            <h2 className="text-2xl font-bold sm:text-3xl">{content.finalCta.title}</h2>
+            <h2 className="text-4xl font-bold sm:text-5xl">{content.finalCta.title}</h2>
             <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-base">{content.finalCta.subtitle}</p>
           </div>
 
@@ -46,7 +46,7 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
                 <p className="text-sm font-semibold text-white">{content.finalCta.notice}</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
+              <form onSubmit={handleSubmit} className="grid gap-3 sm:grid-cols-2">
                 <label className="sr-only" htmlFor="finalcta-name">
                   {content.finalCta.nameLabel}
                 </label>
@@ -55,7 +55,7 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
                   required
                   type="text"
                   placeholder={content.finalCta.nameLabel}
-                  className="min-w-0 flex-1 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white placeholder:text-white/50 outline-none backdrop-blur-sm focus:border-accent"
+                  className="min-w-0 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white placeholder:text-white/50 outline-none backdrop-blur-sm focus:border-accent"
                 />
                 <label className="sr-only" htmlFor="finalcta-email">
                   {content.finalCta.emailLabel}
@@ -65,9 +65,27 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
                   required
                   type="email"
                   placeholder={content.finalCta.emailLabel}
-                  className="min-w-0 flex-1 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white placeholder:text-white/50 outline-none backdrop-blur-sm focus:border-accent"
+                  className="min-w-0 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white placeholder:text-white/50 outline-none backdrop-blur-sm focus:border-accent"
                 />
-                <Button type="submit" variant="primary" className="shrink-0">
+                <label className="sr-only" htmlFor="finalcta-track">
+                  {content.finalCta.trackLabel}
+                </label>
+                <select
+                  id="finalcta-track"
+                  required
+                  defaultValue=""
+                  className="min-w-0 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white outline-none backdrop-blur-sm focus:border-accent sm:col-span-2 [&>option]:text-ink"
+                >
+                  <option value="" disabled>
+                    {content.finalCta.trackPlaceholder}
+                  </option>
+                  {content.programs.map((program) => (
+                    <option key={program.slug} value={program.slug}>
+                      {program.title}
+                    </option>
+                  ))}
+                </select>
+                <Button type="submit" variant="primary" className="w-full sm:col-span-2">
                   {content.finalCta.submit}
                   <ArrowLeft className="h-4 w-4 ltr:rotate-180" aria-hidden />
                 </Button>

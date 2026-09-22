@@ -2,14 +2,14 @@ import Image from "next/image";
 import { ButtonLink } from "./Button";
 import { Reveal } from "./Reveal";
 import { HighlightText } from "./HighlightWord";
-import { PatternCross, PatternBars } from "./ui/brand-patterns";
+import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/lib/content";
 
 export function Hero({ locale, content }: { locale: Locale; content: SiteContent }) {
   return (
     <section className="relative overflow-hidden bg-cream">
-      <PatternBars
+      <PatternFan
         className="pointer-events-none absolute top-6 end-6 h-14 w-14 text-ink opacity-25 sm:h-20 sm:w-20"
         aria-hidden
       />

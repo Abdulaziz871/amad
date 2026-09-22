@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/lib/content";
-import { PatternBars, PatternCross } from "./ui/brand-patterns";
+import { PatternFan, PatternCross } from "./ui/brand-patterns";
 
 export function Footer({ locale, content }: { locale: Locale; content: SiteContent }) {
   const links = [
@@ -18,17 +18,17 @@ export function Footer({ locale, content }: { locale: Locale; content: SiteConte
         className="pointer-events-none absolute -end-6 -top-6 h-28 w-28 rotate-6 text-white opacity-[0.06] sm:h-36 sm:w-36"
         aria-hidden
       />
-      <PatternBars
+      <PatternFan
         className="pointer-events-none absolute bottom-8 start-6 h-10 w-10 text-white opacity-[0.08] sm:h-14 sm:w-14"
         aria-hidden
       />
       <div className="container-amad relative grid gap-10 py-14 md:grid-cols-[1.2fr_1fr_1fr]">
         <div>
           <Image
-            src="/logos/amad-lockup-white.png"
+            src="/logos/amad-lockup-white-padded.png"
             alt={locale === "ar" ? "امد — من الإنماء" : "Amad — by Alinma"}
-            width={2113}
-            height={885}
+            width={2643}
+            height={1415}
             className="h-14 w-auto"
             unoptimized
           />

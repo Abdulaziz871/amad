@@ -20,18 +20,21 @@ export function InteractiveAccordion({
   defaultOpenId?: string | null;
   className?: string;
 }) {
-  const [activeId, setActiveId] = useState<string | null>(defaultOpenId ?? items[0]?.id ?? null);
+  const [activeId, setActiveId] = useState<string | null>(defaultOpenId ?? null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+  const isOdd = items.length % 2 === 1;
 
   return (
     <div className={cn("w-full", className)}>
-      <div className="space-y-0">
-        {items.map((item) => {
+      <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-x-10">
+        {items.map((item, i) => {
           const isActive = activeId === item.id;
           const isHovered = hoveredId === item.id;
+          const isLastOdd = isOdd && i === items.length - 1;
 
           return (
-            <div key={item.id}>
+            <div key={item.id} className={cn(isLastOdd && "sm:col-span-2")}>
               <motion.button
                 onClick={() => setActiveId(isActive ? null : item.id)}
                 onMouseEnter={() => setHoveredId(item.id)}

@@ -16,6 +16,16 @@ export function toneForIndex(i: number): IconTone {
   return tones[i % tones.length];
 }
 
+const slugTones: Record<string, IconTone> = {
+  ip: "ink",
+  bootcamps: "copper",
+  "venture-clinic": "accent",
+};
+
+export function toneForSlug(slug: string): IconTone {
+  return slugTones[slug] ?? "accent";
+}
+
 export function IconBadge({
   icon: Icon,
   tone = "accent",

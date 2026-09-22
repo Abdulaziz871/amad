@@ -1,5 +1,20 @@
 import type { SVGProps } from "react";
 
+/** ديمومة — Lavender fan pattern, from the official Amad brand guideline. */
+export function PatternFan(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
+      <rect x="2" y="2" width="4" height="20" rx="2" />
+      <rect x="8" y="2" width="4" height="3" rx="1.5" />
+      <rect x="8" y="7" width="4" height="15" rx="2" />
+      <rect x="14" y="2" width="4" height="2" rx="1" />
+      <rect x="14" y="11" width="4" height="11" rx="2" />
+      <rect x="20" y="2" width="2.5" height="2.5" rx="1.25" />
+      <rect x="20" y="13" width="2.5" height="9" rx="1.25" />
+    </svg>
+  );
+}
+
 /** مساهمة — Copper woven-cross pattern, from the official Amad brand guideline. */
 export function PatternCross(props: SVGProps<SVGSVGElement>) {
   const cells = [
@@ -17,17 +32,6 @@ export function PatternCross(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-/** ادراك — Deep Blue bars pattern, from the official Amad brand guideline. */
-export function PatternBars(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
-      <rect x="2" y="2.75" width="20" height="4.5" rx="2.25" />
-      <rect x="2" y="9.75" width="20" height="4.5" rx="2.25" />
-      <rect x="2" y="16.75" width="20" height="4.5" rx="2.25" />
-    </svg>
-  );
-}
-
 /**
  * Decorative scatter of the two brand pattern glyphs —
  * used as a section watermark, matching the guideline's tinted-panel usage.
@@ -37,7 +41,7 @@ export function BrandPatternDecor({ className = "" }: { className?: string }) {
     <div className={`pointer-events-none select-none ${className}`} aria-hidden>
       <div className="flex items-center gap-6 opacity-20">
         <PatternCross className="h-12 w-12 text-copper" />
-        <PatternBars className="h-12 w-12 text-ink" />
+        <PatternFan className="h-12 w-12 text-accent" />
       </div>
     </div>
   );

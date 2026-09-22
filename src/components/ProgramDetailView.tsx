@@ -1,17 +1,37 @@
 import Image from "next/image";
 import { Check, ArrowLeft } from "lucide-react";
 import { ButtonLink } from "./Button";
-import { IconBadge } from "./IconBadge";
+import { IconBadge, toneForSlug } from "./IconBadge";
 import { ProgramApplicationForm } from "./ProgramApplicationForm";
 import { Reveal, RevealGroup, RevealItem } from "./Reveal";
 import { HighlightText } from "./HighlightWord";
-import { PatternBars, PatternCross } from "./ui/brand-patterns";
+import { PatternFan, PatternCross } from "./ui/brand-patterns";
 import { cn } from "@/lib/utils";
 import type { Locale } from "@/i18n/config";
 import type { ProgramDetail, SiteContent } from "@/lib/content";
 import { programIcons } from "@/lib/program-icons";
 
-const stepColors = ["bg-accent", "bg-copper", "bg-ink", "bg-accent-dark"];
+const stageColors = ["bg-accent", "bg-copper", "bg-ink", "bg-accent-dark"];
+const heroGradient: Record<string, string> = {
+  ink: "from-ink via-[#0a3a54] to-ink",
+  copper: "from-copper via-[#e0b0a1] to-copper",
+  accent: "from-accent via-accent-dark to-ink",
+};
+const toneText: Record<string, string> = {
+  ink: "text-ink",
+  copper: "text-copper",
+  accent: "text-accent",
+};
+const toneButton: Record<string, string> = {
+  ink: "!bg-ink hover:!bg-[#0a3a54] !shadow-[0_10px_30px_-10px_rgba(0,33,52,0.5)]",
+  copper: "!bg-copper hover:!bg-[#b87c6b] !shadow-[0_10px_30px_-10px_rgba(205,144,126,0.5)]",
+  accent: "!bg-accent hover:!bg-accent-dark !shadow-[0_10px_30px_-10px_rgba(131,127,216,0.6)]",
+};
+const toneOnDark: Record<string, string> = {
+  ink: "!bg-white/10 !text-white",
+  copper: "!bg-copper/20 !text-copper",
+  accent: "!bg-accent/20 !text-accent",
+};
 
 export function ProgramDetailView({
   locale,
@@ -25,13 +45,14 @@ export function ProgramDetailView({
   heroImage?: string | null;
 }) {
   const Icon = programIcons[detail.slug];
+  const tone = toneForSlug(detail.slug);
   const [audienceLabel, ...audienceRest] = detail.audience.split(":");
   const audienceText = audienceRest.join(":").trim();
 
   return (
     <>
       <section className="relative overflow-hidden bg-cream">
-        <PatternBars
+        <PatternFan
           className="pointer-events-none absolute top-6 end-6 h-14 w-14 text-ink opacity-[0.14] sm:h-20 sm:w-20"
           aria-hidden
         />
@@ -50,23 +71,30 @@ export function ProgramDetailView({
               {content.nav.programs}
             </ButtonLink>
 
-            <IconBadge icon={Icon} tone="accent" size="lg" />
+            <IconBadge icon={Icon} tone={tone} size="lg" />
 
             <h1 className="mt-6 max-w-2xl text-3xl font-extrabold leading-tight text-ink sm:text-4xl lg:text-5xl">
               <HighlightText text={detail.title} highlight={content.brandName} />
             </h1>
-            <p className="mt-1.5 text-sm font-medium text-brown/70 rtl:text-right ltr:text-left" dir="ltr">
-              {detail.englishName}
-            </p>
+            {locale !== "ar" && (
+              <p className="mt-1.5 text-sm font-medium text-brown/70 rtl:text-right ltr:text-left" dir="ltr">
+                {detail.englishName}
+              </p>
+            )}
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-brown sm:text-lg">{detail.intro}</p>
 
-            <ButtonLink href="#apply" variant="primary" className="mt-9">
+            <ButtonLink href="#apply" variant="primary" className={cn("mt-9", toneButton[tone])}>
               {detail.cta}
             </ButtonLink>
           </Reveal>
 
           <Reveal delay={0.15} y={24} className="relative mx-auto hidden w-full max-w-sm lg:block">
-            <div className="relative aspect-[4/5] w-full [clip-path:polygon(8%_0%,100%_0%,92%_100%,0%_100%)] bg-linear-to-br from-accent via-accent-dark to-ink drop-shadow-2xl">
+            <div
+              className={cn(
+                "relative aspect-[4/5] w-full [clip-path:polygon(8%_0%,100%_0%,92%_100%,0%_100%)] bg-linear-to-br drop-shadow-2xl",
+                heroGradient[tone] ?? heroGradient.accent
+              )}
+            >
               {heroImage ? (
                 <Image src={heroImage} alt="" fill unoptimized className="object-cover" />
               ) : (
@@ -87,11 +115,11 @@ export function ProgramDetailView({
       <section className="bg-white py-12 sm:py-16">
         <div className="container-amad grid gap-6 lg:grid-cols-2 lg:items-stretch">
           <Reveal className="relative flex flex-col justify-center overflow-hidden rounded-3xl bg-ink p-8 text-white sm:p-10">
-            <PatternBars
+            <PatternFan
               className="pointer-events-none absolute -end-4 -top-4 h-24 w-24 text-white opacity-[0.1] sm:h-32 sm:w-32"
               aria-hidden
             />
-            <IconBadge icon={Icon} tone="accent" />
+            <IconBadge icon={Icon} tone={tone} className={toneOnDark[tone]} />
             <p className="mt-6 text-xs font-semibold uppercase tracking-wide text-white/50">
               {audienceLabel}
             </p>
@@ -107,7 +135,7 @@ export function ProgramDetailView({
             <ul className="relative mt-5 divide-y divide-ink/8">
               {detail.benefits.items.map((item) => (
                 <li key={item} className="flex items-start gap-3 py-3.5 first:pt-0 last:pb-0">
-                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden />
+                  <Check className={cn("mt-0.5 h-5 w-5 shrink-0", toneText[tone])} aria-hidden />
                   <span className="text-sm leading-relaxed text-ink sm:text-base">{item}</span>
                 </li>
               ))}
@@ -137,7 +165,7 @@ export function ProgramDetailView({
                   <span
                     className={cn(
                       "flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-extrabold text-white shadow-lg ring-4 ring-cream transition-transform duration-300 hover:scale-110",
-                      stepColors[i % stepColors.length]
+                      stageColors[i % stageColors.length]
                     )}
                   >
                     {String(i + 1).padStart(2, "0")}
@@ -150,7 +178,7 @@ export function ProgramDetailView({
         </div>
       </section>
 
-      <ProgramApplicationForm detail={detail} content={content} />
+      <ProgramApplicationForm detail={detail} content={content} tone={tone} />
     </>
   );
 }

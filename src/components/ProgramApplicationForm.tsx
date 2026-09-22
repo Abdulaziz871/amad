@@ -4,21 +4,47 @@ import { useState } from "react";
 import { CheckCircle2, Upload } from "lucide-react";
 import { Button } from "./Button";
 import { Reveal } from "./Reveal";
-import { PatternBars } from "./ui/brand-patterns";
+import { PatternFan } from "./ui/brand-patterns";
+import { cn } from "@/lib/utils";
 import type { ProgramDetail, SiteContent } from "@/lib/content";
+import type { IconTone } from "./IconBadge";
 
-const fieldClass =
-  "rounded-xl border border-ink/15 bg-cream px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-accent";
+const fieldFocus: Record<string, string> = {
+  ink: "focus:border-ink",
+  copper: "focus:border-copper",
+  accent: "focus:border-accent",
+};
+const toneText: Record<string, string> = {
+  ink: "text-ink",
+  copper: "text-copper",
+  accent: "text-accent",
+};
+const toneAccentInput: Record<string, string> = {
+  ink: "accent-ink",
+  copper: "accent-copper",
+  accent: "accent-accent",
+};
+const toneButton: Record<string, string> = {
+  ink: "!bg-ink hover:!bg-[#0a3a54]",
+  copper: "!bg-copper hover:!bg-[#b87c6b]",
+  accent: "!bg-accent hover:!bg-accent-dark",
+};
 
 export function ProgramApplicationForm({
   detail,
   content,
+  tone = "accent",
 }: {
   detail: ProgramDetail;
   content: SiteContent;
+  tone?: IconTone;
 }) {
   const [submitted, setSubmitted] = useState(false);
   const labels = content.applicationForm;
+  const fieldClass = cn(
+    "rounded-xl border border-ink/15 bg-cream px-4 py-3 text-sm text-ink outline-none transition-colors",
+    fieldFocus[tone]
+  );
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -27,7 +53,7 @@ export function ProgramApplicationForm({
 
   return (
     <section id="apply" className="relative overflow-hidden scroll-mt-20 py-12 sm:py-16">
-      <PatternBars
+      <PatternFan
         className="pointer-events-none absolute bottom-6 start-6 h-12 w-12 -rotate-3 text-ink opacity-[0.1] sm:h-16 sm:w-16"
         aria-hidden
       />
@@ -43,17 +69,20 @@ export function ProgramApplicationForm({
           </div>
 
           {detail.form.embedUrl ? (
-            <iframe
-              src={detail.form.embedUrl}
-              title={detail.form.title}
-              className="mt-8 h-[850px] w-full rounded-2xl border border-ink/8"
-              loading="lazy"
-            >
-              {content.meta.title}
-            </iframe>
+            <div className="relative mt-8 h-[820px] w-full overflow-hidden rounded-2xl border border-ink/10 bg-cream">
+              <iframe
+                src={detail.form.embedUrl}
+                title={detail.form.title}
+                className="absolute inset-x-0 top-0 w-full border-0"
+                style={{ height: 970 }}
+                loading="lazy"
+              >
+                {content.meta.title}
+              </iframe>
+            </div>
           ) : submitted ? (
             <div className="flex flex-col items-center py-10 text-center">
-              <CheckCircle2 className="h-12 w-12 text-accent" aria-hidden />
+              <CheckCircle2 className={cn("h-12 w-12", toneText[tone])} aria-hidden />
               <p className="mt-4 text-lg font-bold text-ink">{labels.successTitle}</p>
               <p className="mt-2 text-sm text-brown">{labels.successBody}</p>
             </div>
@@ -138,13 +167,18 @@ export function ProgramApplicationForm({
 
               <div className="sm:col-span-2">
                 <label className="flex items-start gap-2.5 text-xs leading-relaxed text-brown">
-                  <input required type="checkbox" name="agree" className="mt-0.5 h-4 w-4 shrink-0 accent-accent" />
+                  <input
+                    required
+                    type="checkbox"
+                    name="agree"
+                    className={cn("mt-0.5 h-4 w-4 shrink-0", toneAccentInput[tone])}
+                  />
                   {labels.agreeLabel}
                 </label>
               </div>
 
               <div className="sm:col-span-2">
-                <Button type="submit" variant="primary" className="w-full sm:w-auto">
+                <Button type="submit" variant="primary" className={cn("w-full sm:w-auto", toneButton[tone])}>
                   {labels.submit}
                 </Button>
               </div>
