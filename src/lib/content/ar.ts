@@ -333,7 +333,7 @@ export const ar: SiteContent = {
   },
   gallery: {
     title: "قصص نجاحنا",
-    videoCaption: "لحظات من حفل نفخر بـه",
+    videoCaption: "لحظات من أثر نفخر بـه",
   },
   partners: {
     title: "الشركاء",
