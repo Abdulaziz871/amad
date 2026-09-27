@@ -47,7 +47,7 @@ export function ProgramCard({
   return (
     <Link
       href={href}
-      className="group relative isolate flex h-[27rem] flex-col justify-end overflow-hidden rounded-3xl shadow-[0_24px_60px_-30px_rgba(12,35,65,0.45)] outline-none sm:h-[30rem]"
+      className="group relative isolate flex h-[30rem] flex-col justify-end overflow-hidden rounded-3xl shadow-[0_24px_60px_-30px_rgba(12,35,65,0.45)] outline-none sm:h-[34rem]"
     >
       {image ? (
         <Image
@@ -72,7 +72,7 @@ export function ProgramCard({
 
       <span
         className={cn(
-          "absolute top-5 start-5 flex h-11 w-11 items-center justify-center rounded-2xl backdrop-blur-md transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110 [&_svg]:h-5 [&_svg]:w-5",
+          "absolute top-5 start-5 flex h-11 w-11 items-center justify-center rounded-2xl backdrop-blur-md transition-all duration-500 [@media(hover:hover)]:group-hover:-translate-y-2 [@media(hover:hover)]:group-hover:opacity-0 [&_svg]:h-5 [&_svg]:w-5",
           toneChip[tone]
         )}
       >

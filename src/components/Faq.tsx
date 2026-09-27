@@ -1,7 +1,7 @@
 import { Reveal } from "./Reveal";
 import { HeadingAccent } from "./SectionHeading";
 import { InteractiveAccordion, type AccordionItem } from "./ui/interactive-accordion";
-import { PatternFan, PatternCross, PatternBars } from "./ui/brand-patterns";
+import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import type { FaqItem } from "@/lib/content";
 
 export function Faq({ title, items }: { title: string; items: FaqItem[] }) {
@@ -15,12 +15,12 @@ export function Faq({ title, items }: { title: string; items: FaqItem[] }) {
   return (
     <section id="faq" className="relative overflow-hidden scroll-mt-24 py-12 sm:py-16">
       <div className="section-glow section-glow--light" aria-hidden />
-      <PatternFan
-        className="pointer-events-none absolute top-2 end-6 h-9 w-9 rotate-3 text-copper opacity-[0.2] sm:h-14 sm:w-14 sm:end-10"
+      <PatternCross
+        className="pointer-events-none absolute bottom-6 start-6 h-12 w-12 -rotate-6 text-ink opacity-[0.14] sm:h-20 sm:w-20"
         aria-hidden
       />
-      <PatternBars
-        className="pointer-events-none absolute top-6 end-[12%] h-32 w-32 -rotate-6 text-accent opacity-[0.05] sm:h-48 sm:w-48"
+      <PatternFan
+        className="pointer-events-none absolute top-2 end-6 h-9 w-9 rotate-3 text-copper opacity-[0.2] sm:h-14 sm:w-14 sm:end-10"
         aria-hidden
       />
       <div className="container-amad relative">
@@ -32,10 +32,6 @@ export function Faq({ title, items }: { title: string; items: FaqItem[] }) {
           <InteractiveAccordion items={accordionItems} />
         </Reveal>
       </div>
-      <PatternCross
-        className="pointer-events-none absolute bottom-6 start-6 h-12 w-12 -rotate-6 text-ink opacity-[0.14] sm:h-20 sm:w-20"
-        aria-hidden
-      />
     </section>
   );
 }

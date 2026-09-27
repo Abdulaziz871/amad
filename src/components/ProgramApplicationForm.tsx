@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CheckCircle2, Upload } from "lucide-react";
 import { Button } from "./Button";
 import { Reveal } from "./Reveal";
-import { PatternFan, PatternBars } from "./ui/brand-patterns";
+import { PatternFan } from "./ui/brand-patterns";
 import { cn } from "@/lib/utils";
 import type { ProgramDetail, SiteContent } from "@/lib/content";
 import type { IconTone } from "./IconBadge";
@@ -54,10 +54,6 @@ export function ProgramApplicationForm({
   return (
     <section id="apply" className="relative overflow-hidden scroll-mt-20 py-12 sm:py-16">
       <div className="section-glow section-glow--light" aria-hidden />
-      <PatternBars
-        className="pointer-events-none absolute top-6 end-6 h-32 w-32 rotate-6 text-ink opacity-[0.05] sm:h-44 sm:w-44"
-        aria-hidden
-      />
       <PatternFan
         className={cn(
           "pointer-events-none absolute bottom-6 start-6 h-9 w-9 -rotate-3 opacity-[0.2] sm:h-14 sm:w-14",

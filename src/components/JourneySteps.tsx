@@ -2,7 +2,7 @@ import { Flag, Rocket, ShieldCheck, Trophy } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal } from "./Reveal";
 import { ScrollRevealContentA, type ScrollRevealItem } from "./ui/scroll-reveal-content-a";
-import { PatternFan, PatternCross, PatternBars } from "./ui/brand-patterns";
+import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import { journeyImage } from "@/lib/images";
 import type { SiteContent } from "@/lib/content";
 
@@ -89,13 +89,12 @@ export function JourneySteps({ content }: { content: SiteContent }) {
           className="pointer-events-none absolute top-4 start-6 h-9 w-9 rotate-6 text-accent opacity-[0.2] sm:h-14 sm:w-14 sm:start-10"
           aria-hidden
         />
-        <PatternBars
-          className="pointer-events-none absolute top-4 end-4 h-32 w-32 -rotate-12 text-copper opacity-[0.05] sm:h-56 sm:w-56"
+        <PatternFan
+          className="pointer-events-none absolute top-6 end-6 h-12 w-12 -rotate-6 text-accent opacity-[0.2] sm:h-16 sm:w-16"
           aria-hidden
         />
         <Reveal>
           <SectionHeading
-            eyebrow={content.journey.eyebrow}
             title={content.journey.title}
             highlight={content.brandName}
             align="center"

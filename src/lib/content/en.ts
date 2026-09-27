@@ -19,18 +19,20 @@ export const en: SiteContent = {
   },
   hero: {
     eyebrow: "In partnership between Alinma Bank and Falak Holding",
-    title: "Where an idea begins —\nand its impact endures.",
-    titleHighlight: "impact",
-    subtitle: "Amad is an integrated innovation and entrepreneurship ecosystem that walks with you step by step: protecting your idea, building you as a founder, and growing your venture.",
+    title: "Your gateway to building\na sustainable future",
+    titleHighlight: "a sustainable future",
+    subtitle: "Amad, the innovation and entrepreneurship ecosystem by Alinma Bank",
     ctaPrimary: "Register your interest",
     ctaSecondary: "Explore the programs",
+    ctaVideo: "Watch the video",
+    closeVideo: "Close video",
     programsStripLabel: "Amad's three programs",
   },
   about: {
     title: "About Amad",
     paragraphs: [
-      "Amad is not a one-off competition. It is a year-long innovation and entrepreneurship ecosystem launched by Alinma Bank in partnership with Falak Holding, connecting three programs into one journey: protecting intellectual property, developing future founders, and supporting ventures all the way to the final showcase.",
-      "We believe innovation needs more than enthusiasm — it needs trusted knowledge, real enablement, and companionship that doesn't stop at the finish line. Amad is built to be your reference in the field before it is your program in the journey.",
+      "Amad is not a one-off competition. It is a year-long innovation and entrepreneurship ecosystem.",
+      "launched by Alinma Bank in partnership with Falak Holding, connecting three programs into one journey: protecting intellectual property, developing future founders, and supporting ventures all the way to the final showcase, We believe innovation needs more than enthusiasm — it needs trusted knowledge, real enablement, and companionship that doesn't stop at the finish line. Amad is built to be your reference in the field before it is your program in the journey.",
     ],
   },
   whyAmad: {
@@ -81,11 +83,11 @@ export const en: SiteContent = {
       slug: "ip",
       title: "Amad IP",
       englishName: "Amad IP",
-      description: "Your idea is an asset worth protecting. Amad IP walks innovators through understanding their rights, protecting their ideas, and turning them into opportunities ready to grow.",
+      description: "Amad IP helps researchers and innovators who hold intellectual property turn their innovations into applicable solutions for the fintech sector, by connecting them to real market challenges and charting a clear commercial path for each.",
       features: [
-        "IP fundamentals workshops",
-        "Specialist guidance on registration and protection",
-        "Market-readiness assessment",
+        "Awareness workshops on IP fundamentals",
+        "Aligning innovation with the financial sector's challenges and priorities",
+        "Market-feasibility validation and business-model building",
       ],
       cta: "Protect your idea",
     },
@@ -93,10 +95,10 @@ export const en: SiteContent = {
       slug: "bootcamps",
       title: "Future Founders",
       englishName: "Future Founders",
-      description: "Talent alone doesn't make a founder — focus and practice do. Future Founders is a hands-on program delivered across three cities, taking young talent from curiosity to a real first step in founding.",
+      description: "Future Founders is an intensive, in-person fintech bootcamp held in three cities across the Kingdom. It targets university students and early-stage innovators, taking them on a hands-on journey from discovering the problem to pitching a complete idea to a judging panel. Join solo or as a team — whether you bring an idea or a skill to add to a team.",
       features: [
-        "Intensive bootcamps in your city",
-        "Practical founding skills from idea to first prototype",
+        "A hands-on journey from discovering the problem to developing and validating the idea",
+        "Practical founding skills, from idea to prototype",
         "Mentorship from founders and sector experts",
       ],
       cta: "Start your founder journey",
@@ -105,11 +107,11 @@ export const en: SiteContent = {
       slug: "venture-clinic",
       title: "Venture Clinic",
       englishName: "Venture Clinic",
-      description: "Every startup needs an honest look at its growth. Venture Clinic runs diagnostic sessions and specialist mentorship that pinpoint strengths and gaps, then walks with founders all the way to the final showcase.",
+      description: "A pre-acceleration program for teams that qualify from Future Founders. It starts with an in-depth diagnosis of each venture, then supports founders as they build the first version of their product and test it with real users, all the way to the final showcase.",
       features: [
-        "One-on-one venture diagnostic sessions",
-        "Specialist mentorship across product, growth, and funding",
-        "Proximity to the partners' banking and investment expertise",
+        "One-on-one diagnosis and a tailored development plan for each team",
+        "Building and refining the product prototype through specialist mentorship sessions",
+        "Testing the solution with real users and partners, aligned with the financial sector's priorities",
       ],
       cta: "Book your session",
     },
@@ -119,6 +121,7 @@ export const en: SiteContent = {
       slug: "ip",
       englishName: "Amad IP",
       title: "Amad IP",
+      tagline: "From innovation, we create impact",
       intro: "Your idea is an asset worth protecting. Amad IP walks innovators through understanding their rights, protecting their ideas, and turning them into opportunities ready to grow.",
       audience: "Who it's for: innovators, researchers, owners of tech ideas, and startups that need to protect their intellectual assets.",
       benefits: {
@@ -128,6 +131,36 @@ export const en: SiteContent = {
           "Specialist guidance on registration and protection",
           "Market-readiness assessment",
           "A direct line into the ecosystem's programs and opportunities",
+        ],
+      },
+      criteria: {
+        title: "Admission criteria",
+        subtitle: "Key evaluation criteria for joining Amad IP",
+        items: [
+          {
+            title: "Innovation & technical distinction",
+            description: "How distinctive the innovation is, in idea or technology, compared with existing solutions.",
+          },
+          {
+            title: "Strength of the IP",
+            description: "How clear and strong the intellectual property rights are, and how protectable and commercially usable they are.",
+          },
+          {
+            title: "Commercial potential",
+            description: "How readily the innovation can become a viable, marketable product or solution.",
+          },
+          {
+            title: "Strategic fit with fintech",
+            description: "How closely the innovation relates to fintech and financial services.",
+          },
+          {
+            title: "Technical & commercial readiness",
+            description: "How mature the innovation is and how ready it is to move toward development and commercial application.",
+          },
+          {
+            title: "Team capability & commitment",
+            description: "The innovators' ability to develop it, and their commitment to the program journey and to working with mentors and experts.",
+          },
         ],
       },
       journey: {
@@ -160,12 +193,13 @@ export const en: SiteContent = {
           },
         ],
       },
-      cta: "Protect your idea",
+      cta: "Join us",
     },
     bootcamps: {
       slug: "bootcamps",
       englishName: "Future Founders",
       title: "Future Founders",
+      tagline: "Where the idea begins, and the impact endures",
       intro: "Talent alone doesn't make a founder — focus and practice do. Future Founders is a hands-on program delivered across three cities, taking young talent from curiosity to a real first step in founding.",
       audience: "Who it's for: students, graduates, and young talent drawn to entrepreneurship and fintech.",
       benefits: {
@@ -175,6 +209,28 @@ export const en: SiteContent = {
           "Practical founding skills from idea to first prototype",
           "Mentorship from founders and sector experts",
           "A path to qualify for Venture Clinic and continue the journey",
+        ],
+      },
+      criteria: {
+        title: "Admission criteria",
+        subtitle: "Key requirements to join Future Founders",
+        items: [
+          {
+            title: "Interest in fintech",
+            description: "The startup offers or plans fintech solutions — including payments, lending, insurance, open banking, or related services.",
+          },
+          {
+            title: "Target audience",
+            description: "A university student or recent graduate looking to develop their skills and build a path in entrepreneurship.",
+          },
+          {
+            title: "An idea or problem worth solving",
+            description: "Has an idea, a problem, or an opportunity that can be developed into an innovative venture.",
+          },
+          {
+            title: "Team commitment",
+            description: "The team must have at least one member ready to attend all program activities.",
+          },
         ],
       },
       journey: {
@@ -207,12 +263,13 @@ export const en: SiteContent = {
           },
         ],
       },
-      cta: "Start your founder journey",
+      cta: "Start your journey",
     },
     "venture-clinic": {
       slug: "venture-clinic",
       englishName: "Venture Clinic",
       title: "Venture Clinic",
+      tagline: "From a promising venture, to impact that grows",
       intro: "Every startup needs an honest look at its growth. Venture Clinic runs diagnostic sessions and specialist mentorship that pinpoint strengths and gaps, then walks with founders all the way to the final showcase.",
       audience: "Who it's for: early-stage founders, Future Founders graduates, and startups looking for structured growth.",
       benefits: {
@@ -259,13 +316,14 @@ export const en: SiteContent = {
           },
         ],
       },
-      cta: "Book your session",
+      cta: "Explore more",
+      ctaTarget: "criteria",
     },
   },
   journey: {
     eyebrow: "The Journey",
-    title: "Amad's journey through the year",
-    tagline: "One journey, three programs, an impact that endures.",
+    title: "Amad's journey",
+    tagline: "One journey, an impact that endures.",
     milestones: [
       { title: "Official launch & registration opens", timing: "October" },
       { title: "Future Founders across three cities", timing: "Nov–Jan" },
@@ -275,6 +333,7 @@ export const en: SiteContent = {
   },
   gallery: {
     title: "Our Success Stories",
+    videoCaption: "Moments from the Amad Tech ceremony",
   },
   partners: {
     title: "Partners",

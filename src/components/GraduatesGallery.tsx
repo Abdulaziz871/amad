@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { SectionHeading } from "./SectionHeading";
+import { VideoButton } from "./VideoButton";
 import { Reveal, RevealGroup, RevealItem } from "./Reveal";
-import { PatternCross, PatternFan, PatternBars } from "./ui/brand-patterns";
+import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import type { SiteContent } from "@/lib/content";
 
 function logoName(src: string) {
@@ -29,16 +30,12 @@ export function GraduatesGallery({
   return (
     <section id="gallery" className="relative overflow-hidden scroll-mt-20 py-14 sm:py-20">
       <div className="section-glow section-glow--light" aria-hidden />
-      <PatternBars
-        className="pointer-events-none absolute top-6 start-6 h-32 w-32 rotate-6 text-accent opacity-[0.06] sm:h-44 sm:w-44"
+      <PatternFan
+        className="pointer-events-none absolute bottom-8 start-6 h-12 w-12 -rotate-3 text-ink opacity-[0.12] sm:h-16 sm:w-16"
         aria-hidden
       />
       <PatternCross
         className="pointer-events-none absolute top-10 end-8 h-9 w-9 rotate-12 text-copper opacity-[0.2] sm:h-14 sm:w-14"
-        aria-hidden
-      />
-      <PatternFan
-        className="pointer-events-none absolute bottom-8 start-6 h-12 w-12 -rotate-3 text-ink opacity-[0.12] sm:h-16 sm:w-16"
         aria-hidden
       />
 
@@ -78,8 +75,20 @@ export function GraduatesGallery({
           </RevealGroup>
         </div>
       )}
+      <Reveal className="relative mt-12 flex justify-center sm:mt-14">
+        <div className="flex items-center gap-4 rounded-full border border-ink/[0.06] bg-white/80 py-2 pe-2 ps-6 shadow-[0_16px_40px_-28px_rgba(12,35,65,0.35)] backdrop-blur-sm">
+          <span className="text-sm font-medium text-ink/60">{content.gallery.videoCaption}</span>
+          <span className="h-6 w-px bg-ink/10" aria-hidden />
+          <VideoButton
+            label={content.hero.ctaVideo}
+            closeLabel={content.hero.closeVideo}
+            src="/images/vid/amad-tech-ceremony.mp4"
+          />
+        </div>
+      </Reveal>
+
       {images.length > 0 && (
-        <div className="relative mt-14 flex flex-col gap-2 sm:mt-16" dir="ltr">
+        <div className="relative mt-10 flex flex-col gap-2 sm:mt-12" dir="ltr">
           <div className="overflow-hidden">
             <div className="flex w-max animate-marquee gap-2">
               {trackA.map((src, i) => (

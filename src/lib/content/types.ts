@@ -36,11 +36,17 @@ export interface ProgramDetail {
   slug: ProgramSlug;
   englishName: string;
   title: string;
+  tagline?: string;
   intro: string;
   audience: string;
   benefits: {
     title: string;
     items: string[];
+  };
+  criteria?: {
+    title: string;
+    subtitle?: string;
+    items: { title: string; description: string }[];
   };
   journey: {
     title: string;
@@ -53,6 +59,8 @@ export interface ProgramDetail {
     embedUrl?: string;
   };
   cta: string;
+  /** Where the hero button scrolls to; defaults to the application form. */
+  ctaTarget?: "apply" | "criteria";
 }
 
 export interface JourneyMilestone {
@@ -88,6 +96,8 @@ export interface SiteContent {
     subtitle: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    ctaVideo: string;
+    closeVideo: string;
     programsStripLabel: string;
   };
   about: {
@@ -115,6 +125,7 @@ export interface SiteContent {
   };
   gallery: {
     title: string;
+    videoCaption: string;
   };
   partners: {
     title: string;

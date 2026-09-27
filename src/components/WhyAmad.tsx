@@ -2,7 +2,7 @@ import { Briefcase, Presentation, Handshake, TrendingUp, Users, Rocket } from "l
 import { SectionHeading } from "./SectionHeading";
 import { Reveal, RevealGroup, RevealItem } from "./Reveal";
 import { ProcessShowcase } from "./ProcessShowcase";
-import { PatternCross, PatternFan, PatternBars } from "./ui/brand-patterns";
+import { PatternBars, PatternCross, PatternFan } from "./ui/brand-patterns";
 import { AnimatedCounter } from "./ui/animated-counter";
 import { cn } from "@/lib/utils";
 import type { SiteContent } from "@/lib/content";
@@ -32,13 +32,12 @@ export function WhyAmad({ content }: { content: SiteContent }) {
         aria-hidden
       />
       <PatternBars
-        className="pointer-events-none absolute bottom-4 start-6 h-14 w-14 rotate-6 text-copper opacity-[0.18] sm:h-20 sm:w-20"
+        className="pointer-events-none absolute bottom-6 start-6 h-8 w-8 rotate-6 text-copper opacity-[0.14] sm:h-10 sm:w-10"
         aria-hidden
       />
       <div className="container-amad relative">
         <Reveal>
           <SectionHeading
-            eyebrow={content.whyAmad.eyebrow}
             title={content.whyAmad.title}
             highlight={content.brandName}
             align="center"

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal, RevealGroup, RevealItem } from "./Reveal";
-import { PatternCross, PatternFan, PatternBars } from "./ui/brand-patterns";
+import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import { journeyImage, partnerLogo } from "@/lib/images";
 import type { SiteContent } from "@/lib/content";
 
@@ -15,16 +15,16 @@ export function PartnersSection({ content }: { content: SiteContent }) {
   return (
     <section id="partners" className="relative overflow-hidden py-14 sm:py-20">
       <div className="section-glow section-glow--light" aria-hidden />
-      <PatternBars
-        className="pointer-events-none absolute top-8 end-[10%] h-32 w-32 rotate-12 text-ink opacity-[0.05] sm:h-44 sm:w-44"
-        aria-hidden
-      />
       <PatternFan
         className="pointer-events-none absolute top-8 start-6 h-9 w-9 -rotate-12 text-copper opacity-[0.22] sm:h-14 sm:w-14"
         aria-hidden
       />
       <PatternCross
         className="pointer-events-none absolute bottom-8 end-6 h-16 w-16 rotate-6 text-accent opacity-[0.1] sm:h-24 sm:w-24"
+        aria-hidden
+      />
+      <PatternCross
+        className="pointer-events-none absolute top-8 end-[8%] h-12 w-12 rotate-12 text-copper opacity-[0.18] sm:h-16 sm:w-16"
         aria-hidden
       />
       <div className="container-amad relative">

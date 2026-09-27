@@ -20,8 +20,8 @@ export function Header({ locale, content }: { locale: Locale; content: SiteConte
     { href: `/${locale}#about`, label: content.nav.about },
     { href: `/${locale}#programs`, label: content.nav.programs },
     { href: `/${locale}#journey`, label: content.nav.journey },
-    { href: `/${locale}#faq`, label: content.nav.faq },
     { href: `/${locale}#gallery`, label: content.nav.gallery },
+    { href: `/${locale}#faq`, label: content.nav.faq },
   ];
 
   return (

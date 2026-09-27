@@ -3,10 +3,11 @@ import { Check, ArrowLeft } from "lucide-react";
 import { ButtonLink } from "./Button";
 import { IconBadge, toneForSlug } from "./IconBadge";
 import { ProgramApplicationForm } from "./ProgramApplicationForm";
-import { Reveal } from "./Reveal";
+import { Reveal, RevealGroup, RevealItem } from "./Reveal";
+import { SectionHeading } from "./SectionHeading";
 import { Tilt } from "./ui/tilt";
 import { HighlightText } from "./HighlightWord";
-import { PatternFan, PatternCross, PatternBars } from "./ui/brand-patterns";
+import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import { ProgramJourney } from "./ProgramJourney";
 import { cn } from "@/lib/utils";
 import type { Locale } from "@/i18n/config";
@@ -49,13 +50,16 @@ export function ProgramDetailView({
   const tone = toneForSlug(detail.slug);
   const [audienceLabel, ...audienceRest] = detail.audience.split(":");
   const audienceText = audienceRest.join(":").trim();
+  // Programs without admission criteria scroll to their details section instead.
+  const ctaHref =
+    detail.ctaTarget === "criteria" ? (detail.criteria ? "#criteria" : "#details") : "#apply";
 
   return (
     <>
       <section className="relative overflow-hidden">
         <div className="section-glow section-glow--light" aria-hidden />
-        <PatternBars
-          className="pointer-events-none absolute top-6 end-6 h-36 w-36 rotate-6 text-ink opacity-[0.05] sm:h-48 sm:w-48"
+        <PatternCross
+          className="pointer-events-none absolute bottom-6 start-[38%] h-24 w-24 -translate-x-1/2 rotate-6 text-copper opacity-[0.08] sm:h-32 sm:w-32"
           aria-hidden
         />
         <PatternFan
@@ -63,10 +67,6 @@ export function ProgramDetailView({
             "pointer-events-none absolute top-6 end-6 h-10 w-10 rotate-6 opacity-[0.24] sm:h-14 sm:w-14",
             toneText[tone]
           )}
-          aria-hidden
-        />
-        <PatternCross
-          className="pointer-events-none absolute bottom-6 start-[38%] h-24 w-24 -translate-x-1/2 rotate-6 text-copper opacity-[0.08] sm:h-32 sm:w-32"
           aria-hidden
         />
         <div className="container-amad relative grid items-start gap-10 py-8 sm:py-10 lg:grid-cols-[1.1fr_0.9fr]">
@@ -86,14 +86,17 @@ export function ProgramDetailView({
             <h1 className="mt-5 max-w-2xl text-4xl font-extrabold leading-tight tracking-tight text-ink sm:text-5xl lg:text-6xl">
               <HighlightText text={detail.title} highlight={content.brandName} />
             </h1>
+            {detail.tagline && (
+              <p className={cn("mt-3 text-xl font-bold leading-snug sm:text-2xl", toneText[tone])}>{detail.tagline}</p>
+            )}
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-brown sm:text-lg">{detail.intro}</p>
             {locale !== "ar" && (
               <p className="mt-1.5 text-sm font-medium text-brown/70 rtl:text-right ltr:text-left" dir="ltr">
                 {detail.englishName}
               </p>
             )}
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-brown sm:text-lg">{detail.intro}</p>
 
-            <ButtonLink href="#apply" variant="primary" className={cn("mt-9", toneButton[tone])}>
+            <ButtonLink href={ctaHref} variant="primary" className={cn("mt-8", toneButton[tone])}>
               {detail.cta}
             </ButtonLink>
           </Reveal>
@@ -124,7 +127,7 @@ export function ProgramDetailView({
         </div>
       </section>
 
-      <section className="relative py-12 sm:py-16">
+      <section id="details" className="relative scroll-mt-24 py-12 sm:py-16">
         <div className="container-amad grid gap-6 lg:grid-cols-2 lg:items-stretch">
           <Reveal className="relative flex flex-col justify-center overflow-hidden rounded-3xl bg-ink p-8 text-white sm:p-10">
             <div className="section-glow section-glow--dark" aria-hidden />
@@ -164,12 +167,47 @@ export function ProgramDetailView({
         </div>
       </section>
 
+      {detail.criteria && (
+        <section id="criteria" className="relative scroll-mt-24 py-12 sm:py-16">
+          <div className="container-amad">
+            <Reveal>
+              <SectionHeading
+                title={detail.criteria.title}
+                subtitle={detail.criteria.subtitle}
+                align="center"
+                className="mx-auto"
+              />
+            </Reveal>
+
+            <RevealGroup
+              stagger={0.07}
+              className={cn(
+                "mt-10 grid gap-4 sm:gap-5 md:grid-cols-2",
+                detail.criteria.items.length % 3 === 0 && "lg:grid-cols-3"
+              )}
+            >
+              {detail.criteria.items.map((item, i) => (
+                <RevealItem
+                  key={item.title}
+                  className="spotlight group relative flex flex-col rounded-3xl border border-ink/[0.06] bg-white p-7 shadow-[0_16px_40px_-32px_rgba(12,35,65,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-32px_rgba(12,35,65,0.4)] sm:p-8"
+                >
+                  <span
+                    className={cn("font-display text-4xl font-extrabold leading-none opacity-80", toneText[tone])}
+                    dir="ltr"
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-5 text-lg font-bold leading-snug text-ink sm:text-xl">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-brown sm:text-base">{item.description}</p>
+                </RevealItem>
+              ))}
+            </RevealGroup>
+          </div>
+        </section>
+      )}
+
       <section className="relative overflow-hidden py-12 sm:py-16">
         <div className="section-glow section-glow--light" aria-hidden />
-        <PatternBars
-          className="pointer-events-none absolute bottom-6 start-6 h-32 w-32 -rotate-6 text-ink opacity-[0.04] sm:h-56 sm:w-56"
-          aria-hidden
-        />
         <PatternCross
           className={cn(
             "pointer-events-none absolute top-4 end-6 h-9 w-9 rotate-12 opacity-[0.2] sm:h-14 sm:w-14 sm:end-10",

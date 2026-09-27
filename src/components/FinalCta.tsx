@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { CheckCircle2, ArrowLeft } from "lucide-react";
+import { CheckCircle2, ArrowLeft, Check } from "lucide-react";
 import { Button } from "./Button";
 import { Reveal } from "./Reveal";
-import { PatternCross, PatternFan, PatternBars } from "./ui/brand-patterns";
+import { PatternCross, PatternFan } from "./ui/brand-patterns";
+import { programIcons } from "@/lib/program-icons";
 import type { SiteContent } from "@/lib/content";
 
 export function FinalCta({ content, backgroundImage }: { content: SiteContent; backgroundImage?: string | null }) {
@@ -27,10 +28,6 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
             </>
           )}
           <div className="section-glow section-glow--dark" aria-hidden />
-          <PatternBars
-            className="pointer-events-none absolute end-6 bottom-6 h-28 w-28 -rotate-6 text-white opacity-[0.06] sm:h-36 sm:w-36"
-            aria-hidden
-          />
           <PatternFan
             className="pointer-events-none absolute top-6 end-6 h-10 w-10 rotate-6 text-accent opacity-[0.28] sm:h-14 sm:w-14"
             aria-hidden
@@ -72,24 +69,36 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
                   placeholder={content.finalCta.emailLabel}
                   className="min-w-0 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white placeholder:text-white/50 outline-none backdrop-blur-sm focus:border-copper-light"
                 />
-                <label className="sr-only" htmlFor="finalcta-track">
-                  {content.finalCta.trackLabel}
-                </label>
-                <select
-                  id="finalcta-track"
-                  required
-                  defaultValue=""
-                  className="min-w-0 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white outline-none backdrop-blur-sm focus:border-copper-light sm:col-span-2 [&>option]:text-ink"
-                >
-                  <option value="" disabled>
+                <fieldset className="sm:col-span-2">
+                  <legend className="mb-2.5 text-sm font-semibold text-white/80">
                     {content.finalCta.trackPlaceholder}
-                  </option>
-                  {content.programs.map((program) => (
-                    <option key={program.slug} value={program.slug}>
-                      {program.title}
-                    </option>
-                  ))}
-                </select>
+                  </legend>
+                  <div className="grid gap-2.5 sm:grid-cols-3">
+                    {content.programs.map((program) => {
+                      const Icon = programIcons[program.slug];
+                      return (
+                        <label
+                          key={program.slug}
+                          className="group relative flex cursor-pointer items-center gap-3 rounded-2xl border border-white/15 bg-white/[0.06] px-4 py-3.5 text-start backdrop-blur-sm transition-all duration-300 hover:border-white/30 hover:bg-white/10 has-[:checked]:border-copper-light has-[:checked]:bg-copper-light/15 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-copper-light/60 sm:flex-col sm:items-start sm:gap-2.5 sm:p-4"
+                        >
+                          <input type="radio" name="track" value={program.slug} required className="peer sr-only" />
+                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/10 text-white/80 transition-colors group-has-[:checked]:bg-copper-light group-has-[:checked]:text-ink [&_svg]:h-4.5 [&_svg]:w-4.5">
+                            <Icon aria-hidden />
+                          </span>
+                          <span className="text-sm font-semibold leading-snug text-white/85 group-has-[:checked]:text-white">
+                            {program.title}
+                          </span>
+                          <span
+                            className="absolute top-3 end-3 flex h-5 w-5 scale-50 items-center justify-center rounded-full bg-copper-light text-ink opacity-0 transition-all duration-300 group-has-[:checked]:scale-100 group-has-[:checked]:opacity-100"
+                            aria-hidden
+                          >
+                            <Check className="h-3 w-3" strokeWidth={3} />
+                          </span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </fieldset>
                 <Button type="submit" variant="light" className="w-full sm:col-span-2">
                   {content.finalCta.submit}
                   <ArrowLeft className="h-4 w-4 ltr:rotate-180" aria-hidden />

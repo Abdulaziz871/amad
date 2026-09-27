@@ -1,7 +1,7 @@
 import { Reveal } from "./Reveal";
 import { HighlightText } from "./HighlightWord";
 import { HeadingAccent } from "./SectionHeading";
-import { PatternFan, PatternCross, PatternBars } from "./ui/brand-patterns";
+import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import { cn } from "@/lib/utils";
 import type { SiteContent } from "@/lib/content";
 
@@ -44,10 +44,6 @@ export function AboutSection({ content }: { content: SiteContent }) {
   return (
     <section id="about" className="relative overflow-hidden scroll-mt-24 py-14 sm:py-20">
       <div className="section-glow section-glow--light" aria-hidden />
-      <PatternBars
-        className="pointer-events-none absolute top-8 end-6 h-32 w-32 rotate-12 text-copper opacity-[0.06] sm:h-44 sm:w-44"
-        aria-hidden
-      />
       <PatternFan
         className="pointer-events-none absolute top-10 start-6 h-9 w-9 rotate-6 text-ink opacity-[0.22] sm:h-14 sm:w-14 sm:start-10"
         aria-hidden
@@ -62,7 +58,7 @@ export function AboutSection({ content }: { content: SiteContent }) {
             <HighlightText text={content.about.title} highlight={content.brandName} />
           </h2>
           <HeadingAccent align="center" />
-          <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:gap-14">
+          <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-14">
             {content.about.paragraphs[0] && (
               <p className="text-balance text-center text-2xl font-bold leading-snug text-ink sm:text-3xl">
                 {content.about.paragraphs[0]}
