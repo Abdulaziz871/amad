@@ -38,7 +38,7 @@ export function PartnersSection({ content }: { content: SiteContent }) {
             <div className="absolute inset-0 bg-linear-to-t from-ink via-ink/60 to-ink/20" aria-hidden />
 
             <div className="absolute inset-0 flex flex-col items-center justify-end gap-8 px-6 py-12 sm:py-16">
-              <div className="flex flex-wrap items-center justify-center gap-5 border-y border-white/25 py-2.5 sm:gap-6">
+              <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6">
                 {partners.flatMap((partner, i) => {
                   const logo = partnerLogo(partner.key, "white");
                   const mark = logo ? (
@@ -74,26 +74,23 @@ export function PartnersSection({ content }: { content: SiteContent }) {
             return (
               <RevealItem
                 key={partner.name}
-                className="spotlight relative rounded-2xl border border-ink/8 bg-cream p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-26px_rgba(12,35,65,0.35)]"
+                className="spotlight relative flex h-full flex-col items-center rounded-3xl border border-ink/[0.06] bg-white px-7 py-9 text-center shadow-[0_16px_40px_-30px_rgba(12,35,65,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(12,35,65,0.4)] sm:px-10"
               >
-                {logo ? (
-                  <>
-                    <span className="inline-flex items-center rounded-xl bg-ink px-4 py-2.5">
-                      <Image
-                        src={logo}
-                        alt={partner.name}
-                        width={160}
-                        height={48}
-                        unoptimized
-                        className="h-7 w-auto object-contain"
-                      />
-                    </span>
-                    <h3 className="sr-only">{partner.name}</h3>
-                  </>
-                ) : (
-                  <h3 className="text-lg font-bold text-ink">{partner.name}</h3>
+                {logo && (
+                  <span className="flex h-16 w-44 items-center justify-center rounded-2xl bg-ink px-6">
+                    <Image
+                      src={logo}
+                      alt=""
+                      width={160}
+                      height={48}
+                      unoptimized
+                      className="h-8 w-auto object-contain"
+                    />
+                  </span>
                 )}
-                <p className="mt-3 text-sm leading-relaxed text-brown">{partner.description}</p>
+                <h3 className="mt-5 text-lg font-bold text-ink">{partner.name}</h3>
+                <span className="mt-3 h-1 w-8 rounded-full bg-copper/70" aria-hidden />
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-brown sm:text-base">{partner.description}</p>
               </RevealItem>
             );
           })}
