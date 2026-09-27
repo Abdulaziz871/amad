@@ -1,39 +1,66 @@
-import type { SVGProps } from "react";
+import type { HTMLAttributes } from "react";
 
-/** ديمومة — Lavender fan pattern, from the official Amad brand guideline. */
-export function PatternFan(props: SVGProps<SVGSVGElement>) {
+function driftStyle(seed: string): React.CSSProperties {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) | 0;
+  const n = Math.abs(h);
+  return {
+    ["--drift-duration" as string]: `${11 + (n % 8)}s`,
+    ["--drift-delay" as string]: `-${n % 9}s`,
+  };
+}
+
+function maskStyle(src: string): React.CSSProperties {
+  return {
+    WebkitMaskImage: `url(${src})`,
+    maskImage: `url(${src})`,
+    WebkitMaskSize: "contain",
+    maskSize: "contain",
+    WebkitMaskRepeat: "no-repeat",
+    maskRepeat: "no-repeat",
+    WebkitMaskPosition: "center",
+    maskPosition: "center",
+  };
+}
+
+/** Lavender fan pattern glyph, from the official Amad brand guideline artwork. */
+export function PatternFan({ className = "", style, ...rest }: HTMLAttributes<HTMLSpanElement>) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
-      <rect x="2" y="2" width="4" height="20" rx="2" />
-      <rect x="8" y="2" width="4" height="3" rx="1.5" />
-      <rect x="8" y="7" width="4" height="15" rx="2" />
-      <rect x="14" y="2" width="4" height="2" rx="1" />
-      <rect x="14" y="11" width="4" height="11" rx="2" />
-      <rect x="20" y="2" width="2.5" height="2.5" rx="1.25" />
-      <rect x="20" y="13" width="2.5" height="9" rx="1.25" />
-    </svg>
+    <span
+      aria-hidden
+      className={`pattern-drift inline-block bg-current ${className}`}
+      style={{ ...maskStyle("/images/patterns/pattern-fan.png"), ...driftStyle(className), ...style }}
+      {...rest}
+    />
   );
 }
 
-/** مساهمة — Copper woven-cross pattern, from the official Amad brand guideline. */
-export function PatternCross(props: SVGProps<SVGSVGElement>) {
-  const cells = [
-    [2, 2], [7, 2], [2, 7], [7, 7],
-    [13, 2], [18, 2], [13, 7], [18, 7],
-    [2, 13], [7, 13], [2, 18], [7, 18],
-    [13, 13], [18, 13], [13, 18], [18, 18],
-  ];
+/** Copper woven-cross pattern glyph, from the official Amad brand guideline artwork. */
+export function PatternCross({ className = "", style, ...rest }: HTMLAttributes<HTMLSpanElement>) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
-      {cells.map(([x, y]) => (
-        <rect key={`${x}-${y}`} x={x} y={y} width="4" height="4" rx="1.5" />
-      ))}
-    </svg>
+    <span
+      aria-hidden
+      className={`pattern-drift inline-block bg-current ${className}`}
+      style={{ ...maskStyle("/images/patterns/pattern-cross.png"), ...driftStyle(className), ...style }}
+      {...rest}
+    />
+  );
+}
+
+/** Stacked-bars pattern glyph, from the official Amad brand guideline artwork. */
+export function PatternBars({ className = "", style, ...rest }: HTMLAttributes<HTMLSpanElement>) {
+  return (
+    <span
+      aria-hidden
+      className={`pattern-drift inline-block bg-current ${className}`}
+      style={{ ...maskStyle("/images/patterns/pattern-bars.png"), ...driftStyle(className), ...style }}
+      {...rest}
+    />
   );
 }
 
 /**
- * Decorative scatter of the two brand pattern glyphs —
+ * Decorative scatter of the brand pattern glyphs —
  * used as a section watermark, matching the guideline's tinted-panel usage.
  */
 export function BrandPatternDecor({ className = "" }: { className?: string }) {

@@ -32,6 +32,10 @@ export function programHeroImage(slug: string): string | null {
   return findFile("images", "programs", slug, photoExtensions);
 }
 
+export function programCardImage(slug: string): string | null {
+  return findFile("images", "programs/cards", slug, photoExtensions);
+}
+
 export function galleryImage(id: string): string | null {
   return findFile("images", "gallery", id, photoExtensions);
 }
@@ -60,4 +64,15 @@ export function partnerLogo(name: string, tone?: "white" | "black" | "dark"): st
     if (toned) return toned;
   }
   return findFile("logos", "partners", name, logoExtensions);
+}
+
+export function clientLogos(): string[] {
+  const dirPath = path.join(process.cwd(), "public", "images", "clients");
+  if (!fs.existsSync(dirPath)) return [];
+  return fs
+    .readdirSync(dirPath)
+    .filter((file) => ["png", "jpg", "jpeg", "webp", "svg"].includes(path.extname(file).slice(1).toLowerCase()))
+    .filter((file) => !/^\d/.test(file))
+    .sort((a, b) => a.localeCompare(b, "ar"))
+    .map((file) => `/images/clients/${encodeURIComponent(file)}`);
 }

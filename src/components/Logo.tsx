@@ -6,11 +6,11 @@ export function Logo({ locale, dark = true }: { locale: Locale; dark?: boolean }
   return (
     <Link href={`/${locale}`} className="flex items-center gap-3" aria-label="امد">
       <Image
-        src={dark ? "/logos/amad-mark-white-padded.png" : "/logos/amad-mark-color-padded.png"}
+        src={dark ? "/logos/amad-lockup-white-padded.png" : "/logos/amad-lockup-color-padded.png"}
         alt=""
-        width={2547}
-        height={1054}
-        className="h-12 w-auto shrink-0"
+        width={2643}
+        height={1415}
+        className="h-11 w-auto shrink-0 sm:h-12"
         priority
         unoptimized
       />

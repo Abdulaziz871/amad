@@ -19,7 +19,7 @@ export const en: SiteContent = {
   },
   hero: {
     eyebrow: "In partnership between Alinma Bank and Falak Holding",
-    title: "Where an idea begins — and its impact endures.",
+    title: "Where an idea begins —\nand its impact endures.",
     titleHighlight: "impact",
     subtitle: "Amad is an integrated innovation and entrepreneurship ecosystem that walks with you step by step: protecting your idea, building you as a founder, and growing your venture.",
     ctaPrimary: "Register your interest",
@@ -42,24 +42,34 @@ export const en: SiteContent = {
         description: "Three linked programs covering the full journey, from protecting the idea to growing the venture.",
       },
       {
-        title: "Trusted knowledge",
-        description: "Content and expertise from the heart of the sector — innovation, fintech, and enablement — from a source you trust.",
+        title: "Mentorship that drives growth",
+        description: "One-on-one mentorship from seasoned experts in product strategy and market expansion.",
       },
       {
         title: "Enabling partners",
         description: "Alinma's banking depth and Falak's venture-building expertise, in one ecosystem.",
       },
       {
+        title: "Direct access to investors",
+        description: "Pitch your venture to a select group of investors, plus networking sessions to build lasting relationships.",
+      },
+      {
+        title: "Infrastructure services",
+        description: "Access to coworking spaces and meeting rooms in Riyadh, and a community of founders and innovators like you.",
+      },
+      {
         title: "Measured impact",
         description: "Clear milestones, continuous follow-up, and a final showcase that celebrates outcomes in front of the sector.",
       },
     ],
+    statsTitle: "Our impact in numbers",
     stats: [
-      { value: "3", label: "Programs" },
-      { value: "3", label: "Cities" },
-      { value: "500+", label: "Targeted participants" },
-      { value: "30+", label: "Mentors & experts" },
-      { value: "15+", label: "Partner entities" },
+      { value: "53+", label: "New jobs created" },
+      { value: "195+", label: "Training & mentorship workshops delivered" },
+      { value: "47", label: "Strategic partnerships signed by startups" },
+      { value: "756%", label: "Growth in participating companies' customer base" },
+      { value: "500+", label: "Targeted beneficiaries across the ecosystem's programs" },
+      { value: "260+", label: "Startups applied to the accelerator" },
     ],
   },
   programsOverview: {
@@ -122,7 +132,12 @@ export const en: SiteContent = {
       },
       journey: {
         title: "The journey",
-        steps: ["Register", "Assess your idea", "Protect it", "Launch"],
+        steps: [
+          { title: "Register", description: "Share your details and idea through the interest form, and the team will reach out." },
+          { title: "Assess your idea", description: "An expert session that gauges your idea's originality and readiness for protection and market." },
+          { title: "Protect it", description: "Hands-on guidance to register your intellectual property and secure your rights, step by step." },
+          { title: "Launch", description: "Turn your protected idea into a growth opportunity and connect with the ecosystem." },
+        ],
       },
       form: {
         title: "Register your interest in Amad IP",
@@ -164,7 +179,12 @@ export const en: SiteContent = {
       },
       journey: {
         title: "The journey",
-        steps: ["Apply", "Join the bootcamp in your city", "Build your pilot project", "Pitch and qualify"],
+        steps: [
+          { title: "Apply", description: "Join solo or as a team — with an idea, or just a skill you bring to a team." },
+          { title: "Join the bootcamp in your city", description: "An intensive bootcamp in Riyadh, Jeddah, or the Eastern Province." },
+          { title: "Build your pilot project", description: "Turn your idea into a prototype with guidance from founders and industry experts." },
+          { title: "Pitch and qualify", description: "Pitch your project — the top teams qualify for the Venture Clinic." },
+        ],
       },
       form: {
         title: "Apply to Future Founders",
@@ -206,7 +226,12 @@ export const en: SiteContent = {
       },
       journey: {
         title: "The journey",
-        steps: ["Book your diagnostic", "Get a clear growth plan", "Ongoing mentorship", "Pitch at the final showcase"],
+        steps: [
+          { title: "Book your diagnostic", description: "A one-on-one session that honestly maps your venture's strengths and gaps." },
+          { title: "Get a clear growth plan", description: "Practical priorities across product, growth, and funding, built on the diagnosis." },
+          { title: "Ongoing mentorship", description: "Regular follow-ups with specialist mentors throughout the clinic." },
+          { title: "Pitch at the final showcase", description: "Present your results to the sector and investors on the final showcase stage." },
+        ],
       },
       form: {
         title: "Book your session at Venture Clinic",
@@ -249,9 +274,7 @@ export const en: SiteContent = {
     ],
   },
   gallery: {
-    eyebrow: "Moments from Amad",
-    title: "Our success stories.. graduates and cohorts of Amad's programs",
-    subtitle: "Photos from cohorts, bootcamps, and closing events across Amad's three programs.",
+    title: "Our Success Stories",
   },
   partners: {
     title: "Partners",
@@ -264,6 +287,9 @@ export const en: SiteContent = {
       name: "Falak Holding",
       description: "The delivery arm and venture partner, with deep experience building ecosystems, enabling startups, and finding opportunity — grow, enable, find.",
     },
+  },
+  clients: {
+    title: "Companies that graduated from our programs",
   },
   faq: {
     title: "FAQ",

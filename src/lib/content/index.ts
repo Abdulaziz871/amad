@@ -18,5 +18,6 @@ export type {
   FormField,
   FaqItem,
   JourneyMilestone,
+  JourneyStep,
   WhyAmadCard,
 } from "./types";

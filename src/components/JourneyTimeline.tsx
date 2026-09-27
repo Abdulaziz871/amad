@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal, RevealGroup, RevealItem } from "./Reveal";
-import { PatternFan, PatternCross } from "./ui/brand-patterns";
+import { PatternFan, PatternCross, PatternBars } from "./ui/brand-patterns";
 import { journeyImage } from "@/lib/images";
 import { cn } from "@/lib/utils";
 import type { SiteContent } from "@/lib/content";
@@ -12,13 +12,17 @@ export function JourneyTimeline({ content }: { content: SiteContent }) {
   const milestones = content.journey.milestones;
 
   return (
-    <section id="journey" className="relative overflow-hidden scroll-mt-24 bg-white py-16 sm:py-20">
+    <section id="journey" className="relative overflow-hidden scroll-mt-24 py-16 sm:py-20">
+      <PatternBars
+        className="pointer-events-none absolute top-6 end-1/4 h-32 w-32 rotate-6 text-copper opacity-[0.05] sm:h-56 sm:w-56"
+        aria-hidden
+      />
       <PatternFan
-        className="pointer-events-none absolute top-6 start-6 h-14 w-14 text-ink opacity-[0.12] sm:h-20 sm:w-20"
+        className="pointer-events-none absolute top-6 start-6 h-10 w-10 rotate-6 text-ink opacity-[0.2] sm:h-14 sm:w-14"
         aria-hidden
       />
       <PatternCross
-        className="pointer-events-none absolute bottom-10 end-8 h-16 w-16 rotate-12 text-copper opacity-[0.1] sm:h-24 sm:w-24"
+        className="pointer-events-none absolute bottom-10 end-8 h-11 w-11 rotate-12 text-accent opacity-[0.18] sm:h-16 sm:w-16"
         aria-hidden
       />
       <div className="container-amad relative">

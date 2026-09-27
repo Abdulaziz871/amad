@@ -27,6 +27,11 @@ export interface ProgramSummary {
   cta: string;
 }
 
+export interface JourneyStep {
+  title: string;
+  description: string;
+}
+
 export interface ProgramDetail {
   slug: ProgramSlug;
   englishName: string;
@@ -39,7 +44,7 @@ export interface ProgramDetail {
   };
   journey: {
     title: string;
-    steps: string[];
+    steps: JourneyStep[];
   };
   form: {
     title: string;
@@ -93,6 +98,7 @@ export interface SiteContent {
     eyebrow: string;
     title: string;
     cards: WhyAmadCard[];
+    statsTitle: string;
     stats: Stat[];
   };
   programsOverview: {
@@ -108,15 +114,16 @@ export interface SiteContent {
     milestones: JourneyMilestone[];
   };
   gallery: {
-    eyebrow: string;
     title: string;
-    subtitle: string;
   };
   partners: {
     title: string;
     sponsorshipLine: string;
     alinma: { name: string; description: string };
     falak: { name: string; description: string };
+  };
+  clients: {
+    title: string;
   };
   faq: {
     title: string;

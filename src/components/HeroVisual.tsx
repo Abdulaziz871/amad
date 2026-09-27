@@ -13,7 +13,7 @@ export function HeroVisual() {
         </linearGradient>
         <linearGradient id="amad-grad-2" x1="0" y1="1" x2="1" y2="0">
           <stop offset="0%" stopColor="#CD907E" />
-          <stop offset="100%" stopColor="#e0b0a1" />
+          <stop offset="100%" stopColor="#ffa38b" />
         </linearGradient>
       </defs>
 

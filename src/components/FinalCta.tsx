@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CheckCircle2, ArrowLeft } from "lucide-react";
 import { Button } from "./Button";
 import { Reveal } from "./Reveal";
-import { PatternCross, PatternFan } from "./ui/brand-patterns";
+import { PatternCross, PatternFan, PatternBars } from "./ui/brand-patterns";
 import type { SiteContent } from "@/lib/content";
 
 export function FinalCta({ content, backgroundImage }: { content: SiteContent; backgroundImage?: string | null }) {
@@ -26,8 +26,13 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
               <div className="absolute inset-0 bg-ink/85" aria-hidden />
             </>
           )}
+          <div className="section-glow section-glow--dark" aria-hidden />
+          <PatternBars
+            className="pointer-events-none absolute end-6 bottom-6 h-28 w-28 -rotate-6 text-white opacity-[0.06] sm:h-36 sm:w-36"
+            aria-hidden
+          />
           <PatternFan
-            className="pointer-events-none absolute top-6 end-6 h-14 w-14 text-white opacity-20 sm:h-20 sm:w-20"
+            className="pointer-events-none absolute top-6 end-6 h-10 w-10 rotate-6 text-accent opacity-[0.28] sm:h-14 sm:w-14"
             aria-hidden
           />
           <PatternCross
@@ -35,14 +40,14 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
             aria-hidden
           />
           <div className="relative mx-auto max-w-2xl text-center">
-            <h2 className="text-4xl font-bold sm:text-5xl">{content.finalCta.title}</h2>
+            <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">{content.finalCta.title}</h2>
             <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-base">{content.finalCta.subtitle}</p>
           </div>
 
           <div className="relative mx-auto mt-9 max-w-xl">
             {submitted ? (
               <div className="flex flex-col items-center gap-2 rounded-2xl bg-white/5 px-6 py-8 text-center backdrop-blur-sm">
-                <CheckCircle2 className="h-9 w-9 text-accent" aria-hidden />
+                <CheckCircle2 className="h-9 w-9 text-copper-light" aria-hidden />
                 <p className="text-sm font-semibold text-white">{content.finalCta.notice}</p>
               </div>
             ) : (
@@ -55,7 +60,7 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
                   required
                   type="text"
                   placeholder={content.finalCta.nameLabel}
-                  className="min-w-0 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white placeholder:text-white/50 outline-none backdrop-blur-sm focus:border-accent"
+                  className="min-w-0 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white placeholder:text-white/50 outline-none backdrop-blur-sm focus:border-copper-light"
                 />
                 <label className="sr-only" htmlFor="finalcta-email">
                   {content.finalCta.emailLabel}
@@ -65,7 +70,7 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
                   required
                   type="email"
                   placeholder={content.finalCta.emailLabel}
-                  className="min-w-0 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white placeholder:text-white/50 outline-none backdrop-blur-sm focus:border-accent"
+                  className="min-w-0 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white placeholder:text-white/50 outline-none backdrop-blur-sm focus:border-copper-light"
                 />
                 <label className="sr-only" htmlFor="finalcta-track">
                   {content.finalCta.trackLabel}
@@ -74,7 +79,7 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
                   id="finalcta-track"
                   required
                   defaultValue=""
-                  className="min-w-0 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white outline-none backdrop-blur-sm focus:border-accent sm:col-span-2 [&>option]:text-ink"
+                  className="min-w-0 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white outline-none backdrop-blur-sm focus:border-copper-light sm:col-span-2 [&>option]:text-ink"
                 >
                   <option value="" disabled>
                     {content.finalCta.trackPlaceholder}
@@ -85,7 +90,7 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
                     </option>
                   ))}
                 </select>
-                <Button type="submit" variant="primary" className="w-full sm:col-span-2">
+                <Button type="submit" variant="light" className="w-full sm:col-span-2">
                   {content.finalCta.submit}
                   <ArrowLeft className="h-4 w-4 ltr:rotate-180" aria-hidden />
                 </Button>

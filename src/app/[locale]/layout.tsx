@@ -7,6 +7,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SplashScreen } from "@/components/SplashScreen";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { SpotlightTracker } from "@/components/SpotlightTracker";
 import "../globals.css";
 
 const alinmaDisplay = localFont({
@@ -85,6 +86,7 @@ export default async function LocaleLayout({
     >
       <body className="flex min-h-full flex-col bg-cream text-ink" suppressHydrationWarning>
         <SmoothScroll />
+        <SpotlightTracker />
         <SplashScreen />
         <Header locale={locale} content={content} />
         <main className="flex-1">{children}</main>

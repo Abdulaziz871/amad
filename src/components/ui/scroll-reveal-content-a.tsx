@@ -37,7 +37,7 @@ export function ScrollRevealContentA({ items, className, ...props }: Props) {
   const n = items.length;
 
   return (
-    <div className={cn("bg-white", className)} ref={trackRef} {...props}>
+    <div className={cn(className)} ref={trackRef} {...props}>
       <div className="container-amad">
         <div className="relative flex flex-col w-full">
           <div className="sticky top-24 flex min-h-[calc(100vh-6rem)] w-full flex-col items-start justify-center py-6">

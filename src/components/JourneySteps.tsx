@@ -2,15 +2,15 @@ import { Flag, Rocket, ShieldCheck, Trophy } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal } from "./Reveal";
 import { ScrollRevealContentA, type ScrollRevealItem } from "./ui/scroll-reveal-content-a";
-import { PatternFan, PatternCross } from "./ui/brand-patterns";
+import { PatternFan, PatternCross, PatternBars } from "./ui/brand-patterns";
 import { journeyImage } from "@/lib/images";
 import type { SiteContent } from "@/lib/content";
 
 const icons = [Flag, Rocket, ShieldCheck, Trophy];
 const gradients = [
   "bg-linear-to-br from-accent to-accent-dark",
-  "bg-linear-to-br from-copper to-[#e0b0a1]",
-  "bg-linear-to-br from-ink to-[#0a3a54]",
+  "bg-linear-to-br from-copper to-[#ffa38b]",
+  "bg-linear-to-br from-ink to-[#16325a]",
   "bg-linear-to-br from-accent-dark to-ink",
 ];
 const tones = [
@@ -82,10 +82,15 @@ export function JourneySteps({ content }: { content: SiteContent }) {
   });
 
   return (
-    <section id="journey" className="relative scroll-mt-24 bg-white pt-16 sm:pt-20">
+    <section id="journey" className="relative scroll-mt-24 pt-16 sm:pt-20">
+      <div className="section-glow section-glow--light" aria-hidden />
       <div className="container-amad relative overflow-hidden">
         <PatternFan
-          className="pointer-events-none absolute top-4 start-6 h-12 w-12 text-ink opacity-[0.1] sm:h-16 sm:w-16 sm:start-10"
+          className="pointer-events-none absolute top-4 start-6 h-9 w-9 rotate-6 text-accent opacity-[0.2] sm:h-14 sm:w-14 sm:start-10"
+          aria-hidden
+        />
+        <PatternBars
+          className="pointer-events-none absolute top-4 end-4 h-32 w-32 -rotate-12 text-copper opacity-[0.05] sm:h-56 sm:w-56"
           aria-hidden
         />
         <Reveal>
@@ -101,7 +106,7 @@ export function JourneySteps({ content }: { content: SiteContent }) {
       <ScrollRevealContentA items={items} />
       <div className="container-amad relative overflow-hidden py-12 text-center">
         <PatternCross
-          className="pointer-events-none absolute bottom-2 end-6 h-14 w-14 rotate-6 text-copper opacity-[0.12] sm:h-20 sm:w-20 sm:end-10"
+          className="pointer-events-none absolute bottom-2 end-6 h-11 w-11 rotate-6 text-ink opacity-[0.15] sm:h-16 sm:w-16 sm:end-10"
           aria-hidden
         />
         <ColorfulTagline text={content.journey.tagline} />

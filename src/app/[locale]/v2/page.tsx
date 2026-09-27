@@ -1,6 +1,6 @@
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getContent } from "@/lib/content";
-import { galleryImages, ctaImage, partnerLogo } from "@/lib/images";
+import { galleryImages, ctaImage, clientLogos } from "@/lib/images";
 import { Hero } from "@/components/Hero";
 import { AboutSection } from "@/components/AboutSection";
 import { WhyAmad } from "@/components/WhyAmad";
@@ -38,12 +38,7 @@ export default async function HomePageV2({
       <WhyAmad content={content} />
       <ProgramsOverview locale={locale} content={content} />
       <JourneyTimeline content={content} />
-      <GraduatesGallery
-        content={content}
-        images={galleryImages()}
-        alinmaLogo={partnerLogo("alinma", "white")}
-        falakLogo={partnerLogo("falak", "white")}
-      />
+      <GraduatesGallery content={content} images={galleryImages()} logos={clientLogos()} />
       <PartnersSection content={content} />
       <Faq title={content.faq.title} items={content.faq.items} />
       <FinalCta content={content} backgroundImage={ctaImage("final")} />

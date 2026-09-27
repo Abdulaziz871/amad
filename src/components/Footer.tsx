@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/lib/content";
-import { PatternFan, PatternCross } from "./ui/brand-patterns";
+import { PatternFan, PatternCross, PatternBars } from "./ui/brand-patterns";
 
 export function Footer({ locale, content }: { locale: Locale; content: SiteContent }) {
   const links = [
@@ -14,12 +14,17 @@ export function Footer({ locale, content }: { locale: Locale; content: SiteConte
 
   return (
     <footer className="relative mt-auto overflow-hidden bg-ink text-white">
-      <PatternCross
-        className="pointer-events-none absolute -end-6 -top-6 h-28 w-28 rotate-6 text-white opacity-[0.06] sm:h-36 sm:w-36"
+      <div className="section-glow section-glow--dark" aria-hidden />
+      <PatternBars
+        className="pointer-events-none absolute end-6 top-6 h-28 w-28 rotate-6 text-white opacity-[0.05] sm:h-40 sm:w-40"
         aria-hidden
       />
       <PatternFan
-        className="pointer-events-none absolute bottom-8 start-6 h-10 w-10 text-white opacity-[0.08] sm:h-14 sm:w-14"
+        className="pointer-events-none absolute bottom-8 start-6 h-9 w-9 rotate-6 text-copper opacity-[0.22] sm:h-14 sm:w-14"
+        aria-hidden
+      />
+      <PatternCross
+        className="pointer-events-none absolute top-1/2 start-1/3 h-8 w-8 -rotate-12 text-accent opacity-[0.16] sm:h-12 sm:w-12"
         aria-hidden
       />
       <div className="container-amad relative grid gap-10 py-14 md:grid-cols-[1.2fr_1fr_1fr]">

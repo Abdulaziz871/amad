@@ -26,9 +26,9 @@ export function SplashScreen() {
         stage === "fade" ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
     >
-      <div className="relative flex h-16 w-40 items-center justify-center">
+      <div className="relative flex h-24 w-64 items-center justify-center">
         <div
-          className={`absolute h-16 w-16 transition-opacity duration-300 ${
+          className={`absolute h-20 w-20 transition-opacity duration-300 ${
             stage === "spin" ? "opacity-100" : "opacity-0"
           }`}
         >
@@ -48,7 +48,7 @@ export function SplashScreen() {
             width={2643}
             height={1415}
             unoptimized
-            className="h-10 w-auto sm:h-12"
+            className="h-16 w-auto sm:h-20"
             priority
           />
         </div>

@@ -2,11 +2,13 @@
 
 :root {
   --color-cream: #fdf8f5;
-  --color-ink: #002134;
-  --color-accent: #837fd8;
-  --color-accent-dark: #6b66c7;
+  --color-ink: #0c2341;
+  --color-accent: #8b84d7;
+  --color-accent-dark: #6f68c4;
   --color-white: #ffffff;
-  --color-copper: #cd907e;
+  --color-copper: #c66e4e;
+  --color-copper-light: #ffa38b;
+  --color-warm: #f9ebe0;
   --color-brown: #755750;
 }
 
@@ -17,6 +19,8 @@
   --color-accent-dark: var(--color-accent-dark);
   --color-white: var(--color-white);
   --color-copper: var(--color-copper);
+  --color-copper-light: var(--color-copper-light);
+  --color-warm: var(--color-warm);
   --color-brown: var(--color-brown);
   --font-sans: var(--font-alinma-text);
   --font-display: var(--font-alinma-display);
@@ -38,7 +42,7 @@ h6 {
 }
 
 ::selection {
-  background: var(--color-accent);
+  background: var(--color-copper);
   color: var(--color-white);
 }
 
@@ -96,4 +100,101 @@ h6 {
 
 .animate-kenburns {
   animation: kenburns 12s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes benefit-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Tailwind's rotate and translate utilities use the individual `rotate`/`translate`
+   properties, so animating `transform` here layers on top without overriding them. */
+@keyframes pattern-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate3d(6px, -10px, 0) rotate(4deg);
+  }
+  66% {
+    transform: translate3d(-5px, 6px, 0) rotate(-3deg);
+  }
+}
+
+.pattern-drift {
+  animation: pattern-drift var(--drift-duration, 14s) ease-in-out infinite;
+  animation-delay: var(--drift-delay, 0s);
+  will-change: transform;
+}
+
+.spotlight {
+  isolation: isolate;
+}
+
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    240px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(139, 132, 215, 0.14),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pattern-drift,
+  .animate-float,
+  .animate-kenburns {
+    animation: none;
+  }
+}
+
+.section-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Fades out before the section's top/bottom edge so neighbouring sections blend without a seam. */
+.section-glow--light {
+  background:
+    radial-gradient(55% 45% at 85% 25%, rgba(139, 132, 215, 0.12), transparent 70%),
+    radial-gradient(45% 40% at 12% 70%, rgba(255, 163, 139, 0.12), transparent 70%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+}
+
+.section-glow--dark {
+  background:
+    radial-gradient(60% 60% at 12% -10%, rgba(139, 132, 215, 0.2), transparent 70%),
+    radial-gradient(55% 55% at 105% 110%, rgba(198, 110, 78, 0.16), transparent 70%);
 }

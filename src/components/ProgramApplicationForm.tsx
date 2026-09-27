@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CheckCircle2, Upload } from "lucide-react";
 import { Button } from "./Button";
 import { Reveal } from "./Reveal";
-import { PatternFan } from "./ui/brand-patterns";
+import { PatternFan, PatternBars } from "./ui/brand-patterns";
 import { cn } from "@/lib/utils";
 import type { ProgramDetail, SiteContent } from "@/lib/content";
 import type { IconTone } from "./IconBadge";
@@ -25,8 +25,8 @@ const toneAccentInput: Record<string, string> = {
   accent: "accent-accent",
 };
 const toneButton: Record<string, string> = {
-  ink: "!bg-ink hover:!bg-[#0a3a54]",
-  copper: "!bg-copper hover:!bg-[#b87c6b]",
+  ink: "!bg-ink hover:!bg-[#16325a]",
+  copper: "!bg-copper hover:!bg-[#b0603f]",
   accent: "!bg-accent hover:!bg-accent-dark",
 };
 
@@ -53,8 +53,16 @@ export function ProgramApplicationForm({
 
   return (
     <section id="apply" className="relative overflow-hidden scroll-mt-20 py-12 sm:py-16">
+      <div className="section-glow section-glow--light" aria-hidden />
+      <PatternBars
+        className="pointer-events-none absolute top-6 end-6 h-32 w-32 rotate-6 text-ink opacity-[0.05] sm:h-44 sm:w-44"
+        aria-hidden
+      />
       <PatternFan
-        className="pointer-events-none absolute bottom-6 start-6 h-12 w-12 -rotate-3 text-ink opacity-[0.1] sm:h-16 sm:w-16"
+        className={cn(
+          "pointer-events-none absolute bottom-6 start-6 h-9 w-9 -rotate-3 opacity-[0.2] sm:h-14 sm:w-14",
+          toneText[tone]
+        )}
         aria-hidden
       />
       <div className="container-amad relative">

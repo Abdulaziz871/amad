@@ -3,18 +3,19 @@ import { Check, ArrowLeft } from "lucide-react";
 import { ButtonLink } from "./Button";
 import { IconBadge, toneForSlug } from "./IconBadge";
 import { ProgramApplicationForm } from "./ProgramApplicationForm";
-import { Reveal, RevealGroup, RevealItem } from "./Reveal";
+import { Reveal } from "./Reveal";
+import { Tilt } from "./ui/tilt";
 import { HighlightText } from "./HighlightWord";
-import { PatternFan, PatternCross } from "./ui/brand-patterns";
+import { PatternFan, PatternCross, PatternBars } from "./ui/brand-patterns";
+import { ProgramJourney } from "./ProgramJourney";
 import { cn } from "@/lib/utils";
 import type { Locale } from "@/i18n/config";
 import type { ProgramDetail, SiteContent } from "@/lib/content";
 import { programIcons } from "@/lib/program-icons";
 
-const stageColors = ["bg-accent", "bg-copper", "bg-ink", "bg-accent-dark"];
 const heroGradient: Record<string, string> = {
-  ink: "from-ink via-[#0a3a54] to-ink",
-  copper: "from-copper via-[#e0b0a1] to-copper",
+  ink: "from-ink via-[#16325a] to-ink",
+  copper: "from-copper via-[#ffa38b] to-copper",
   accent: "from-accent via-accent-dark to-ink",
 };
 const toneText: Record<string, string> = {
@@ -23,9 +24,9 @@ const toneText: Record<string, string> = {
   accent: "text-accent",
 };
 const toneButton: Record<string, string> = {
-  ink: "!bg-ink hover:!bg-[#0a3a54] !shadow-[0_10px_30px_-10px_rgba(0,33,52,0.5)]",
-  copper: "!bg-copper hover:!bg-[#b87c6b] !shadow-[0_10px_30px_-10px_rgba(205,144,126,0.5)]",
-  accent: "!bg-accent hover:!bg-accent-dark !shadow-[0_10px_30px_-10px_rgba(131,127,216,0.6)]",
+  ink: "!bg-ink hover:!bg-[#16325a] !shadow-[0_10px_30px_-10px_rgba(12,35,65,0.5)]",
+  copper: "!bg-copper hover:!bg-[#b0603f] !shadow-[0_10px_30px_-10px_rgba(198,110,78,0.5)]",
+  accent: "!bg-accent hover:!bg-accent-dark !shadow-[0_10px_30px_-10px_rgba(139,132,215,0.6)]",
 };
 const toneOnDark: Record<string, string> = {
   ink: "!bg-white/10 !text-white",
@@ -51,29 +52,38 @@ export function ProgramDetailView({
 
   return (
     <>
-      <section className="relative overflow-hidden bg-cream">
+      <section className="relative overflow-hidden">
+        <div className="section-glow section-glow--light" aria-hidden />
+        <PatternBars
+          className="pointer-events-none absolute top-6 end-6 h-36 w-36 rotate-6 text-ink opacity-[0.05] sm:h-48 sm:w-48"
+          aria-hidden
+        />
         <PatternFan
-          className="pointer-events-none absolute top-6 end-6 h-14 w-14 text-ink opacity-[0.14] sm:h-20 sm:w-20"
+          className={cn(
+            "pointer-events-none absolute top-6 end-6 h-10 w-10 rotate-6 opacity-[0.24] sm:h-14 sm:w-14",
+            toneText[tone]
+          )}
           aria-hidden
         />
         <PatternCross
-          className="pointer-events-none absolute -bottom-8 start-[38%] h-32 w-32 -translate-x-1/2 rotate-6 text-copper opacity-[0.08] sm:h-44 sm:w-44"
+          className="pointer-events-none absolute bottom-6 start-[38%] h-24 w-24 -translate-x-1/2 rotate-6 text-copper opacity-[0.08] sm:h-32 sm:w-32"
           aria-hidden
         />
-        <div className="container-amad relative grid gap-10 py-10 sm:py-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <Reveal y={20}>
-            <ButtonLink
-              href={`/${locale}#programs`}
-              variant="secondary"
-              className="mb-8 px-4 py-2 text-xs"
-            >
-              <ArrowLeft className="h-3.5 w-3.5 ltr:rotate-180" aria-hidden />
-              {content.nav.programs}
-            </ButtonLink>
+        <div className="container-amad relative grid items-start gap-10 py-8 sm:py-10 lg:grid-cols-[1.1fr_0.9fr]">
+          <Reveal y={20} className="lg:pt-8">
+            <div className="flex items-center gap-3">
+              <IconBadge icon={Icon} tone={tone} />
+              <ButtonLink
+                href={`/${locale}#programs`}
+                variant="secondary"
+                className="px-4 py-2 text-xs"
+              >
+                <ArrowLeft className="h-3.5 w-3.5 ltr:rotate-180" aria-hidden />
+                {content.nav.programs}
+              </ButtonLink>
+            </div>
 
-            <IconBadge icon={Icon} tone={tone} size="lg" />
-
-            <h1 className="mt-6 max-w-2xl text-3xl font-extrabold leading-tight text-ink sm:text-4xl lg:text-5xl">
+            <h1 className="mt-5 max-w-2xl text-4xl font-extrabold leading-tight tracking-tight text-ink sm:text-5xl lg:text-6xl">
               <HighlightText text={detail.title} highlight={content.brandName} />
             </h1>
             {locale !== "ar" && (
@@ -88,35 +98,42 @@ export function ProgramDetailView({
             </ButtonLink>
           </Reveal>
 
-          <Reveal delay={0.15} y={24} className="relative mx-auto hidden w-full max-w-sm lg:block">
-            <div
-              className={cn(
-                "relative aspect-[4/5] w-full [clip-path:polygon(8%_0%,100%_0%,92%_100%,0%_100%)] bg-linear-to-br drop-shadow-2xl",
-                heroGradient[tone] ?? heroGradient.accent
-              )}
-            >
-              {heroImage ? (
-                <Image src={heroImage} alt="" fill unoptimized className="object-cover" />
-              ) : (
-                <div
-                  className="h-full w-full opacity-70"
-                  style={{
-                    backgroundImage:
-                      "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.35), transparent 35%), radial-gradient(circle at 75% 70%, rgba(205,144,126,0.5), transparent 40%)",
-                  }}
-                  aria-hidden
-                />
-              )}
-            </div>
+          <Reveal delay={0.15} y={24} className="relative mx-auto hidden w-full max-w-lg lg:block">
+            <Tilt>
+              <div
+                className={cn(
+                  "animate-float relative aspect-[4/5] w-full [clip-path:polygon(8%_0%,100%_0%,92%_100%,0%_100%)] drop-shadow-2xl",
+                  !heroImage && cn("bg-linear-to-br", heroGradient[tone] ?? heroGradient.accent)
+                )}
+              >
+                {heroImage ? (
+                  <Image src={heroImage} alt="" fill unoptimized className="object-cover" />
+                ) : (
+                  <div
+                    className="h-full w-full opacity-70"
+                    style={{
+                      backgroundImage:
+                        "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.35), transparent 35%), radial-gradient(circle at 75% 70%, rgba(198,110,78,0.5), transparent 40%)",
+                    }}
+                    aria-hidden
+                  />
+                )}
+              </div>
+            </Tilt>
           </Reveal>
         </div>
       </section>
 
-      <section className="bg-white py-12 sm:py-16">
+      <section className="relative py-12 sm:py-16">
         <div className="container-amad grid gap-6 lg:grid-cols-2 lg:items-stretch">
           <Reveal className="relative flex flex-col justify-center overflow-hidden rounded-3xl bg-ink p-8 text-white sm:p-10">
+            <div className="section-glow section-glow--dark" aria-hidden />
             <PatternFan
-              className="pointer-events-none absolute -end-4 -top-4 h-24 w-24 text-white opacity-[0.1] sm:h-32 sm:w-32"
+              className="pointer-events-none absolute end-5 top-5 h-20 w-20 text-white opacity-[0.08] sm:h-24 sm:w-24"
+              aria-hidden
+            />
+            <PatternCross
+              className="pointer-events-none absolute bottom-4 start-4 h-9 w-9 -rotate-6 text-copper opacity-[0.25] sm:h-12 sm:w-12"
               aria-hidden
             />
             <IconBadge icon={Icon} tone={tone} className={toneOnDark[tone]} />
@@ -126,9 +143,12 @@ export function ProgramDetailView({
             <p className="mt-3 text-xl font-semibold leading-relaxed sm:text-2xl">{audienceText}</p>
           </Reveal>
 
-          <Reveal delay={0.1} className="relative flex flex-col overflow-hidden rounded-3xl border border-ink/8 bg-cream p-8 sm:p-10">
+          <Reveal delay={0.1} className="spotlight relative flex flex-col overflow-hidden rounded-3xl border border-ink/8 bg-cream p-8 sm:p-10">
             <PatternCross
-              className="pointer-events-none absolute -bottom-6 -start-6 h-24 w-24 -rotate-6 text-copper opacity-[0.1] sm:h-32 sm:w-32"
+              className={cn(
+                "pointer-events-none absolute bottom-5 end-5 h-16 w-16 -rotate-6 opacity-[0.12] sm:h-20 sm:w-20",
+                toneText[tone]
+              )}
               aria-hidden
             />
             <h2 className="relative text-xl font-bold text-ink sm:text-2xl">{detail.benefits.title}</h2>
@@ -145,8 +165,16 @@ export function ProgramDetailView({
       </section>
 
       <section className="relative overflow-hidden py-12 sm:py-16">
+        <div className="section-glow section-glow--light" aria-hidden />
+        <PatternBars
+          className="pointer-events-none absolute bottom-6 start-6 h-32 w-32 -rotate-6 text-ink opacity-[0.04] sm:h-56 sm:w-56"
+          aria-hidden
+        />
         <PatternCross
-          className="pointer-events-none absolute top-4 end-6 h-12 w-12 rotate-12 text-accent opacity-[0.12] sm:h-16 sm:w-16 sm:end-10"
+          className={cn(
+            "pointer-events-none absolute top-4 end-6 h-9 w-9 rotate-12 opacity-[0.2] sm:h-14 sm:w-14 sm:end-10",
+            toneText[tone]
+          )}
           aria-hidden
         />
         <div className="container-amad relative">
@@ -154,27 +182,7 @@ export function ProgramDetailView({
             <h2 className="text-2xl font-bold text-ink sm:text-3xl">{detail.journey.title}</h2>
           </Reveal>
 
-          <div className="relative mt-12">
-            <div
-              className="absolute top-6 start-[12.5%] end-[12.5%] hidden h-px bg-ink/12 sm:block"
-              aria-hidden
-            />
-            <RevealGroup className="relative grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-4 sm:gap-x-6">
-              {detail.journey.steps.map((step, i) => (
-                <RevealItem key={step} className="flex flex-col items-center gap-4 text-center">
-                  <span
-                    className={cn(
-                      "flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-extrabold text-white shadow-lg ring-4 ring-cream transition-transform duration-300 hover:scale-110",
-                      stageColors[i % stageColors.length]
-                    )}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="text-sm font-semibold leading-snug text-ink sm:text-base">{step}</p>
-                </RevealItem>
-              ))}
-            </RevealGroup>
-          </div>
+          <ProgramJourney slug={detail.slug} steps={detail.journey.steps} locale={locale} />
         </div>
       </section>
 

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, Globe } from "lucide-react";
 import { Logo } from "./Logo";
 import { ButtonLink } from "./Button";
+import { ScrollProgress } from "./ScrollProgress";
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/lib/content";
 
@@ -25,6 +26,7 @@ export function Header({ locale, content }: { locale: Locale; content: SiteConte
 
   return (
     <header className="sticky top-0 z-50 bg-ink text-white">
+      <ScrollProgress />
       <div className="container-amad flex items-center justify-between py-4">
         <Logo locale={locale} />
 
@@ -48,7 +50,7 @@ export function Header({ locale, content }: { locale: Locale; content: SiteConte
             <Globe className="h-4 w-4" aria-hidden />
             {content.nav.langSwitch}
           </Link>
-          <ButtonLink href={`/${locale}#interest`} variant="primary">
+          <ButtonLink href={`/${locale}#interest`} variant="light" className="!shadow-none">
             {content.nav.registerInterest}
           </ButtonLink>
         </div>
@@ -85,7 +87,7 @@ export function Header({ locale, content }: { locale: Locale; content: SiteConte
               <Globe className="h-4 w-4" aria-hidden />
               {content.nav.langSwitch}
             </Link>
-            <ButtonLink href={`/${locale}#interest`} variant="primary" className="mt-2 w-full">
+            <ButtonLink href={`/${locale}#interest`} variant="light" className="mt-2 w-full !shadow-none">
               {content.nav.registerInterest}
             </ButtonLink>
           </div>
