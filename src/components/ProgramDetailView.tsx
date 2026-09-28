@@ -230,7 +230,9 @@ export function ProgramDetailView({
 
       {detail.faq && detail.faq.length > 0 && <Faq title={content.faq.title} items={detail.faq} />}
 
-      <ProgramApplicationForm detail={detail} content={content} tone={tone} locale={locale} alfiaForm={alfiaForm} />
+      {detail.showApplicationForm !== false && (
+        <ProgramApplicationForm detail={detail} content={content} tone={tone} locale={locale} alfiaForm={alfiaForm} />
+      )}
     </>
   );
 }

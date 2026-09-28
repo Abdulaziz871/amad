@@ -62,6 +62,8 @@ export interface ProgramDetail {
   cta: string;
   /** Where the hero button scrolls to; defaults to the application form. */
   ctaTarget?: "apply" | "criteria";
+  /** Set to false for programs that don't take public applications. */
+  showApplicationForm?: boolean;
 }
 
 export interface JourneyMilestone {
@@ -75,16 +77,14 @@ export interface WhyAmadCard {
 }
 
 export interface AlfiaFormUi {
-  sectionPersonal: string;
-  sectionSkills: string;
-  sectionCommitment: string;
-  sectionTeam: string;
+  step: string;
+  next: string;
+  back: string;
+  reviewHint: string;
   member: string;
   selectPlaceholder: string;
   submit: string;
   submitting: string;
-  successTitle: string;
-  successBody: string;
   errorFields: string;
   errorGeneric: string;
   chooseAtLeastOne: string;

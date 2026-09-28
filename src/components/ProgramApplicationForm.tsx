@@ -32,11 +32,6 @@ const toneButton: Record<string, string> = {
   copper: "!bg-copper hover:!bg-[#b0603f]",
   accent: "!bg-accent hover:!bg-accent-dark",
 };
-const toneAlfia: Record<string, { text: string; bg: string; border: string; ring: string }> = {
-  ink: { text: "text-ink", bg: "bg-ink hover:bg-[#16325a]", border: "focus:border-ink", ring: "ring-ink/30" },
-  copper: { text: "text-copper", bg: "bg-copper hover:bg-[#b0603f]", border: "focus:border-copper", ring: "ring-copper/40" },
-  accent: { text: "text-accent", bg: "bg-accent hover:bg-accent-dark", border: "focus:border-accent", ring: "ring-accent/40" },
-};
 
 export function ProgramApplicationForm({
   detail,
@@ -82,18 +77,17 @@ export function ProgramApplicationForm({
               : cn("rounded-3xl border border-ink/8 bg-white", detail.form.embedUrl ? "p-6 sm:p-8" : "p-6 sm:p-10")
           )}
         >
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-ink sm:text-3xl">{detail.form.title}</h2>
-            <p className="mt-3 text-sm leading-relaxed text-brown sm:text-base">{detail.form.subtitle}</p>
-          </div>
+          {alfiaForm ? (
+            <h2 className="sr-only">{detail.form.title}</h2>
+          ) : (
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-ink sm:text-3xl">{detail.form.title}</h2>
+              <p className="mt-3 text-sm leading-relaxed text-brown sm:text-base">{detail.form.subtitle}</p>
+            </div>
+          )}
 
           {alfiaForm ? (
-            <AlfiaApplicationForm
-              form={alfiaForm}
-              locale={locale}
-              ui={content.alfiaForm}
-              tone={toneAlfia[tone] ?? toneAlfia.accent}
-            />
+            <AlfiaApplicationForm form={alfiaForm} locale={locale} ui={content.alfiaForm} />
           ) : detail.form.embedUrl ? (
             <div className="relative mt-8 h-[820px] w-full overflow-hidden rounded-2xl border border-ink/10 bg-cream">
               <iframe
