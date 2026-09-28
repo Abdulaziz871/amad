@@ -52,6 +52,7 @@ export interface ProgramDetail {
     title: string;
     steps: JourneyStep[];
   };
+  faq?: FaqItem[];
   form: {
     title: string;
     subtitle: string;
@@ -71,6 +72,24 @@ export interface JourneyMilestone {
 export interface WhyAmadCard {
   title: string;
   description: string;
+}
+
+export interface AlfiaFormUi {
+  sectionPersonal: string;
+  sectionSkills: string;
+  sectionCommitment: string;
+  sectionTeam: string;
+  member: string;
+  selectPlaceholder: string;
+  submit: string;
+  submitting: string;
+  successTitle: string;
+  successBody: string;
+  errorFields: string;
+  errorGeneric: string;
+  chooseAtLeastOne: string;
+  closedTitle: string;
+  closedBody: string;
 }
 
 export interface SiteContent {
@@ -141,6 +160,7 @@ export interface SiteContent {
     items: FaqItem[];
   };
   footer: {
+    followUs: string;
     quickLinks: string;
     registerInterest: string;
     legal: string;
@@ -155,6 +175,7 @@ export interface SiteContent {
     submit: string;
     notice: string;
   };
+  alfiaForm: AlfiaFormUi;
   applicationForm: {
     nameLabel: string;
     emailLabel: string;

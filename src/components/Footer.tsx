@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/lib/content";
 import { PatternCross, PatternFan } from "./ui/brand-patterns";
+import { SocialLinks } from "./SocialLinks";
 
 export function Footer({ locale, content }: { locale: Locale; content: SiteContent }) {
   const links = [
@@ -33,6 +34,9 @@ export function Footer({ locale, content }: { locale: Locale; content: SiteConte
             className="h-14 w-auto"
             unoptimized
           />
+          <div className="mt-7">
+            <SocialLinks label={content.footer.followUs} />
+          </div>
         </div>
 
         <div>

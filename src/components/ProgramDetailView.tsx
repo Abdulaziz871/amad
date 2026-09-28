@@ -3,6 +3,7 @@ import { Check, ArrowLeft } from "lucide-react";
 import { ButtonLink } from "./Button";
 import { IconBadge, toneForSlug } from "./IconBadge";
 import { ProgramApplicationForm } from "./ProgramApplicationForm";
+import { Faq } from "./Faq";
 import { Reveal, RevealGroup, RevealItem } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 import { Tilt } from "./ui/tilt";
@@ -13,6 +14,7 @@ import { cn } from "@/lib/utils";
 import type { Locale } from "@/i18n/config";
 import type { ProgramDetail, SiteContent } from "@/lib/content";
 import { programIcons } from "@/lib/program-icons";
+import type { AlfiaForm } from "@/lib/alfia";
 
 const heroGradient: Record<string, string> = {
   ink: "from-ink via-[#16325a] to-ink",
@@ -40,11 +42,13 @@ export function ProgramDetailView({
   content,
   detail,
   heroImage,
+  alfiaForm,
 }: {
   locale: Locale;
   content: SiteContent;
   detail: ProgramDetail;
   heroImage?: string | null;
+  alfiaForm?: AlfiaForm | null;
 }) {
   const Icon = programIcons[detail.slug];
   const tone = toneForSlug(detail.slug);
@@ -224,7 +228,9 @@ export function ProgramDetailView({
         </div>
       </section>
 
-      <ProgramApplicationForm detail={detail} content={content} tone={tone} />
+      {detail.faq && detail.faq.length > 0 && <Faq title={content.faq.title} items={detail.faq} />}
+
+      <ProgramApplicationForm detail={detail} content={content} tone={tone} locale={locale} alfiaForm={alfiaForm} />
     </>
   );
 }

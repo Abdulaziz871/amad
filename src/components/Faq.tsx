@@ -1,5 +1,5 @@
 import { Reveal } from "./Reveal";
-import { HeadingAccent } from "./SectionHeading";
+import { SectionHeading } from "./SectionHeading";
 import { InteractiveAccordion, type AccordionItem } from "./ui/interactive-accordion";
 import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import type { FaqItem } from "@/lib/content";
@@ -25,11 +25,10 @@ export function Faq({ title, items }: { title: string; items: FaqItem[] }) {
       />
       <div className="container-amad relative">
         <Reveal>
-          <h2 className="text-4xl font-extrabold tracking-tight text-ink sm:text-5xl lg:text-6xl">{title}</h2>
-          <HeadingAccent />
+          <SectionHeading title={title} align="center" className="mx-auto" />
         </Reveal>
-        <Reveal delay={0.1} className="mx-auto mt-8 max-w-5xl rounded-3xl border border-ink/8 bg-white px-6 sm:px-8">
-          <InteractiveAccordion items={accordionItems} />
+        <Reveal delay={0.1} className="mx-auto mt-10 max-w-3xl">
+          <InteractiveAccordion items={accordionItems} defaultOpenId={accordionItems[0]?.id} />
         </Reveal>
       </div>
     </section>

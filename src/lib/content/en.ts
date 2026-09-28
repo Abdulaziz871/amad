@@ -172,6 +172,32 @@ export const en: SiteContent = {
           { title: "Launch", description: "Turn your protected idea into a growth opportunity and connect with the ecosystem." },
         ],
       },
+      faq: [
+        {
+          question: "What is Amad?",
+          answer: "Amad is an integrated innovation and entrepreneurship ecosystem launched by Alinma Bank in partnership with Falak Holding. It brings together three connected initiatives — Amad IP, Future Founders, and the Venture Clinic — in one year-long journey, aiming to protect ideas, build founders' skills, and support venture growth, in line with Saudi Vision 2030.",
+        },
+        {
+          question: "Who is Amad IP for?",
+          answer: "Idea owners, innovators, and holders of registered patents who want to develop their innovations into applicable solutions for the fintech sector.",
+        },
+        {
+          question: "How long does the program run?",
+          answer: "The Amad IP initiative runs for 12 weeks.",
+        },
+        {
+          question: "What about ownership of my idea?",
+          answer: "Your idea remains entirely yours. Amad does not take any right or stake in your idea or venture except with your explicit consent as its owner.",
+        },
+        {
+          question: "Is the program in person or remote?",
+          answer: "The program follows a hybrid model, combining in-person and virtual sessions.",
+        },
+        {
+          question: "Is funding available?",
+          answer: "There is no direct funding, but the program offers opportunities to pitch in front of investors and connects you with funding networks in the sector.",
+        },
+      ],
       form: {
         title: "Register your interest in Amad IP",
         subtitle: "Complete your details and our team will reach out within a few business days to discuss protecting your innovation.",
@@ -242,6 +268,40 @@ export const en: SiteContent = {
           { title: "Pitch and qualify", description: "Pitch your project — the top teams qualify for the Venture Clinic." },
         ],
       },
+      faq: [
+        {
+          question: "What is Amad?",
+          answer: "Amad is an integrated innovation and entrepreneurship ecosystem launched by Alinma Bank in partnership with Falak Holding. It brings together three connected initiatives — Amad IP, Future Founders, and the Venture Clinic — in one year-long journey, aiming to protect ideas, build founders' skills, and support venture growth, in line with Saudi Vision 2030.",
+        },
+        {
+          question: "Who is Future Founders for?",
+          answer: "University students and recent graduates (within 4 years of graduation) who want to build founding skills — whether joining with an idea or a skill to add to a team.",
+        },
+        {
+          question: "Do I need a ready idea to apply?",
+          answer: "No, you don't need a ready idea — you can join solo or as a team, with an idea or even just a skill to contribute, and the program helps you form a team and build your skills from scratch up to a prototype.",
+        },
+        {
+          question: "Which cities host Future Founders activities?",
+          answer: "Future Founders activities take place in three cities: Riyadh, Jeddah, and the Eastern Province.",
+        },
+        {
+          question: "How long does the program run?",
+          answer: "The Future Founders initiative runs for five days.",
+        },
+        {
+          question: "Is the program in person or remote?",
+          answer: "Future Founders is an in-person bootcamp held in three cities: Riyadh, Jeddah, and the Eastern Province.",
+        },
+        {
+          question: "Do I have to apply as a formed team, or can I join alone?",
+          answer: "You can join as an individual or as a team, and you don't need a complete idea — it's enough to bring an idea, or even just a skill to contribute, and you'll form your team during the program itself.",
+        },
+        {
+          question: "Is funding available?",
+          answer: "There is no direct funding, but the program offers opportunities to pitch in front of investors and connects you with funding networks in the sector.",
+        },
+      ],
       form: {
         title: "Apply to Future Founders",
         subtitle: "Complete your details below, and the program team will reach out about the upcoming cohort.",
@@ -284,12 +344,30 @@ export const en: SiteContent = {
       journey: {
         title: "The journey",
         steps: [
-          { title: "Book your diagnostic", description: "A one-on-one session that honestly maps your venture's strengths and gaps." },
+          { title: "Diagnose your venture", description: "An assessment of your team's position and readiness that reveals strengths and gaps and sets your priorities clearly." },
           { title: "Get a clear growth plan", description: "Practical priorities across product, growth, and funding, built on the diagnosis." },
           { title: "Ongoing mentorship", description: "Regular follow-ups with specialist mentors throughout the clinic." },
           { title: "Pitch at the final showcase", description: "Present your results to the sector and investors on the final showcase stage." },
         ],
       },
+      faq: [
+        {
+          question: "What is Amad?",
+          answer: "Amad is an integrated innovation and entrepreneurship ecosystem launched by Alinma Bank in partnership with Falak Holding. It brings together three connected initiatives — Amad IP, Future Founders, and the Venture Clinic — in one year-long journey, aiming to protect ideas, build founders' skills, and support venture growth, in line with Saudi Vision 2030.",
+        },
+        {
+          question: "Who is the Venture Clinic for?",
+          answer: "Startup founders looking for diagnostics and growth guidance. It's reserved for teams that qualify through Future Founders: the best 7 teams from each city, 21 teams in total.",
+        },
+        {
+          question: "How long does the program run?",
+          answer: "The Venture Clinic initiative runs for 12 weeks, with intensive mentorship and support.",
+        },
+        {
+          question: "Is the program in person or remote?",
+          answer: "The program follows a hybrid model, combining in-person and virtual mentorship sessions.",
+        },
+      ],
       form: {
         title: "Book your session at Venture Clinic",
         subtitle: "Complete your venture details, and the clinic team will reach out to schedule an intro session.",
@@ -325,10 +403,10 @@ export const en: SiteContent = {
     title: "Amad's journey",
     tagline: "One journey, an impact that endures.",
     milestones: [
-      { title: "Official launch & registration opens", timing: "October" },
-      { title: "Future Founders across three cities", timing: "Nov–Jan" },
-      { title: "Venture Clinic & Amad IP milestones", timing: "Jan–Apr" },
-      { title: "Final showcase & impact report", timing: "August" },
+      { title: "Launch", timing: "October 4" },
+      { title: "Future Founders across three cities", timing: "November" },
+      { title: "Venture Clinic & Amad IP", timing: "Dec – Apr" },
+      { title: "Final showcase day", timing: "May" },
     ],
   },
   gallery: {
@@ -355,59 +433,20 @@ export const en: SiteContent = {
     items: [
       {
         question: "What is Amad?",
-        answer:
-          "Amad is an integrated innovation and entrepreneurship ecosystem launched by Alinma Bank in partnership with Falak Holding. It brings together three connected initiatives — Amad IP, Ruwad Amad, and the Venture Clinic — in one year-long journey, aiming to protect ideas, build founders' skills, and support venture growth, in line with Saudi Vision 2030.",
-      },
-      {
-        question: "Who is Amad for?",
-        answer:
-          "Amad is designed for three groups depending on your stage: owners of ideas and registered patents (Amad IP track); university students and recent graduates (within 4 years of graduation) who want to build founding skills — whether joining with an idea or a skill to add to a team (Ruwad Amad track); and existing startup founders looking for diagnostics and growth guidance (Venture Clinic, for teams that qualify through Ruwad Amad).",
-      },
-      {
-        question: "Do I need a ready idea to apply?",
-        answer:
-          "It depends on the track: Ruwad Amad doesn't require a ready idea — you can join solo or as a team, with an idea or even just a skill to contribute, and the program helps you form a team and build your skills from scratch up to a prototype. Amad IP, on the other hand, assumes you already have an idea or a registered patent you want to develop and commercialize.",
-      },
-      {
-        question: "Which cities host Ruwad Amad activities?",
-        answer: "Amad activities take place in three cities: Riyadh, Jeddah, and the Eastern Province.",
-      },
-      {
-        question: "How long does the program run?",
-        answer: "The accelerator program runs for 12 weeks with intensive mentorship and support.",
+        answer: "Amad is an integrated innovation and entrepreneurship ecosystem launched by Alinma Bank in partnership with Falak Holding. It brings together three connected initiatives — Amad IP, Future Founders, and the Venture Clinic — in one year-long journey, aiming to protect ideas, build founders' skills, and support venture growth, in line with Saudi Vision 2030.",
       },
       {
         question: "Can I join more than one program?",
-        answer:
-          "There are essentially two application tracks: Amad IP (a fully independent track) and Ruwad Amad. The Venture Clinic isn't a separate application track — it's the advanced stage for the top teams from Ruwad Amad: the best 7 teams from each of the three cities are selected, for a total of 21 teams that qualify for the Clinic. So if you join Ruwad Amad and stand out, you qualify for the Clinic automatically, with no separate application. Amad IP, however, is a standalone track you can apply to independently, regardless of your participation in the other track.",
-      },
-      {
-        question: "What about ownership of my idea?",
-        answer:
-          "Your idea remains entirely yours. Amad does not take any right or stake in your idea or venture except with your explicit consent as its owner.",
+        answer: "There are essentially two application tracks: Amad IP (a fully independent track) and Future Founders. The Venture Clinic isn't a separate application track — it's the advanced stage for the top teams from Future Founders: the best 7 teams from each of the three cities are selected, for a total of 21 teams that qualify for the Clinic. So if you join Future Founders and stand out, you qualify for the Clinic automatically, with no separate application. Amad IP, however, is a standalone track you can apply to independently, regardless of your participation in the other track.",
       },
       {
         question: "Is participation in Amad free?",
-        answer:
-          "Yes, participation in both Amad tracks — Ruwad Amad and the Venture Clinic, and Amad IP — is free of charge for applicants. The ecosystem is fully funded through the partnership between Alinma Bank and Falak Holding, with no financial contribution required from participants.",
-      },
-      {
-        question: "Is the program in person or remote?",
-        answer: "The program follows a hybrid model, combining in-person and virtual sessions.",
-      },
-      {
-        question: "Do I have to apply as a formed team, or can I join alone?",
-        answer:
-          "You can join as an individual or as a team, and you don't need a complete idea — it's enough to bring an idea, or even just a skill to contribute, and you'll form your team during the program itself.",
-      },
-      {
-        question: "Is funding available?",
-        answer:
-          "There is no direct funding, but the program offers opportunities to pitch in front of investors and connects you with funding networks in the sector.",
+        answer: "Yes, participation in both Amad tracks — Future Founders and the Venture Clinic, and Amad IP — is free of charge for applicants. The ecosystem is fully funded through the partnership between Alinma Bank and Falak Holding, with no financial contribution required from participants.",
       },
     ],
   },
   footer: {
+    followUs: "Follow us",
     quickLinks: "Quick links",
     registerInterest: "Register your interest",
     legal: "© 2026 Falak Holding. All rights reserved.",
@@ -421,6 +460,23 @@ export const en: SiteContent = {
     trackPlaceholder: "Choose a track",
     submit: "Register your interest",
     notice: "Your interest has been registered, thank you.",
+  },
+  alfiaForm: {
+    sectionPersonal: "Your details",
+    sectionSkills: "Skills & experience",
+    sectionCommitment: "Commitment & time",
+    sectionTeam: "Your team",
+    member: "Member",
+    selectPlaceholder: "Select",
+    submit: "Submit your application",
+    submitting: "Submitting…",
+    successTitle: "Your application has been received",
+    successBody: "Thank you for applying to Future Founders. We'll review your application and get back to you by email.",
+    errorFields: "Some fields need attention — please review the ones highlighted in red.",
+    errorGeneric: "We couldn't submit your application right now. Please try again shortly.",
+    chooseAtLeastOne: "Choose at least one option.",
+    closedTitle: "Applications are currently closed",
+    closedBody: "Future Founders isn't accepting applications right now. Follow us to hear when the next round opens.",
   },
   applicationForm: {
     nameLabel: "Full name",

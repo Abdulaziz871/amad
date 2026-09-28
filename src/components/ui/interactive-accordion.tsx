@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface AccordionItem {
@@ -21,126 +22,86 @@ export function InteractiveAccordion({
   className?: string;
 }) {
   const [activeId, setActiveId] = useState<string | null>(defaultOpenId ?? null);
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
-
-  const isOdd = items.length % 2 === 1;
+  const baseId = useId();
 
   return (
-    <div className={cn("w-full", className)}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-x-10">
-        {items.map((item, i) => {
-          const isActive = activeId === item.id;
-          const isHovered = hoveredId === item.id;
-          const isLastOdd = isOdd && i === items.length - 1;
+    <ul className={cn("flex w-full flex-col gap-3", className)}>
+      {items.map((item) => {
+        const isActive = activeId === item.id;
+        const buttonId = `${baseId}-${item.id}-button`;
+        const panelId = `${baseId}-${item.id}-panel`;
 
-          return (
-            <div key={item.id} className={cn(isLastOdd && "sm:col-span-2")}>
-              <motion.button
+        return (
+          <li
+            key={item.id}
+            className={cn(
+              "overflow-hidden rounded-2xl border bg-white transition-all duration-300",
+              isActive
+                ? "border-copper/30 shadow-[0_18px_40px_-28px_rgba(198,110,78,0.45)]"
+                : "border-ink/[0.07] hover:border-ink/15 hover:shadow-[0_12px_30px_-26px_rgba(12,35,65,0.35)]"
+            )}
+          >
+            <h3>
+              <button
+                id={buttonId}
+                type="button"
+                aria-expanded={isActive}
+                aria-controls={panelId}
                 onClick={() => setActiveId(isActive ? null : item.id)}
-                onMouseEnter={() => setHoveredId(item.id)}
-                onMouseLeave={() => setHoveredId(null)}
-                className="relative w-full group"
-                initial={false}
+                className="group flex w-full items-center gap-4 px-5 py-4 text-start focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-copper sm:gap-5 sm:px-7 sm:py-5"
               >
-                <div className="flex items-center gap-6 px-1 py-5">
-                  <div className="relative flex h-10 w-10 shrink-0 items-center justify-center">
-                    <motion.div
-                      className="absolute inset-0 rounded-full bg-accent"
-                      initial={false}
-                      animate={{
-                        scale: isActive ? 1 : isHovered ? 0.85 : 0,
-                        opacity: isActive ? 1 : isHovered ? 0.12 : 0,
-                      }}
-                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    />
-                    <motion.span
-                      className="relative z-10 text-sm font-semibold tracking-wide"
-                      animate={{ color: isActive ? "#FFFFFF" : "#755750" }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {item.number}
-                    </motion.span>
-                  </div>
+                <span
+                  className={cn(
+                    "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-xs font-bold transition-colors duration-300",
+                    isActive ? "bg-copper text-white" : "bg-ink/[0.05] text-ink/50 group-hover:bg-ink/[0.08]"
+                  )}
+                  dir="ltr"
+                >
+                  {item.number}
+                </span>
+                <span
+                  className={cn(
+                    "flex-1 text-base font-bold leading-snug transition-colors duration-300 sm:text-lg",
+                    isActive ? "text-ink" : "text-ink/80 group-hover:text-ink"
+                  )}
+                >
+                  {item.title}
+                </span>
+                <span
+                  className={cn(
+                    "flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300",
+                    isActive
+                      ? "rotate-45 border-copper bg-copper text-white"
+                      : "border-ink/15 text-ink/60 group-hover:border-ink/30"
+                  )}
+                  aria-hidden
+                >
+                  <Plus className="h-4 w-4" />
+                </span>
+              </button>
+            </h3>
 
-                  <motion.h3
-                    className="text-start text-lg font-bold tracking-tight sm:text-xl"
-                    animate={{
-                      x: isActive || isHovered ? 4 : 0,
-                      color: isActive || isHovered ? "#002134" : "#755750",
-                    }}
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                  >
-                    {item.title}
-                  </motion.h3>
-
-                  <div className="ms-auto flex items-center justify-center">
-                    <motion.div
-                      className="flex h-8 w-8 items-center justify-center"
-                      animate={{ rotate: isActive ? 45 : 0 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    >
-                      <motion.svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        className="text-ink"
-                        animate={{ opacity: isActive || isHovered ? 1 : 0.4 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <path d="M8 1V15M1 8H15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                      </motion.svg>
-                    </motion.div>
-                  </div>
-                </div>
-
-                <div className="absolute inset-x-0 bottom-0 h-px bg-ink/10" />
+            <AnimatePresence initial={false}>
+              {isActive && (
                 <motion.div
-                  className="absolute inset-x-0 bottom-0 h-px rtl:origin-right ltr:origin-left bg-accent"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: isActive ? 1 : isHovered ? 0.3 : 0 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              </motion.button>
-
-              <AnimatePresence mode="wait">
-                {isActive && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{
-                      height: "auto",
-                      opacity: 1,
-                      transition: {
-                        height: { type: "spring", stiffness: 300, damping: 30 },
-                        opacity: { duration: 0.2, delay: 0.1 },
-                      },
-                    }}
-                    exit={{
-                      height: 0,
-                      opacity: 0,
-                      transition: {
-                        height: { type: "spring", stiffness: 300, damping: 30 },
-                        opacity: { duration: 0.1 },
-                      },
-                    }}
-                    className="overflow-hidden"
-                  >
-                    <motion.p
-                      className="py-6 ps-16 pe-4 leading-relaxed text-brown sm:pe-12"
-                      initial={{ y: -10 }}
-                      animate={{ y: 0 }}
-                      exit={{ y: -10 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                    >
-                      {item.content}
-                    </motion.p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={buttonId}
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
+                  className="overflow-hidden"
+                >
+                  <p className="border-t border-ink/[0.06] px-5 pb-5 pt-4 text-sm leading-relaxed text-brown sm:ps-[4.75rem] sm:pe-16 sm:text-base">
+                    {item.content}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </li>
+        );
+      })}
+    </ul>
   );
 }

@@ -140,8 +140,7 @@ export function ProcessShowcase({ items }: { items: { title: string; description
             className="relative flex h-full flex-col"
           >
             <span
-              className="pointer-events-none absolute -top-4 end-0 select-none font-display text-[8rem] font-black leading-none text-white/[0.06] sm:text-[10rem]"
-              dir="ltr"
+              className="pointer-events-none absolute -bottom-2 end-0 select-none font-display text-[8rem] font-black leading-none text-white/[0.06] sm:text-[10rem]"
               aria-hidden
             >
               {pad(active + 1)}
@@ -159,10 +158,7 @@ export function ProcessShowcase({ items }: { items: { title: string; description
               <Icon aria-hidden />
             </motion.span>
 
-            <span className="mt-8 text-sm font-semibold tracking-wider text-white/50" dir="ltr">
-              {pad(active + 1)} / {pad(items.length)}
-            </span>
-            <h3 className="mt-2 text-2xl font-extrabold leading-snug sm:text-3xl lg:text-4xl">{item.title}</h3>
+            <h3 className="mt-8 text-2xl font-extrabold leading-snug sm:text-3xl lg:text-4xl">{item.title}</h3>
             <p className="mt-4 max-w-md text-base leading-relaxed text-white/75 sm:text-lg">{item.description}</p>
 
             <div className="mt-auto flex items-center gap-2 pt-10" aria-hidden>

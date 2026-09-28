@@ -4,6 +4,7 @@ import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getContent } from "@/lib/content";
 import { programHeroImage } from "@/lib/images";
 import { ProgramDetailView } from "@/components/ProgramDetailView";
+import { getFutureFoundersForm } from "@/lib/alfia";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -29,6 +30,7 @@ export default async function BootcampsProgramPage({
   if (!isLocale(rawLocale)) notFound();
   const locale: Locale = rawLocale;
   const content = getContent(locale);
+  const alfiaForm = await getFutureFoundersForm();
 
   return (
     <ProgramDetailView
@@ -36,6 +38,7 @@ export default async function BootcampsProgramPage({
       content={content}
       detail={content.programDetails.bootcamps}
       heroImage={programHeroImage("bootcamps")}
+      alfiaForm={alfiaForm}
     />
   );
 }

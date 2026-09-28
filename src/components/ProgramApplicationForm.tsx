@@ -8,6 +8,9 @@ import { PatternFan } from "./ui/brand-patterns";
 import { cn } from "@/lib/utils";
 import type { ProgramDetail, SiteContent } from "@/lib/content";
 import type { IconTone } from "./IconBadge";
+import { AlfiaApplicationForm } from "./AlfiaApplicationForm";
+import type { AlfiaForm } from "@/lib/alfia";
+import type { Locale } from "@/i18n/config";
 
 const fieldFocus: Record<string, string> = {
   ink: "focus:border-ink",
@@ -29,15 +32,24 @@ const toneButton: Record<string, string> = {
   copper: "!bg-copper hover:!bg-[#b0603f]",
   accent: "!bg-accent hover:!bg-accent-dark",
 };
+const toneAlfia: Record<string, { text: string; bg: string; border: string; ring: string }> = {
+  ink: { text: "text-ink", bg: "bg-ink hover:bg-[#16325a]", border: "focus:border-ink", ring: "ring-ink/30" },
+  copper: { text: "text-copper", bg: "bg-copper hover:bg-[#b0603f]", border: "focus:border-copper", ring: "ring-copper/40" },
+  accent: { text: "text-accent", bg: "bg-accent hover:bg-accent-dark", border: "focus:border-accent", ring: "ring-accent/40" },
+};
 
 export function ProgramApplicationForm({
   detail,
   content,
   tone = "accent",
+  locale,
+  alfiaForm,
 }: {
   detail: ProgramDetail;
   content: SiteContent;
   tone?: IconTone;
+  locale: Locale;
+  alfiaForm?: AlfiaForm | null;
 }) {
   const [submitted, setSubmitted] = useState(false);
   const labels = content.applicationForm;
@@ -63,16 +75,26 @@ export function ProgramApplicationForm({
       />
       <div className="container-amad relative">
         <Reveal
-          className={`relative mx-auto max-w-3xl rounded-3xl border border-ink/8 bg-white ${
-            detail.form.embedUrl ? "p-6 sm:p-8" : "p-6 sm:p-10"
-          }`}
+          className={cn(
+            "relative mx-auto max-w-3xl",
+            alfiaForm
+              ? ""
+              : cn("rounded-3xl border border-ink/8 bg-white", detail.form.embedUrl ? "p-6 sm:p-8" : "p-6 sm:p-10")
+          )}
         >
           <div className="text-center">
             <h2 className="text-2xl font-bold text-ink sm:text-3xl">{detail.form.title}</h2>
             <p className="mt-3 text-sm leading-relaxed text-brown sm:text-base">{detail.form.subtitle}</p>
           </div>
 
-          {detail.form.embedUrl ? (
+          {alfiaForm ? (
+            <AlfiaApplicationForm
+              form={alfiaForm}
+              locale={locale}
+              ui={content.alfiaForm}
+              tone={toneAlfia[tone] ?? toneAlfia.accent}
+            />
+          ) : detail.form.embedUrl ? (
             <div className="relative mt-8 h-[820px] w-full overflow-hidden rounded-2xl border border-ink/10 bg-cream">
               <iframe
                 src={detail.form.embedUrl}
