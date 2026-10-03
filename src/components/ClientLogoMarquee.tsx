@@ -5,7 +5,7 @@ function logoName(src: string) {
   return file.replace(/\.[^.]+$/, "").replace(/[_\s-]?logo$/i, "").trim();
 }
 
-// A continuous right-to-left carousel; hovering pauses it and brings the hovered logo into full colour.
+// A continuous right-to-left carousel; hovering pauses it and lifts the hovered logo.
 export function ClientLogoMarquee({ logos }: { logos: string[] }) {
   const track = [...logos, ...logos];
 

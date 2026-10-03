@@ -193,7 +193,7 @@ h6 {
   mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
 }
 
-/* Client logo carousel: scrolls right-to-left, fades at the edges, pauses on hover. */
+/* Client logo carousel: scrolls right-to-left in full colour, fades at the edges, pauses on hover. */
 .logo-marquee {
   -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
   mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
@@ -209,9 +209,7 @@ h6 {
 }
 
 .logo-marquee__img {
-  filter: grayscale(1);
-  opacity: 0.65;
-  transition: filter 0.4s ease, opacity 0.4s ease, transform 0.4s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+  transition: transform 0.4s cubic-bezier(0.21, 0.47, 0.32, 0.98);
 }
 
 .logo-marquee__name {
@@ -220,27 +218,13 @@ h6 {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.logo-marquee:hover .logo-marquee__item:not(:hover) .logo-marquee__img {
-  opacity: 0.35;
-}
-
 .logo-marquee__item:hover .logo-marquee__img {
-  filter: none;
-  opacity: 1;
   transform: translateY(-4px) scale(1.1);
 }
 
 .logo-marquee__item:hover .logo-marquee__name {
   opacity: 1;
   transform: none;
-}
-
-/* Touch screens have no hover, so show logos in full colour. */
-@media (hover: none) {
-  .logo-marquee__img {
-    filter: none;
-    opacity: 1;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
