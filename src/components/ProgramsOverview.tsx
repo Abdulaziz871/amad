@@ -1,6 +1,6 @@
 import { SectionHeading } from "./SectionHeading";
-import { ProgramCard } from "./ProgramCard";
-import { Reveal, RevealGroup, RevealItem } from "./Reveal";
+import { ProgramsPathway } from "./ProgramsPathway";
+import { Reveal } from "./Reveal";
 import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import { programCardImage } from "@/lib/images";
 import type { Locale } from "@/i18n/config";
@@ -20,22 +20,22 @@ export function ProgramsOverview({ locale, content }: { locale: Locale; content:
       />
       <div className="container-amad relative">
         <Reveal>
-          <SectionHeading title={content.nav.programs} align="center" className="mx-auto" />
+          <SectionHeading
+            title={content.nav.programs}
+            subtitle={content.programsOverview.subtitle}
+            align="center"
+            className="mx-auto"
+          />
         </Reveal>
 
-        <RevealGroup className="mt-10 grid gap-6 md:grid-cols-3">
-          {content.programs.map((program) => (
-            <RevealItem key={program.slug} className="h-full">
-              <ProgramCard
-                program={program}
-                locale={locale}
-                learnMore={content.programsOverview.learnMore}
-                image={programCardImage(program.slug)}
-              />
-            </RevealItem>
-          ))}
-        </RevealGroup>
+        <ProgramsPathway
+          locale={locale}
+          programs={content.programs}
+          labels={content.programsOverview}
+          images={Object.fromEntries(content.programs.map((program) => [program.slug, programCardImage(program.slug)]))}
+        />
       </div>
     </section>
   );
 }
+

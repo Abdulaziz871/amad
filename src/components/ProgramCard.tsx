@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Check } from "lucide-react";
+import { ArrowLeft, Check, Lock } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { ProgramSummary } from "@/lib/content";
 import { programIcons } from "@/lib/program-icons";
@@ -34,11 +34,14 @@ export function ProgramCard({
   locale,
   learnMore,
   image,
+  statusLabel,
 }: {
   program: ProgramSummary;
   locale: Locale;
   learnMore: string;
   image?: string | null;
+  /** Shown as a locked badge, for programs that only admit qualified teams. */
+  statusLabel?: string;
 }) {
   const Icon = programIcons[program.slug];
   const href = `/${locale}/programs/${program.slug}`;
@@ -78,6 +81,25 @@ export function ProgramCard({
       >
         <Icon aria-hidden />
       </span>
+
+      {statusLabel && (
+        <span
+          className={cn(
+            "absolute top-5 end-5 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold backdrop-blur-md",
+            program.access === "open" ? "bg-white/90 text-ink" : "border border-white/25 bg-ink/50 text-white"
+          )}
+        >
+          {program.access === "open" ? (
+            <span className="relative flex h-2 w-2" aria-hidden>
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            </span>
+          ) : (
+            <Lock className="h-3.5 w-3.5" aria-hidden />
+          )}
+          {statusLabel}
+        </span>
+      )}
 
       <div className="p-6 text-white sm:p-7">
         <h3 className="text-2xl font-bold leading-snug transition-transform duration-500 ease-out group-hover:-translate-y-1 sm:text-[1.7rem]">

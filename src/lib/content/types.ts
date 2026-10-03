@@ -20,6 +20,8 @@ export interface FaqItem {
 
 export interface ProgramSummary {
   slug: ProgramSlug;
+  /** "open" programs accept direct applications; "qualified" ones only admit teams promoted from another program. */
+  access: "open" | "qualified";
   title: string;
   englishName: string;
   description: string;
@@ -133,6 +135,11 @@ export interface SiteContent {
   programsOverview: {
     learnMore: string;
     pathwayNote: string;
+    subtitle: string;
+    statusOpen: string;
+    statusQualified: string;
+    hint: string;
+    steps: { apply: string; qualify: string; grow: string };
   };
   programs: ProgramSummary[];
   programDetails: Record<ProgramSlug, ProgramDetail>;

@@ -76,11 +76,17 @@ export const en: SiteContent = {
   },
   programsOverview: {
     learnMore: "Learn more",
-    pathwayNote: "Successful Ruwad Amad graduates continue here",
+    pathwayNote: "Qualified teams from both programs",
+    subtitle: "Apply directly to Amad IP or Future Founders. Qualified teams from both programs move on to the Venture Clinic.",
+    statusOpen: "Applications open",
+    statusQualified: "Qualified teams only",
+    hint: "Tap any program to see its path",
+    steps: { apply: "Apply directly", qualify: "Qualify", grow: "Grow your venture" },
   },
   programs: [
     {
       slug: "ip",
+      access: "open",
       title: "Amad IP",
       englishName: "Amad IP",
       description: "Amad IP helps researchers and innovators who hold intellectual property turn their innovations into applicable solutions for the fintech sector, by connecting them to real market challenges and charting a clear commercial path for each.",
@@ -93,6 +99,7 @@ export const en: SiteContent = {
     },
     {
       slug: "bootcamps",
+      access: "open",
       title: "Future Founders",
       englishName: "Future Founders",
       description: "Future Founders is an intensive, in-person fintech bootcamp held in three cities across the Kingdom. It targets university students and early-stage innovators, taking them on a hands-on journey from discovering the problem to pitching a complete idea to a judging panel. Join solo or as a team — whether you bring an idea or a skill to add to a team.",
@@ -105,9 +112,10 @@ export const en: SiteContent = {
     },
     {
       slug: "venture-clinic",
+      access: "qualified",
       title: "Venture Clinic",
       englishName: "Venture Clinic",
-      description: "A pre-acceleration program for teams that qualify from Future Founders. It starts with an in-depth diagnosis of each venture, then supports founders as they build the first version of their product and test it with real users, all the way to the final showcase.",
+      description: "A pre-acceleration program for teams that qualify from Amad IP and Future Founders. It starts with an in-depth diagnosis of each venture, then supports founders as they build the first version of their product and test it with real users, all the way to the final showcase.",
       features: [
         "One-on-one diagnosis and a tailored development plan for each team",
         "Building and refining the product prototype through specialist mentorship sessions",
@@ -331,7 +339,7 @@ export const en: SiteContent = {
       title: "Venture Clinic",
       tagline: "From a promising venture, to impact that grows",
       intro: "Every startup needs an honest look at its growth. Venture Clinic runs diagnostic sessions and specialist mentorship that pinpoint strengths and gaps, then walks with founders all the way to the final showcase.",
-      audience: "Who it's for: early-stage founders, Future Founders graduates, and startups looking for structured growth.",
+      audience: "Who it's for: teams that qualify from Amad IP and Future Founders.",
       benefits: {
         title: "What you get",
         items: [
