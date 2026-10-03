@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { CheckCircle2, ArrowLeft, Check } from "lucide-react";
+import { CheckCircle2, ArrowLeft, Check, Lock } from "lucide-react";
 import { Button } from "./Button";
 import { Reveal } from "./Reveal";
 import { PatternCross, PatternFan } from "./ui/brand-patterns";
@@ -11,6 +11,9 @@ import type { SiteContent } from "@/lib/content";
 
 export function FinalCta({ content, backgroundImage }: { content: SiteContent; backgroundImage?: string | null }) {
   const [submitted, setSubmitted] = useState(false);
+  // Only programs that accept direct applications are selectable; qualified-only ones get a note instead.
+  const openPrograms = content.programs.filter((program) => program.access === "open");
+  const hasQualifiedProgram = content.programs.some((program) => program.access === "qualified");
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -73,8 +76,8 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
                   <legend className="mb-2.5 text-sm font-semibold text-white/80">
                     {content.finalCta.trackPlaceholder}
                   </legend>
-                  <div className="grid gap-2.5 sm:grid-cols-3">
-                    {content.programs.map((program) => {
+                  <div className="grid gap-2.5 sm:grid-cols-2">
+                    {openPrograms.map((program) => {
                       const Icon = programIcons[program.slug];
                       return (
                         <label
@@ -98,6 +101,12 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
                       );
                     })}
                   </div>
+                  {hasQualifiedProgram && (
+                    <p className="mt-3 flex items-start gap-2 text-start text-xs leading-relaxed text-white/60">
+                      <Lock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-copper-light" aria-hidden />
+                      {content.finalCta.qualifiedNote}
+                    </p>
+                  )}
                 </fieldset>
                 <Button type="submit" variant="light" className="w-full sm:col-span-2">
                   {content.finalCta.submit}

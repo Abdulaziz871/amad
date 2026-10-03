@@ -81,18 +81,6 @@ h6 {
   }
 }
 
-.animate-marquee {
-  animation: marquee 90s linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-}
-
-.animate-marquee-reverse {
-  animation: marquee 90s linear infinite reverse;
-  will-change: transform;
-  backface-visibility: hidden;
-}
-
 @keyframes kenburns {
   0% {
     transform: scale(1);
@@ -196,6 +184,68 @@ h6 {
 @media (prefers-reduced-motion: reduce) {
   .pathway-flow {
     animation: none;
+  }
+}
+
+/* Gallery thumbnail strip: soft fade at both ends hints that it scrolls. */
+.thumb-strip {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}
+
+/* Client logo carousel: scrolls right-to-left, fades at the edges, pauses on hover. */
+.logo-marquee {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+.logo-marquee__track {
+  animation: marquee 45s linear infinite;
+  will-change: transform;
+}
+
+.logo-marquee:hover .logo-marquee__track {
+  animation-play-state: paused;
+}
+
+.logo-marquee__img {
+  filter: grayscale(1);
+  opacity: 0.65;
+  transition: filter 0.4s ease, opacity 0.4s ease, transform 0.4s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+}
+
+.logo-marquee__name {
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.logo-marquee:hover .logo-marquee__item:not(:hover) .logo-marquee__img {
+  opacity: 0.35;
+}
+
+.logo-marquee__item:hover .logo-marquee__img {
+  filter: none;
+  opacity: 1;
+  transform: translateY(-4px) scale(1.1);
+}
+
+.logo-marquee__item:hover .logo-marquee__name {
+  opacity: 1;
+  transform: none;
+}
+
+/* Touch screens have no hover, so show logos in full colour. */
+@media (hover: none) {
+  .logo-marquee__img {
+    filter: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee__track {
+    animation-duration: 120s;
   }
 }
 

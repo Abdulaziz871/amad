@@ -13,8 +13,9 @@ import { cn } from "@/lib/utils";
 const AUTOPLAY_MS = 4500;
 const ease = [0.21, 0.47, 0.32, 0.98] as const;
 
-// Entry cards sit in a two-column grid, so their centres land at x = 100 / 300 (mirrored in RTL); both curves meet the gate at x = 200.
+// Entry cards sit in a two-column grid, so their centres land at x = 100 / 300 (mirrored in RTL); a feeder's curve meets the gate at x = 200.
 const funnelPaths = ["M100 0 C100 60 200 40 200 100", "M300 0 C300 60 200 40 200 100"];
+const columnCentres = ["start-1/4", "start-3/4"];
 
 type Labels = SiteContent["programsOverview"];
 
@@ -49,13 +50,15 @@ export function ProgramsPathway({
     setSelected(slug);
   };
 
+  const feeders = qualified?.qualifiesFrom ?? [];
   const clinicSelected = selected === qualified?.slug;
-  const routeActive = (slug: ProgramSlug) => selected === slug || clinicSelected;
+  // The route to the clinic lights up when the clinic or one of the programs feeding it is selected.
+  const routeOn = clinicSelected || feeders.includes(selected);
   const current = programs.find((program) => program.slug === selected) ?? programs[0];
 
   return (
     <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
-      {/* The map: two open doors that merge into the qualification gate, which leads to the clinic. */}
+      {/* The map: open programs on top; only feeder programs connect through the qualification gate to the clinic. */}
       <div className="relative rounded-[2rem] bg-white/70 p-4 shadow-[0_24px_60px_-35px_rgba(12,35,65,0.35)] ring-1 ring-ink/5 backdrop-blur sm:p-6">
         <StepLabel index={1} text={labels.steps.apply} />
         <div className="mt-3 grid grid-cols-2 gap-3 sm:gap-4">
@@ -66,7 +69,7 @@ export function ProgramsPathway({
               image={images[program.slug]}
               status={labels.statusOpen}
               selected={selected === program.slug}
-              dimmed={!routeActive(program.slug)}
+              dimmed={selected !== program.slug && !(clinicSelected && feeders.includes(program.slug))}
               onSelect={() => choose(program.slug)}
             />
           ))}
@@ -76,12 +79,11 @@ export function ProgramsPathway({
           <>
             <div className="relative h-16 sm:h-20" aria-hidden>
               <svg viewBox="0 0 400 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full rtl:-scale-x-100">
-                {funnelPaths.map((d, i) => {
-                  const on = routeActive(openPrograms[i]?.slug);
-                  return (
-                    <g key={d}>
+                {openPrograms.map((program, i) =>
+                  feeders.includes(program.slug) ? (
+                    <g key={program.slug}>
                       <path
-                        d={d}
+                        d={funnelPaths[i]}
                         fill="none"
                         stroke="currentColor"
                         strokeWidth={2}
@@ -89,47 +91,69 @@ export function ProgramsPathway({
                         vectorEffect="non-scaling-stroke"
                         className="text-ink/20"
                       />
+                      {/* No non-scaling-stroke here: it breaks the pathLength draw animation in Chrome. */}
                       <motion.path
-                        d={d}
+                        d={funnelPaths[i]}
                         fill="none"
                         stroke="currentColor"
                         strokeWidth={4}
                         strokeLinecap="round"
-                        vectorEffect="non-scaling-stroke"
                         className="text-copper"
                         initial={false}
-                        animate={{ pathLength: on ? 1 : 0, opacity: on ? 1 : 0 }}
-                        transition={{ duration: on ? 0.6 : 0.25, ease }}
+                        animate={{ pathLength: routeOn ? 1 : 0, opacity: routeOn ? 1 : 0 }}
+                        transition={{ duration: routeOn ? 0.6 : 0.25, ease }}
                       />
                     </g>
-                  );
-                })}
+                  ) : null
+                )}
               </svg>
+              {openPrograms.map((program, i) =>
+                feeders.includes(program.slug) ? null : (
+                  <span
+                    key={program.slug}
+                    className={cn(
+                      "absolute top-3 whitespace-nowrap rounded-full bg-ink/5 px-3 py-1 text-[0.7rem] font-semibold text-ink/55 ltr:-translate-x-1/2 rtl:translate-x-1/2",
+                      columnCentres[i]
+                    )}
+                  >
+                    {labels.standalone}
+                  </span>
+                )
+              )}
             </div>
 
             <div className="flex flex-col items-center">
               <StepLabel index={2} text={labels.steps.qualify} centered />
               <div className="relative mt-2">
-                <motion.span
-                  key={`pulse-${selected}`}
-                  className="absolute inset-0 rounded-full bg-copper"
-                  initial={{ scale: 1, opacity: 0.5 }}
-                  animate={{ scale: 1.35, opacity: 0 }}
-                  transition={{ duration: 0.9, delay: 0.5, ease: "easeOut" }}
-                  aria-hidden
-                />
-                <span className="relative inline-flex items-center gap-2 rounded-full bg-copper px-4 py-2 text-xs font-bold text-white shadow-lg shadow-copper/30 sm:text-sm">
+                {routeOn && (
+                  <motion.span
+                    key={`pulse-${selected}`}
+                    className="absolute inset-0 rounded-full bg-copper"
+                    initial={{ scale: 1, opacity: 0.5 }}
+                    animate={{ scale: 1.35, opacity: 0 }}
+                    transition={{ duration: 0.9, delay: 0.5, ease: "easeOut" }}
+                    aria-hidden
+                  />
+                )}
+                <span
+                  className={cn(
+                    "relative inline-flex items-center gap-2 rounded-full border-2 px-4 py-2 text-xs font-bold transition-colors duration-300 sm:text-sm",
+                    routeOn
+                      ? "border-copper bg-copper text-white shadow-lg shadow-copper/30 delay-500"
+                      : "border-dashed border-ink/20 bg-white text-ink/50"
+                  )}
+                >
                   <Check className="h-4 w-4" aria-hidden />
                   {labels.pathwayNote}
                 </span>
               </div>
               <div className="relative h-8 w-1 overflow-hidden rounded-full bg-ink/10 sm:h-10" aria-hidden>
                 <motion.span
-                  key={selected}
+                  key={routeOn ? selected : "off"}
                   className="absolute inset-0 origin-top rounded-full bg-copper"
                   initial={{ scaleY: 0 }}
-                  animate={{ scaleY: 1 }}
-                  transition={{ duration: 0.35, delay: 0.7, ease }}
+                  animate={{ scaleY: routeOn ? 1 : 0 }}
+                  transition={{ duration: 0.35, delay: routeOn ? 0.7 : 0, ease }}
                 />
               </div>
             </div>
@@ -140,7 +164,7 @@ export function ProgramsPathway({
               image={images[qualified.slug]}
               status={labels.statusQualified}
               selected={clinicSelected}
-              dimmed={false}
+              dimmed={!routeOn}
               glowDelay={1}
               wide
               onSelect={() => choose(qualified.slug)}

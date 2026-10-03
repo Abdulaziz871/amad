@@ -22,6 +22,8 @@ export interface ProgramSummary {
   slug: ProgramSlug;
   /** "open" programs accept direct applications; "qualified" ones only admit teams promoted from another program. */
   access: "open" | "qualified";
+  /** For "qualified" programs: the programs whose qualifying teams move on to this one. */
+  qualifiesFrom?: ProgramSlug[];
   title: string;
   englishName: string;
   description: string;
@@ -139,6 +141,7 @@ export interface SiteContent {
     statusOpen: string;
     statusQualified: string;
     hint: string;
+    standalone: string;
     steps: { apply: string; qualify: string; grow: string };
   };
   programs: ProgramSummary[];
@@ -152,6 +155,7 @@ export interface SiteContent {
   gallery: {
     title: string;
     videoCaption: string;
+    viewer: { previous: string; next: string; close: string; expand: string };
   };
   partners: {
     title: string;
@@ -179,6 +183,7 @@ export interface SiteContent {
     emailLabel: string;
     trackLabel: string;
     trackPlaceholder: string;
+    qualifiedNote: string;
     submit: string;
     notice: string;
   };

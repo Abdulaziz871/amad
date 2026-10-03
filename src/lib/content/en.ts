@@ -76,11 +76,12 @@ export const en: SiteContent = {
   },
   programsOverview: {
     learnMore: "Learn more",
-    pathwayNote: "Qualified teams from both programs",
-    subtitle: "Apply directly to Amad IP or Future Founders. Qualified teams from both programs move on to the Venture Clinic.",
+    pathwayNote: "Qualified Future Founders teams",
+    subtitle: "Apply directly to Amad IP or Future Founders. Top Future Founders teams then qualify for the Venture Clinic.",
     statusOpen: "Applications open",
     statusQualified: "Qualified teams only",
     hint: "Tap any program to see its path",
+    standalone: "Standalone track",
     steps: { apply: "Apply directly", qualify: "Qualify", grow: "Grow your venture" },
   },
   programs: [
@@ -113,9 +114,10 @@ export const en: SiteContent = {
     {
       slug: "venture-clinic",
       access: "qualified",
+      qualifiesFrom: ["bootcamps"],
       title: "Venture Clinic",
       englishName: "Venture Clinic",
-      description: "A pre-acceleration program for teams that qualify from Amad IP and Future Founders. It starts with an in-depth diagnosis of each venture, then supports founders as they build the first version of their product and test it with real users, all the way to the final showcase.",
+      description: "A pre-acceleration program for teams that qualify from Future Founders. It starts with an in-depth diagnosis of each venture, then supports founders as they build the first version of their product and test it with real users, all the way to the final showcase.",
       features: [
         "One-on-one diagnosis and a tailored development plan for each team",
         "Building and refining the product prototype through specialist mentorship sessions",
@@ -339,7 +341,7 @@ export const en: SiteContent = {
       title: "Venture Clinic",
       tagline: "From a promising venture, to impact that grows",
       intro: "Every startup needs an honest look at its growth. Venture Clinic runs diagnostic sessions and specialist mentorship that pinpoint strengths and gaps, then walks with founders all the way to the final showcase.",
-      audience: "Who it's for: teams that qualify from Amad IP and Future Founders.",
+      audience: "Who it's for: teams that qualify from Future Founders.",
       benefits: {
         title: "What you get",
         items: [
@@ -421,6 +423,7 @@ export const en: SiteContent = {
   gallery: {
     title: "Our Success Stories",
     videoCaption: "Moments from the Amad Tech ceremony",
+    viewer: { previous: "Previous photo", next: "Next photo", close: "Close", expand: "View fullscreen" },
   },
   partners: {
     title: "Partners",
@@ -467,6 +470,7 @@ export const en: SiteContent = {
     emailLabel: "Email address",
     trackLabel: "Track you're interested in",
     trackPlaceholder: "Choose a track",
+    qualifiedNote: "The Venture Clinic has no direct registration. Top Future Founders teams qualify for it.",
     submit: "Register your interest",
     notice: "Your interest has been registered, thank you.",
   },
