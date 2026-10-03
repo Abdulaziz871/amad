@@ -87,7 +87,7 @@ export function ProgramDetailView({
               </ButtonLink>
             </div>
 
-            <h1 className="mt-5 max-w-2xl text-4xl font-extrabold leading-tight tracking-tight text-ink sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 max-w-2xl text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
               <HighlightText text={detail.title} highlight={content.brandName} />
             </h1>
             {detail.tagline && (

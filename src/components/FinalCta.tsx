@@ -37,7 +37,7 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
             aria-hidden
           />
           <div className="relative mx-auto max-w-2xl text-center">
-            <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">{content.finalCta.title}</h2>
+            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-[2.75rem]">{content.finalCta.title}</h2>
             <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-base">{content.finalCta.subtitle}</p>
           </div>
 

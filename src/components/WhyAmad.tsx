@@ -64,7 +64,7 @@ export function WhyAmad({ content }: { content: SiteContent }) {
               <div className="mt-auto pt-12">
                 <AnimatedCounter
                   value={featured.value}
-                  className="block font-display text-7xl font-extrabold leading-none text-ink tabular-nums sm:text-8xl rtl:text-right ltr:text-left"
+                  className="block font-display text-6xl font-extrabold leading-none text-ink tabular-nums sm:text-7xl rtl:text-right ltr:text-left"
                   affixClassName="text-copper"
                 />
                 <p className="mt-5 max-w-xs text-lg font-bold leading-snug text-ink/80 sm:text-xl">{featured.label}</p>
@@ -84,7 +84,7 @@ export function WhyAmad({ content }: { content: SiteContent }) {
                   <RevealItem key={stat.label} className="group flex items-center gap-5 py-5 first:pt-0 last:pb-0 sm:gap-7">
                     <AnimatedCounter
                       value={stat.value}
-                      className="w-28 shrink-0 font-display text-4xl font-extrabold leading-none text-ink tabular-nums sm:w-36 sm:text-5xl rtl:text-right ltr:text-left"
+                      className="w-24 shrink-0 font-display text-3xl font-extrabold leading-none text-ink tabular-nums sm:w-32 sm:text-4xl rtl:text-right ltr:text-left"
                       affixClassName={tone.text}
                     />
                     <p className="flex-1 text-sm font-medium leading-relaxed text-ink/70 sm:text-base">{stat.label}</p>

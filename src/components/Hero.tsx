@@ -24,7 +24,7 @@ export function Hero({ locale, content }: { locale: Locale; content: SiteContent
           <span className="inline-flex items-center rounded-full border border-ink/10 bg-white px-4 py-1.5 text-xs font-semibold tracking-wide text-brown">
             {content.hero.eyebrow}
           </span>
-          <h1 className="mt-6 text-4xl font-extrabold leading-[1.15] text-ink sm:text-5xl lg:text-[3.25rem]">
+          <h1 className="mt-6 text-3xl font-extrabold leading-[1.2] text-ink sm:text-4xl lg:text-5xl">
             <HighlightText text={content.hero.title} highlight={content.hero.titleHighlight} />
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-brown sm:text-lg">

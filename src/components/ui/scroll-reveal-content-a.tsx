@@ -25,9 +25,11 @@ export interface ScrollRevealItem {
 
 interface Props extends Omit<React.ComponentProps<"div">, "children"> {
   items: ScrollRevealItem[];
+  /** Rendered inside the sticky panel so it stays visible while scrolling through the items. */
+  header?: React.ReactNode;
 }
 
-export function ScrollRevealContentA({ items, className, ...props }: Props) {
+export function ScrollRevealContentA({ items, header, className, ...props }: Props) {
   const [scrollProgress, setScrollProgress] = React.useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -40,7 +42,8 @@ export function ScrollRevealContentA({ items, className, ...props }: Props) {
     <div className={cn(className)} ref={trackRef} {...props}>
       <div className="container-amad">
         <div className="relative flex flex-col w-full">
-          <div className="sticky top-24 flex min-h-[calc(100vh-6rem)] w-full flex-col items-start justify-center py-6">
+          <div className="sticky top-24 flex w-full flex-col items-start py-4">
+            {header && <div className="mb-6 w-full shrink-0">{header}</div>}
             <div className="mb-6 flex w-full gap-1.5 shrink-0" aria-hidden>
               {items.map((item, i) => (
                 <div key={item.number} className="h-1 flex-1 overflow-hidden rounded-full bg-ink/10">
@@ -51,18 +54,19 @@ export function ScrollRevealContentA({ items, className, ...props }: Props) {
                 </div>
               ))}
             </div>
-            <div className="grid w-full items-center gap-10 lg:grid-cols-2 lg:gap-16">
-              <div className="relative min-h-[220px] w-full">
+            <div className="grid w-full items-center gap-6 lg:grid-cols-2 lg:gap-16">
+              <div className="relative min-h-[170px] w-full lg:min-h-[300px]">
                 {items.map((item, i) => (
                   <PointItem
                     key={item.number}
                     item={item}
+                    total={items[n - 1]?.number}
                     isActive={scrollProgress >= i / n && scrollProgress < (i + 1) / n}
                   />
                 ))}
               </div>
 
-              <div className="relative hidden h-[min(55vh,22rem)] w-full items-center justify-center lg:flex">
+              <div className="relative flex h-56 w-full items-center justify-center sm:h-72 lg:h-[min(62vh,32rem)]">
                 {items.map((item, i) => {
                   const active = scrollProgress >= i / n && scrollProgress < (i + 1) / n;
                   return (
@@ -73,15 +77,6 @@ export function ScrollRevealContentA({ items, className, ...props }: Props) {
                         active ? "opacity-100" : "opacity-0"
                       )}
                     >
-                      <span
-                        aria-hidden
-                        className={cn(
-                          "pointer-events-none absolute top-1/2 -end-16 z-0 -translate-y-1/2 select-none text-[13rem] font-black leading-none",
-                          item.tone.frameGhost
-                        )}
-                      >
-                        {item.number}
-                      </span>
                       <div className="relative z-10 flex h-full w-full items-center justify-center overflow-hidden rounded-[2rem] shadow-2xl">
                         <div className={cn("absolute inset-0", !item.image && item.gradientClass)}>
                           {item.image ? (
@@ -110,7 +105,7 @@ export function ScrollRevealContentA({ items, className, ...props }: Props) {
   );
 }
 
-function PointItem({ item, isActive }: { item: ScrollRevealItem; isActive: boolean }) {
+function PointItem({ item, total, isActive }: { item: ScrollRevealItem; total?: string; isActive: boolean }) {
   return (
     <div
       className={cn(
@@ -118,26 +113,21 @@ function PointItem({ item, isActive }: { item: ScrollRevealItem; isActive: boole
         isActive ? "opacity-100" : "pointer-events-none opacity-0"
       )}
     >
-      <span
-        aria-hidden
-        className={cn(
-          "pointer-events-none absolute -top-10 -start-3 select-none text-[8rem] font-black leading-none sm:-top-14 sm:text-[10rem]",
-          item.tone.ghost
-        )}
-      >
-        {item.number}
-      </span>
-      <div className="relative flex flex-col gap-3">
+      <div className="relative flex flex-col gap-4">
+        <div className="flex w-fit items-baseline gap-1.5 font-display tabular-nums" dir="ltr">
+          <span className={cn("text-2xl font-bold sm:text-3xl", item.tone.text)}>{item.number}</span>
+          {total && <span className="text-base font-medium text-ink/35 sm:text-lg">/ {total}</span>}
+        </div>
         <span
           className={cn(
-            "inline-flex w-fit items-center gap-2 rounded-full border px-4 py-2 text-sm font-extrabold",
+            "inline-flex w-fit items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-extrabold sm:text-base",
             item.tone.badge
           )}
         >
-          <Calendar className="h-4 w-4" aria-hidden />
+          <Calendar className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden />
           {item.description}
         </span>
-        <h3 className="text-2xl font-bold leading-snug text-ink sm:text-3xl">{item.title}</h3>
+        <h3 className="text-2xl font-bold leading-snug text-ink sm:text-3xl lg:text-4xl">{item.title}</h3>
       </div>
     </div>
   );

@@ -47,7 +47,7 @@ function ColorfulTagline({ text }: { text: string }) {
   let clauseIndex = -1;
 
   return (
-    <p className="text-xl font-bold leading-snug sm:text-2xl">
+    <p className="text-lg font-bold leading-snug sm:text-xl">
       {parts.map((part, i) => {
         if (part === "," || part === "،") {
           return (
@@ -82,9 +82,9 @@ export function JourneySteps({ content }: { content: SiteContent }) {
   });
 
   return (
-    <section id="journey" className="relative scroll-mt-24 pt-16 sm:pt-20">
+    <section id="journey" className="relative scroll-mt-24 pt-2 sm:pt-4">
       <div className="section-glow section-glow--light" aria-hidden />
-      <div className="container-amad relative overflow-hidden">
+      <div className="container-amad pointer-events-none absolute inset-x-0 top-0 h-40" aria-hidden>
         <PatternFan
           className="pointer-events-none absolute top-4 start-6 h-9 w-9 rotate-6 text-accent opacity-[0.2] sm:h-14 sm:w-14 sm:start-10"
           aria-hidden
@@ -93,16 +93,15 @@ export function JourneySteps({ content }: { content: SiteContent }) {
           className="pointer-events-none absolute top-6 end-6 h-12 w-12 -rotate-6 text-accent opacity-[0.2] sm:h-16 sm:w-16"
           aria-hidden
         />
-        <Reveal>
-          <SectionHeading
-            title={content.journey.title}
-            highlight={content.brandName}
-            align="center"
-            className="mx-auto pb-12"
-          />
-        </Reveal>
       </div>
-      <ScrollRevealContentA items={items} />
+      <ScrollRevealContentA
+        items={items}
+        header={
+          <Reveal>
+            <SectionHeading title={content.journey.title} highlight={content.brandName} align="center" className="mx-auto" />
+          </Reveal>
+        }
+      />
       <div className="container-amad relative overflow-hidden py-12 text-center">
         <PatternCross
           className="pointer-events-none absolute bottom-2 end-6 h-11 w-11 rotate-6 text-ink opacity-[0.15] sm:h-16 sm:w-16 sm:end-10"

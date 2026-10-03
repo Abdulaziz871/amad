@@ -26,6 +26,10 @@
   --font-display: var(--font-alinma-display);
 }
 
+html {
+  font-size: 87.5%;
+}
+
 body {
   background: var(--color-cream);
   color: var(--color-ink);

@@ -2,9 +2,8 @@ import { cn } from "@/lib/utils";
 
 export function HighlightWord({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <span className={cn("relative inline-block whitespace-nowrap text-copper", className)}>
-      <span className="absolute -inset-x-1.5 -inset-y-0.5 -z-10 rounded-lg bg-copper-light/25" aria-hidden />
-      <span className="relative">{children}</span>
+    <span className={cn("inline-block whitespace-nowrap text-copper", className)}>
+      {children}
     </span>
   );
 }

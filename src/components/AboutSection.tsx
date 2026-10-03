@@ -54,7 +54,7 @@ export function AboutSection({ content }: { content: SiteContent }) {
       />
       <div className="container-amad relative">
         <Reveal className="mx-auto max-w-5xl">
-          <h2 className="text-center text-4xl font-extrabold tracking-tight text-ink sm:text-5xl lg:text-6xl">
+          <h2 className="text-center text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-[2.75rem]">
             <HighlightText text={content.about.title} highlight={content.brandName} />
           </h2>
           <HeadingAccent align="center" />
