@@ -31,6 +31,14 @@ export interface ProgramSummary {
   cta: string;
 }
 
+export type BenefitIcon = "asset" | "market" | "route" | "network";
+
+export interface BenefitCard {
+  icon: BenefitIcon;
+  title: string;
+  description: string;
+}
+
 export interface JourneyStep {
   title: string;
   description: string;
@@ -46,6 +54,8 @@ export interface ProgramDetail {
   benefits: {
     title: string;
     items: string[];
+    /** When set, benefits render as icon cards instead of the plain `items` checklist. */
+    cards?: BenefitCard[];
   };
   criteria?: {
     title: string;
@@ -113,6 +123,7 @@ export interface SiteContent {
     langSwitch: string;
   };
   hero: {
+    eyebrow: string;
     title: string;
     titleHighlight: string;
     subtitle: string;
@@ -158,7 +169,7 @@ export interface SiteContent {
   gallery: {
     title: string;
     videoCaption: string;
-    viewer: { previous: string; next: string; close: string; expand: string; viewAll: string };
+    viewer: { previous: string; next: string; close: string; expand: string; drag: string };
   };
   partners: {
     title: string;

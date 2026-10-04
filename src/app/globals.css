@@ -187,6 +187,35 @@ h6 {
   }
 }
 
+/* Gallery arc cards: a gentle idle float and sway, each card on its own delay/duration. */
+@keyframes card-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-7px) rotate(0.8deg);
+  }
+  50% {
+    transform: translateY(-2px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-9px) rotate(-0.8deg);
+  }
+}
+
+.card-float {
+  animation: card-float var(--float-duration, 6s) ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-float {
+    animation: none;
+  }
+}
+
 /* Gallery thumbnail strip: soft fade at both ends hints that it scrolls. */
 .thumb-strip {
   -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);

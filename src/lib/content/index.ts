@@ -11,6 +11,7 @@ export function getContent(locale: Locale): SiteContent {
 
 export type {
   SiteContent,
+  BenefitIcon,
   ProgramDetail,
   ProgramSummary,
   ProgramSlug,

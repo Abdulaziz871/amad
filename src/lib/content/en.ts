@@ -14,10 +14,11 @@ export const en: SiteContent = {
     journey: "Journey",
     faq: "FAQ",
     gallery: "Graduates",
-    registerInterest: "Register your interest",
+    registerInterest: "Register with us",
     langSwitch: "العربية",
   },
   hero: {
+    eyebrow: "Register your interest and be the first to know when applications open",
     title: "Your gateway to building\na sustainable future",
     titleHighlight: "a sustainable future",
     subtitle: "Amad, the innovation and entrepreneurship ecosystem by Alinma Bank",
@@ -98,7 +99,7 @@ export const en: SiteContent = {
         "Aligning innovation with the financial sector's challenges and priorities",
         "Market-feasibility validation and business-model building",
       ],
-      cta: "Protect your idea",
+      cta: "Submit your innovation",
     },
     {
       slug: "bootcamps",
@@ -134,7 +135,7 @@ export const en: SiteContent = {
       englishName: "Amad IP",
       title: "Amad IP",
       tagline: "From innovation, we create impact",
-      intro: "Your idea is an asset worth protecting. Amad IP walks innovators through understanding their rights, protecting their ideas, and turning them into opportunities ready to grow.",
+      intro: "The program is for IP holders, inventors, researchers and technical teams, as well as universities, research centers, technology transfer offices, startups, and organizations that own technologies applicable to the financial sector.",
       audience: "Who it's for: innovators, researchers, owners of tech ideas, and startups that need to protect their intellectual assets.",
       benefits: {
         title: "What you get",
@@ -143,6 +144,28 @@ export const en: SiteContent = {
           "Specialist guidance on registration and protection",
           "Market-readiness assessment",
           "A direct line into the ecosystem's programs and opportunities",
+        ],
+        cards: [
+          {
+            icon: "asset",
+            title: "Asset assessment",
+            description: "Understanding the technology, ownership clarity, protection status, and technical readiness.",
+          },
+          {
+            icon: "market",
+            title: "Market validation",
+            description: "Testing the problem and the proposed application with customers and beneficiaries.",
+          },
+          {
+            icon: "route",
+            title: "Commercialization path",
+            description: "Working out the best way to benefit from the asset, based on its rights and the assessment results.",
+          },
+          {
+            icon: "network",
+            title: "Ecosystem connection",
+            description: "A direct line into the ecosystem's programs and opportunities.",
+          },
         ],
       },
       criteria: {
@@ -425,7 +448,7 @@ export const en: SiteContent = {
   gallery: {
     title: "Our Success Stories",
     videoCaption: "Moments from the Amad Tech ceremony",
-    viewer: { previous: "Previous photo", next: "Next photo", close: "Close", expand: "View photo", viewAll: "View all photos" },
+    viewer: { previous: "Previous photo", next: "Next photo", close: "Close", expand: "View photo", drag: "Drag" },
   },
   partners: {
     title: "Partners",

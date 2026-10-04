@@ -73,7 +73,7 @@ export function GraduatesGallery({
           >
             {content.gallery.videoCaption}
           </BlockLabel>
-          <div className="container-amad mt-6">
+          <div className="mt-2">
             <GraduatesShowcase images={images} labels={content.gallery.viewer} />
           </div>
         </Reveal>

@@ -3,88 +3,212 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
-import { AnimatePresence, motion } from "motion/react";
-import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useVelocity,
+  type MotionValue,
+} from "motion/react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const SWIPE_PX = 60;
 
-// Bento tiles on sm+ (4 columns, dense flow): big 2x2, small, tall 1x2, small, small, wide 2x1, small.
-// Mobile is a plain 2-column grid with the first photo spanning both columns.
-const tileSpans = [
-  "col-span-2 sm:row-span-2",
-  "",
-  "sm:row-span-2",
-  "",
-  "",
-  "sm:col-span-2",
-  "",
-];
+// Arc carousel (inspired by griflan.com's "Client Confessions"): a draggable row of framed photos
+// where each card tilts and dips according to its distance from the centre, so the row swings
+// along a curve as it moves. Click a photo to open it fullscreen.
+const GAP_PX = 24;
+const MAX_TILT_DEG = 9;
+const MAX_DIP_PX = 70;
+const CLICK_SLOP_PX = 6;
+const START_INDEX = 3;
+const MAX_SWING_DEG = 7;
 
-type Labels = { previous: string; next: string; close: string; expand: string; viewAll: string };
+type Labels = { previous: string; next: string; close: string; expand: string; drag: string };
 
 export function GraduatesShowcase({ images, labels }: { images: string[]; labels: Labels }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const tiles = images.slice(0, tileSpans.length);
-  const hidden = images.length - tiles.length;
+  const [layout, setLayout] = useState({ viewport: 0, card: 0 });
+  const [cursorOn, setCursorOn] = useState(false);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const placed = useRef(false);
+  const dragDistance = useRef(0);
+  const trackX = useMotionValue(0);
+  // Drag velocity drives an under-damped spring, so the cards swing like pendulums and settle after release.
+  const velocity = useVelocity(trackX);
+  const swing = useSpring(
+    useTransform(velocity, (v) => Math.max(-MAX_SWING_DEG, Math.min(MAX_SWING_DEG, -v / 140))),
+    { stiffness: 90, damping: 7, mass: 0.8 }
+  );
+  const cursorX = useSpring(0, { stiffness: 500, damping: 40 });
+  const cursorY = useSpring(0, { stiffness: 500, damping: 40 });
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!viewport || !track) return;
+    const measure = () => {
+      const card = (track.children[0] as HTMLElement | undefined)?.offsetWidth ?? 0;
+      setLayout({ viewport: viewport.clientWidth, card });
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(viewport);
+    return () => observer.disconnect();
+  }, []);
+
+  const step = layout.card + GAP_PX;
+  // Track offsets that put the first / last card in the centre of the viewport.
+  const maxX = layout.viewport / 2 - layout.card / 2;
+  const minX = maxX - step * (images.length - 1);
+
+  // Start a few photos in so both sides of the screen are filled, once the sizes are known.
+  useEffect(() => {
+    if (!placed.current && layout.card > 0) {
+      trackX.set(maxX - step * Math.min(START_INDEX, images.length - 1));
+      placed.current = true;
+    }
+  }, [layout.card, maxX, step, images.length, trackX]);
+
+  function moveCursor(e: React.PointerEvent<HTMLDivElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    cursorX.set(e.clientX - rect.left);
+    cursorY.set(e.clientY - rect.top);
+  }
 
   return (
     <>
-      <div className="mx-auto grid max-w-5xl grid-flow-dense auto-rows-[8.5rem] grid-cols-2 gap-2.5 sm:auto-rows-[10rem] sm:grid-cols-4 sm:gap-3 lg:auto-rows-[11.5rem]">
-        {tiles.map((src, i) => {
-          const isMore = i === tiles.length - 1 && hidden > 0;
-          return (
-            <motion.button
+      <div
+        ref={viewportRef}
+        className="relative cursor-grab touch-pan-y select-none pt-8 pb-20 active:cursor-grabbing sm:pt-10 sm:pb-28 [@media(hover:hover)]:cursor-none"
+        dir="ltr"
+        onPointerMove={moveCursor}
+        onPointerEnter={(e) => {
+          if (e.pointerType === "mouse") setCursorOn(true);
+        }}
+        onPointerLeave={() => setCursorOn(false)}
+      >
+        <motion.div
+          ref={trackRef}
+          className="flex w-max items-start"
+          style={{ x: trackX, gap: GAP_PX }}
+          drag="x"
+          dragConstraints={{ left: minX, right: maxX }}
+          dragElastic={0.12}
+          dragTransition={{ power: 0.35, timeConstant: 320 }}
+          onDragStart={() => {
+            dragDistance.current = 0;
+          }}
+          onDrag={(_, info) => {
+            dragDistance.current = Math.max(dragDistance.current, Math.abs(info.offset.x));
+          }}
+        >
+          {images.map((src, i) => (
+            <ArcCard
               key={src}
-              type="button"
-              onClick={() => setOpenIndex(i)}
-              aria-label={isMore ? labels.viewAll : `${labels.expand} ${i + 1}`}
-              className={cn(
-                "group relative overflow-hidden rounded-2xl bg-ink outline-none focus-visible:ring-2 focus-visible:ring-copper focus-visible:ring-offset-2 focus-visible:ring-offset-cream sm:rounded-3xl",
-                tileSpans[i]
-              )}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: i * 0.06, ease: [0.21, 0.47, 0.32, 0.98] }}
-            >
-              <Image
-                src={src}
-                alt=""
-                fill
-                unoptimized
-                className={cn(
-                  "object-cover transition-transform duration-700 ease-out group-hover:scale-110",
-                  isMore && "scale-110 blur-[2px]"
-                )}
-              />
-              {isMore ? (
-                <span className="absolute inset-0 flex flex-col items-center justify-center gap-1 bg-ink/60 text-white transition-colors duration-300 group-hover:bg-copper/80">
-                  <span className="font-display text-3xl font-extrabold tabular-nums sm:text-4xl" dir="ltr">
-                    +{hidden}
-                  </span>
-                  <span className="text-xs font-semibold sm:text-sm">{labels.viewAll}</span>
-                </span>
-              ) : (
-                <>
-                  <span
-                    className="absolute inset-0 bg-linear-to-t from-ink/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                    aria-hidden
-                  />
-                  <span className="absolute bottom-3 end-3 flex h-9 w-9 translate-y-2 items-center justify-center rounded-full bg-white/90 text-ink opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                    <Expand className="h-4 w-4" aria-hidden />
-                  </span>
-                </>
-              )}
-            </motion.button>
-          );
-        })}
+              src={src}
+              index={i}
+              step={step}
+              viewport={layout.viewport}
+              card={layout.card}
+              trackX={trackX}
+              swing={swing}
+              label={`${labels.expand} ${i + 1}`}
+              onOpen={() => {
+                if (dragDistance.current < CLICK_SLOP_PX) setOpenIndex(i);
+              }}
+            />
+          ))}
+        </motion.div>
+
+        <motion.span
+          className="pointer-events-none absolute z-10 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-copper text-xs font-bold text-white shadow-lg"
+          style={{ left: cursorX, top: cursorY }}
+          initial={false}
+          animate={{ scale: cursorOn ? 1 : 0, opacity: cursorOn ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
+          aria-hidden
+        >
+          {labels.drag}
+        </motion.span>
       </div>
 
       {openIndex !== null && (
         <Lightbox images={images} startIndex={openIndex} labels={labels} onClose={() => setOpenIndex(null)} />
       )}
     </>
+  );
+}
+
+function ArcCard({
+  src,
+  index,
+  step,
+  viewport,
+  card,
+  trackX,
+  swing,
+  label,
+  onOpen,
+}: {
+  src: string;
+  index: number;
+  step: number;
+  viewport: number;
+  card: number;
+  trackX: MotionValue<number>;
+  swing: MotionValue<number>;
+  label: string;
+  onOpen: () => void;
+}) {
+  // Signed distance of this card's centre from the viewport centre, in viewport halves (-1 … 1 on screen).
+  const distance = useTransform(trackX, (x) => {
+    if (!viewport) return 0;
+    const centre = x + index * step + card / 2;
+    return (centre - viewport / 2) / (viewport / 2);
+  });
+  const rotate = useTransform(
+    [distance, swing],
+    ([d, s]: number[]) => Math.max(-1.6, Math.min(1.6, d)) * MAX_TILT_DEG + s
+  );
+  const y = useTransform(distance, (d) => Math.min(d * d, 2.5) * MAX_DIP_PX);
+  const framed = index % 2 === 0 ? "bg-white" : "bg-copper";
+
+  // Each card floats on its own rhythm so the row never moves in lockstep.
+  const floatStyle = {
+    "--float-delay": `${-(index * 0.7) % 6}s`,
+    "--float-duration": `${5 + (index % 4) * 0.8}s`,
+  } as React.CSSProperties;
+
+  return (
+    <motion.div style={{ rotate, y }} className="w-64 shrink-0 origin-top sm:w-80 lg:w-[22rem]">
+      <div className="card-float" style={floatStyle}>
+        <button
+          type="button"
+          onClick={onOpen}
+          aria-label={label}
+          className={cn(
+            "group relative block w-full rounded-[1rem] p-1 shadow-[0_24px_50px_-28px_rgba(12,35,65,0.55)] outline-none focus-visible:ring-2 focus-visible:ring-copper sm:p-1.5",
+            framed
+          )}
+        >
+          <span className="relative block aspect-[4/3] overflow-hidden rounded-[0.8rem]">
+            <Image
+              src={src}
+              alt=""
+              fill
+              unoptimized
+              draggable={false}
+              className="pointer-events-none object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+          </span>
+        </button>
+      </div>
+    </motion.div>
   );
 }
 

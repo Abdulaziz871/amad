@@ -31,7 +31,7 @@ export function Footer({ locale, content }: { locale: Locale; content: SiteConte
             alt={locale === "ar" ? "امد — من الإنماء" : "Amad — by Alinma"}
             width={2643}
             height={1415}
-            className="h-14 w-auto"
+            className="h-20 w-auto sm:h-24"
             unoptimized
           />
           <div className="mt-7">

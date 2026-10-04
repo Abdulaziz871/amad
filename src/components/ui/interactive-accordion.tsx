@@ -93,7 +93,7 @@ export function InteractiveAccordion({
                   transition={{ duration: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
                   className="overflow-hidden"
                 >
-                  <p className="border-t border-ink/[0.06] px-5 pb-5 pt-4 text-sm leading-relaxed text-brown sm:ps-[4.75rem] sm:pe-16 sm:text-base">
+                  <p className="whitespace-pre-line border-t border-ink/[0.06] px-5 pb-5 pt-4 text-sm leading-relaxed text-brown sm:ps-[4.75rem] sm:pe-16 sm:text-base">
                     {item.content}
                   </p>
                 </motion.div>

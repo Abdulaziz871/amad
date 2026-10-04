@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Check, ArrowLeft } from "lucide-react";
+import { Check, ArrowLeft, Network, Route, ScanSearch, Target, type LucideIcon } from "lucide-react";
 import { ButtonLink } from "./Button";
 import { IconBadge, toneForSlug } from "./IconBadge";
 import { ProgramApplicationForm } from "./ProgramApplicationForm";
@@ -12,7 +12,7 @@ import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import { ProgramJourney } from "./ProgramJourney";
 import { cn } from "@/lib/utils";
 import type { Locale } from "@/i18n/config";
-import type { ProgramDetail, SiteContent } from "@/lib/content";
+import type { BenefitIcon, ProgramDetail, SiteContent } from "@/lib/content";
 import { programIcons } from "@/lib/program-icons";
 import type { AlfiaForm } from "@/lib/alfia";
 
@@ -35,6 +35,17 @@ const toneOnDark: Record<string, string> = {
   ink: "!bg-white/10 !text-white",
   copper: "!bg-copper/20 !text-copper",
   accent: "!bg-accent/20 !text-accent",
+};
+const toneSoft: Record<string, string> = {
+  ink: "bg-ink/[0.07] text-ink",
+  copper: "bg-copper/10 text-copper",
+  accent: "bg-accent/15 text-accent-dark",
+};
+const benefitIcons: Record<BenefitIcon, LucideIcon> = {
+  asset: ScanSearch,
+  market: Target,
+  route: Route,
+  network: Network,
 };
 
 export function ProgramDetailView({
@@ -159,14 +170,39 @@ export function ProgramDetailView({
               aria-hidden
             />
             <h2 className="relative text-xl font-bold text-ink sm:text-2xl">{detail.benefits.title}</h2>
-            <ul className="relative mt-5 divide-y divide-ink/8">
-              {detail.benefits.items.map((item) => (
-                <li key={item} className="flex items-start gap-3 py-3.5 first:pt-0 last:pb-0">
-                  <Check className={cn("mt-0.5 h-5 w-5 shrink-0", toneText[tone])} aria-hidden />
-                  <span className="text-sm leading-relaxed text-ink sm:text-base">{item}</span>
-                </li>
-              ))}
-            </ul>
+            {detail.benefits.cards ? (
+              <ul className="relative mt-5 grid gap-3 sm:grid-cols-2">
+                {detail.benefits.cards.map((card) => {
+                  const CardIcon = benefitIcons[card.icon];
+                  return (
+                    <li
+                      key={card.title}
+                      className="group flex flex-col rounded-2xl border border-ink/[0.06] bg-white p-5 shadow-[0_12px_30px_-26px_rgba(12,35,65,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_-28px_rgba(12,35,65,0.45)]"
+                    >
+                      <span
+                        className={cn(
+                          "flex h-10 w-10 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110",
+                          toneSoft[tone]
+                        )}
+                      >
+                        <CardIcon className="h-5 w-5" aria-hidden />
+                      </span>
+                      <h3 className="mt-3.5 text-base font-bold leading-snug text-ink">{card.title}</h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-brown">{card.description}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <ul className="relative mt-5 divide-y divide-ink/8">
+                {detail.benefits.items.map((item) => (
+                  <li key={item} className="flex items-start gap-3 py-3.5 first:pt-0 last:pb-0">
+                    <Check className={cn("mt-0.5 h-5 w-5 shrink-0", toneText[tone])} aria-hidden />
+                    <span className="text-sm leading-relaxed text-ink sm:text-base">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </Reveal>
         </div>
       </section>
