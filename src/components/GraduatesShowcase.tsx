@@ -6,6 +6,7 @@ import Image from "next/image";
 import {
   AnimatePresence,
   motion,
+  useAnimationFrame,
   useMotionValue,
   useSpring,
   useTransform,
@@ -17,15 +18,18 @@ import { cn } from "@/lib/utils";
 
 const SWIPE_PX = 60;
 
-// Arc carousel (inspired by griflan.com's "Client Confessions"): a draggable row of framed photos
-// where each card tilts and dips according to its distance from the centre, so the row swings
-// along a curve as it moves. Click a photo to open it fullscreen.
+// Endless arc carousel (inspired by griflan.com's "Client Confessions"): a row of framed photos that only
+// moves when dragged, wrapping around so it never runs out in either direction. Each card tilts and dips
+// by its distance from the centre so the row moves along a curve, and movement speed makes the cards
+// swing. A flick glides on and slows to a stop. Click a photo to open it.
 const GAP_PX = 24;
 const MAX_TILT_DEG = 9;
 const MAX_DIP_PX = 70;
 const CLICK_SLOP_PX = 6;
-const START_INDEX = 3;
 const MAX_SWING_DEG = 7;
+const FRICTION = 0.05; // fraction of a flick's speed lost per frame until it stops
+const MIN_SPEED_PX_PER_S = 2;
+const MAX_FLICK_PX_PER_S = 3000;
 
 type Labels = { previous: string; next: string; close: string; expand: string; drag: string };
 
@@ -34,12 +38,13 @@ export function GraduatesShowcase({ images, labels }: { images: string[]; labels
   const [layout, setLayout] = useState({ viewport: 0, card: 0 });
   const [cursorOn, setCursorOn] = useState(false);
   const viewportRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const placed = useRef(false);
+  const sizerRef = useRef<HTMLDivElement>(null);
+  const dragging = useRef(false);
   const dragDistance = useRef(0);
-  const trackX = useMotionValue(0);
-  // Drag velocity drives an under-damped spring, so the cards swing like pendulums and settle after release.
-  const velocity = useVelocity(trackX);
+  const speed = useRef(0);
+  const offset = useMotionValue(0);
+  // Movement speed drives an under-damped spring, so the cards swing like pendulums and settle.
+  const velocity = useVelocity(offset);
   const swing = useSpring(
     useTransform(velocity, (v) => Math.max(-MAX_SWING_DEG, Math.min(MAX_SWING_DEG, -v / 140))),
     { stiffness: 90, damping: 7, mass: 0.8 }
@@ -49,12 +54,9 @@ export function GraduatesShowcase({ images, labels }: { images: string[]; labels
 
   useEffect(() => {
     const viewport = viewportRef.current;
-    const track = trackRef.current;
-    if (!viewport || !track) return;
-    const measure = () => {
-      const card = (track.children[0] as HTMLElement | undefined)?.offsetWidth ?? 0;
-      setLayout({ viewport: viewport.clientWidth, card });
-    };
+    const sizer = sizerRef.current;
+    if (!viewport || !sizer) return;
+    const measure = () => setLayout({ viewport: viewport.clientWidth, card: sizer.offsetWidth });
     measure();
     const observer = new ResizeObserver(measure);
     observer.observe(viewport);
@@ -62,17 +64,18 @@ export function GraduatesShowcase({ images, labels }: { images: string[]; labels
   }, []);
 
   const step = layout.card + GAP_PX;
-  // Track offsets that put the first / last card in the centre of the viewport.
-  const maxX = layout.viewport / 2 - layout.card / 2;
-  const minX = maxX - step * (images.length - 1);
+  // Repeat the photos if needed so the loop is always wider than the screen and never shows a gap.
+  const copies = step > GAP_PX ? Math.max(1, Math.ceil((layout.viewport + step * 2) / (step * images.length))) : 1;
+  const slots = Array.from({ length: copies }, () => images).flat();
+  const loopWidth = step > GAP_PX ? step * slots.length : 0;
 
-  // Start a few photos in so both sides of the screen are filled, once the sizes are known.
-  useEffect(() => {
-    if (!placed.current && layout.card > 0) {
-      trackX.set(maxX - step * Math.min(START_INDEX, images.length - 1));
-      placed.current = true;
-    }
-  }, [layout.card, maxX, step, images.length, trackX]);
+  // After a flick, keep gliding with friction until the row comes to rest; no movement on its own.
+  useAnimationFrame((_, delta) => {
+    if (dragging.current || !loopWidth || speed.current === 0) return;
+    speed.current *= 1 - FRICTION;
+    if (Math.abs(speed.current) < MIN_SPEED_PX_PER_S) speed.current = 0;
+    offset.set(offset.get() + (speed.current * Math.min(delta, 64)) / 1000);
+  });
 
   function moveCursor(e: React.PointerEvent<HTMLDivElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -82,7 +85,7 @@ export function GraduatesShowcase({ images, labels }: { images: string[]; labels
 
   return (
     <>
-      <div
+      <motion.div
         ref={viewportRef}
         className="relative cursor-grab touch-pan-y select-none pt-8 pb-20 active:cursor-grabbing sm:pt-10 sm:pb-28 [@media(hover:hover)]:cursor-none"
         dir="ltr"
@@ -91,39 +94,42 @@ export function GraduatesShowcase({ images, labels }: { images: string[]; labels
           if (e.pointerType === "mouse") setCursorOn(true);
         }}
         onPointerLeave={() => setCursorOn(false)}
+        onPanStart={() => {
+          dragging.current = true;
+          dragDistance.current = 0;
+        }}
+        onPan={(_, info) => {
+          offset.set(offset.get() + info.delta.x);
+          dragDistance.current = Math.max(dragDistance.current, Math.abs(info.offset.x));
+        }}
+        onPanEnd={(_, info) => {
+          dragging.current = false;
+          speed.current = Math.max(-MAX_FLICK_PX_PER_S, Math.min(MAX_FLICK_PX_PER_S, info.velocity.x));
+        }}
       >
-        <motion.div
-          ref={trackRef}
-          className="flex w-max items-start"
-          style={{ x: trackX, gap: GAP_PX }}
-          drag="x"
-          dragConstraints={{ left: minX, right: maxX }}
-          dragElastic={0.12}
-          dragTransition={{ power: 0.35, timeConstant: 320 }}
-          onDragStart={() => {
-            dragDistance.current = 0;
-          }}
-          onDrag={(_, info) => {
-            dragDistance.current = Math.max(dragDistance.current, Math.abs(info.offset.x));
-          }}
-        >
-          {images.map((src, i) => (
-            <ArcCard
-              key={src}
-              src={src}
-              index={i}
-              step={step}
-              viewport={layout.viewport}
-              card={layout.card}
-              trackX={trackX}
-              swing={swing}
-              label={`${labels.expand} ${i + 1}`}
-              onOpen={() => {
-                if (dragDistance.current < CLICK_SLOP_PX) setOpenIndex(i);
-              }}
-            />
-          ))}
-        </motion.div>
+        {/* Invisible card in normal flow: gives the row its height and lets us measure the card width. */}
+        <div ref={sizerRef} className="invisible w-64 sm:w-80 lg:w-[22rem]" aria-hidden>
+          <div className="aspect-[4/3] p-1 sm:p-1.5" />
+        </div>
+
+        {slots.map((src, i) => (
+          <ArcCard
+            key={`${src}-${i}`}
+            src={src}
+            index={i}
+            step={step}
+            loopWidth={loopWidth}
+            viewport={layout.viewport}
+            card={layout.card}
+            offset={offset}
+            swing={swing}
+            duplicate={i >= images.length}
+            label={`${labels.expand} ${(i % images.length) + 1}`}
+            onOpen={() => {
+              if (dragDistance.current < CLICK_SLOP_PX) setOpenIndex(i % images.length);
+            }}
+          />
+        ))}
 
         <motion.span
           className="pointer-events-none absolute z-10 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-copper text-xs font-bold text-white shadow-lg"
@@ -135,7 +141,7 @@ export function GraduatesShowcase({ images, labels }: { images: string[]; labels
         >
           {labels.drag}
         </motion.span>
-      </div>
+      </motion.div>
 
       {openIndex !== null && (
         <Lightbox images={images} startIndex={openIndex} labels={labels} onClose={() => setOpenIndex(null)} />
@@ -148,29 +154,35 @@ function ArcCard({
   src,
   index,
   step,
+  loopWidth,
   viewport,
   card,
-  trackX,
+  offset,
   swing,
+  duplicate,
   label,
   onOpen,
 }: {
   src: string;
   index: number;
   step: number;
+  loopWidth: number;
   viewport: number;
   card: number;
-  trackX: MotionValue<number>;
+  offset: MotionValue<number>;
   swing: MotionValue<number>;
+  duplicate: boolean;
   label: string;
   onOpen: () => void;
 }) {
-  // Signed distance of this card's centre from the viewport centre, in viewport halves (-1 … 1 on screen).
-  const distance = useTransform(trackX, (x) => {
-    if (!viewport) return 0;
-    const centre = x + index * step + card / 2;
-    return (centre - viewport / 2) / (viewport / 2);
+  // Card's left edge, wrapped into [-step, loopWidth - step) so cards leaving one side re-enter on the other.
+  const x = useTransform(offset, (o) => {
+    if (!loopWidth) return index * step;
+    const raw = index * step + o + step;
+    return (((raw % loopWidth) + loopWidth) % loopWidth) - step;
   });
+  // Signed distance of the card's centre from the viewport centre, in viewport halves (-1 … 1 on screen).
+  const distance = useTransform(x, (left) => (viewport ? (left + card / 2 - viewport / 2) / (viewport / 2) : 0));
   const rotate = useTransform(
     [distance, swing],
     ([d, s]: number[]) => Math.max(-1.6, Math.min(1.6, d)) * MAX_TILT_DEG + s
@@ -185,12 +197,17 @@ function ArcCard({
   } as React.CSSProperties;
 
   return (
-    <motion.div style={{ rotate, y }} className="w-64 shrink-0 origin-top sm:w-80 lg:w-[22rem]">
+    <motion.div
+      style={{ x, rotate, y }}
+      className="absolute top-8 left-0 w-64 origin-top sm:top-10 sm:w-80 lg:w-[22rem]"
+      aria-hidden={duplicate || undefined}
+    >
       <div className="card-float" style={floatStyle}>
         <button
           type="button"
           onClick={onOpen}
           aria-label={label}
+          tabIndex={duplicate ? -1 : undefined}
           className={cn(
             "group relative block w-full rounded-[1rem] p-1 shadow-[0_24px_50px_-28px_rgba(12,35,65,0.55)] outline-none focus-visible:ring-2 focus-visible:ring-copper sm:p-1.5",
             framed

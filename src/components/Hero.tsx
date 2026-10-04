@@ -3,6 +3,7 @@ import { ButtonLink } from "./Button";
 import { Reveal } from "./Reveal";
 import { Tilt } from "./ui/tilt";
 import { HighlightText } from "./HighlightWord";
+import { TonedText } from "./TonedText";
 import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/lib/content";
@@ -28,11 +29,11 @@ export function Hero({ locale, content }: { locale: Locale; content: SiteContent
             <HighlightText text={content.hero.title} highlight={content.hero.titleHighlight} />
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-brown sm:text-lg">
-            {content.hero.subtitle}
+            <TonedText text={content.hero.subtitle} highlights={content.hero.subtitleHighlights} />
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
-            <ButtonLink href={`/${locale}#interest`} variant="primary">
+            <ButtonLink href={`/${locale}/programs/bootcamps#apply`} variant="primary">
               {content.hero.ctaPrimary}
             </ButtonLink>
             <ButtonLink href={`/${locale}#programs`} variant="secondary">

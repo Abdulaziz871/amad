@@ -22,7 +22,7 @@ export const en: SiteContent = {
     title: "Your gateway to building\na sustainable future",
     titleHighlight: "a sustainable future",
     subtitle: "Amad, the innovation and entrepreneurship ecosystem by Alinma Bank",
-    ctaPrimary: "Register your interest",
+    ctaPrimary: "Register with us",
     ctaSecondary: "Explore the programs",
     ctaVideo: "Watch the video",
     closeVideo: "Close video",
@@ -485,7 +485,7 @@ export const en: SiteContent = {
   footer: {
     followUs: "Follow us",
     quickLinks: "Quick links",
-    registerInterest: "Register your interest",
+    registerInterest: "Register with us",
     legal: "© 2026 Falak Holding. All rights reserved.",
   },
   finalCta: {

@@ -1,6 +1,8 @@
 import clsx from "clsx";
 import { HighlightText } from "./HighlightWord";
 import { HeadingAccent } from "./HeadingAccent";
+import { TonedText } from "./TonedText";
+import type { TextHighlight } from "@/lib/content";
 
 export { HeadingAccent };
 
@@ -8,6 +10,7 @@ export function SectionHeading({
   eyebrow,
   title,
   subtitle,
+  subtitleHighlights,
   highlight,
   align = "start",
   className,
@@ -15,6 +18,7 @@ export function SectionHeading({
   eyebrow?: string;
   title: string;
   subtitle?: string;
+  subtitleHighlights?: TextHighlight[];
   highlight?: string;
   align?: "start" | "center";
   className?: string;
@@ -37,7 +41,11 @@ export function SectionHeading({
         <HighlightText text={title} highlight={highlight} />
       </h2>
       <HeadingAccent align={align} />
-      {subtitle && <p className="mt-5 text-base leading-relaxed text-brown sm:text-lg">{subtitle}</p>}
+      {subtitle && (
+        <p className="mt-5 text-base leading-relaxed text-brown sm:text-lg">
+          <TonedText text={subtitle} highlights={subtitleHighlights} />
+        </p>
+      )}
     </div>
   );
 }

@@ -31,6 +31,9 @@ export interface ProgramSummary {
   cta: string;
 }
 
+/** A phrase to colour inside a text, in one of the brand tones. */
+export type TextHighlight = { text: string; tone: "ink" | "copper" | "accent" };
+
 export type BenefitIcon = "asset" | "market" | "route" | "network";
 
 export interface BenefitCard {
@@ -127,6 +130,7 @@ export interface SiteContent {
     title: string;
     titleHighlight: string;
     subtitle: string;
+    subtitleHighlights?: TextHighlight[];
     ctaPrimary: string;
     ctaSecondary: string;
     ctaVideo: string;
@@ -151,6 +155,7 @@ export interface SiteContent {
     learnMore: string;
     pathwayNote: string;
     subtitle: string;
+    subtitleHighlights?: TextHighlight[];
     statusOpen: string;
     statusQualified: string;
     hint: string;

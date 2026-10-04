@@ -2,28 +2,10 @@ import { Reveal } from "./Reveal";
 import { HighlightText } from "./HighlightWord";
 import { HeadingAccent } from "./SectionHeading";
 import { PatternCross, PatternFan } from "./ui/brand-patterns";
-import { cn } from "@/lib/utils";
-import type { SiteContent } from "@/lib/content";
+import { TonedText } from "./TonedText";
+import type { SiteContent, TextHighlight } from "@/lib/content";
 
-const highlightTones = ["text-ink", "text-copper", "text-accent-dark"];
-
-// Colours each highlight phrase found in the text; tones cycle in the order the phrases are listed.
-function renderHighlighted(text: string, highlights: string[]) {
-  const phrases = highlights.filter((phrase) => text.includes(phrase));
-  if (phrases.length === 0) return text;
-
-  const escaped = phrases.map((phrase) => phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
-  const parts = text.split(new RegExp(`(${escaped.join("|")})`));
-  return parts.map((part, i) => {
-    const toneIndex = highlights.indexOf(part);
-    if (toneIndex === -1) return part;
-    return (
-      <span key={i} className={cn("font-bold", highlightTones[toneIndex % highlightTones.length])}>
-        {part}
-      </span>
-    );
-  });
-}
+const highlightTones: TextHighlight["tone"][] = ["ink", "copper", "accent"];
 
 export function AboutSection({ content }: { content: SiteContent }) {
   return (
@@ -52,7 +34,15 @@ export function AboutSection({ content }: { content: SiteContent }) {
             {content.about.paragraphs.length > 1 && (
               <div className="space-y-4 text-justify text-base leading-relaxed text-brown sm:text-lg">
                 {content.about.paragraphs.slice(1).map((paragraph) => (
-                  <p key={paragraph}>{renderHighlighted(paragraph, content.about.highlights)}</p>
+                  <p key={paragraph}>
+                    <TonedText
+                      text={paragraph}
+                      highlights={content.about.highlights.map((text, i) => ({
+                        text,
+                        tone: highlightTones[i % highlightTones.length],
+                      }))}
+                    />
+                  </p>
                 ))}
               </div>
             )}

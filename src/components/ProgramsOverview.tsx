@@ -25,6 +25,7 @@ export function ProgramsOverview({ locale, content }: { locale: Locale; content:
           <SectionHeading
             title={content.nav.programs}
             subtitle={content.programsOverview.subtitle}
+            subtitleHighlights={content.programsOverview.subtitleHighlights}
             align="center"
             className="mx-auto"
           />

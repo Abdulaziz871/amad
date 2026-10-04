@@ -50,7 +50,7 @@ export function Header({ locale, content }: { locale: Locale; content: SiteConte
             <Globe className="h-4 w-4" aria-hidden />
             {content.nav.langSwitch}
           </Link>
-          <ButtonLink href={`/${locale}#interest`} variant="light" className="!shadow-none">
+          <ButtonLink href={`/${locale}/programs/bootcamps#apply`} variant="light" className="!shadow-none">
             {content.nav.registerInterest}
           </ButtonLink>
         </div>
@@ -87,7 +87,7 @@ export function Header({ locale, content }: { locale: Locale; content: SiteConte
               <Globe className="h-4 w-4" aria-hidden />
               {content.nav.langSwitch}
             </Link>
-            <ButtonLink href={`/${locale}#interest`} variant="light" className="mt-2 w-full !shadow-none">
+            <ButtonLink href={`/${locale}/programs/bootcamps#apply`} variant="light" className="mt-2 w-full !shadow-none">
               {content.nav.registerInterest}
             </ButtonLink>
           </div>
