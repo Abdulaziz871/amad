@@ -21,10 +21,7 @@ export function Hero({ locale, content }: { locale: Locale; content: SiteContent
       />
       <div className="container-amad relative grid items-start gap-10 py-8 lg:grid-cols-[1.1fr_0.9fr] lg:py-10">
         <Reveal y={20} className="lg:pt-10">
-          <span className="inline-flex items-center rounded-full border border-ink/10 bg-white px-4 py-1.5 text-xs font-semibold tracking-wide text-brown">
-            {content.hero.eyebrow}
-          </span>
-          <h1 className="mt-6 text-3xl font-extrabold leading-[1.2] text-ink sm:text-4xl lg:text-5xl">
+          <h1 className="text-3xl font-extrabold leading-[1.2] text-ink sm:text-4xl lg:text-5xl">
             <HighlightText text={content.hero.title} highlight={content.hero.titleHighlight} />
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-brown sm:text-lg">

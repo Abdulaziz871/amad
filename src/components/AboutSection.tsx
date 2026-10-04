@@ -5,39 +5,24 @@ import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import { cn } from "@/lib/utils";
 import type { SiteContent } from "@/lib/content";
 
-const initiativeTones = ["text-ink", "text-copper", "text-accent-dark"];
-const highlightedPhrase = "حماية الملكية الفكرية، تنمية مؤسسي المستقبل، ودعم المشاريع الناشئة";
+const highlightTones = ["text-ink", "text-copper", "text-accent-dark"];
 
-function renderAboutBody(text: string) {
-  const index = text.indexOf(highlightedPhrase);
-  if (index === -1) return text;
+// Colours each highlight phrase found in the text; tones cycle in the order the phrases are listed.
+function renderHighlighted(text: string, highlights: string[]) {
+  const phrases = highlights.filter((phrase) => text.includes(phrase));
+  if (phrases.length === 0) return text;
 
-  const before = text.slice(0, index);
-  const after = text.slice(index + highlightedPhrase.length);
-  const parts = highlightedPhrase.split(/([,،])/).filter((part) => part !== "");
-  let clauseIndex = -1;
-
-  return (
-    <>
-      {before}
-      {parts.map((part, i) => {
-        if (part === "," || part === "،") {
-          return (
-            <span key={i} className="text-brown">
-              {part}{" "}
-            </span>
-          );
-        }
-        clauseIndex += 1;
-        return (
-          <span key={i} className={cn("font-bold", initiativeTones[clauseIndex % initiativeTones.length])}>
-            {part.trim()}
-          </span>
-        );
-      })}
-      {after}
-    </>
-  );
+  const escaped = phrases.map((phrase) => phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const parts = text.split(new RegExp(`(${escaped.join("|")})`));
+  return parts.map((part, i) => {
+    const toneIndex = highlights.indexOf(part);
+    if (toneIndex === -1) return part;
+    return (
+      <span key={i} className={cn("font-bold", highlightTones[toneIndex % highlightTones.length])}>
+        {part}
+      </span>
+    );
+  });
 }
 
 export function AboutSection({ content }: { content: SiteContent }) {
@@ -64,10 +49,12 @@ export function AboutSection({ content }: { content: SiteContent }) {
                 {content.about.paragraphs[0]}
               </p>
             )}
-            {content.about.paragraphs[1] && (
-              <p className="text-justify text-base leading-relaxed text-brown sm:text-lg">
-                {renderAboutBody(content.about.paragraphs[1])}
-              </p>
+            {content.about.paragraphs.length > 1 && (
+              <div className="space-y-4 text-justify text-base leading-relaxed text-brown sm:text-lg">
+                {content.about.paragraphs.slice(1).map((paragraph) => (
+                  <p key={paragraph}>{renderHighlighted(paragraph, content.about.highlights)}</p>
+                ))}
+              </div>
             )}
           </div>
         </Reveal>

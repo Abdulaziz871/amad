@@ -18,7 +18,6 @@ export const en: SiteContent = {
     langSwitch: "العربية",
   },
   hero: {
-    eyebrow: "In partnership between Alinma Bank and Falak Holding",
     title: "Your gateway to building\na sustainable future",
     titleHighlight: "a sustainable future",
     subtitle: "Amad, the innovation and entrepreneurship ecosystem by Alinma Bank",
@@ -32,8 +31,10 @@ export const en: SiteContent = {
     title: "About Amad",
     paragraphs: [
       "Amad is not a one-off competition. It is a year-long innovation and entrepreneurship ecosystem.",
-      "launched by Alinma Bank in partnership with Falak Holding, connecting three programs into one journey: protecting intellectual property, developing future founders, and supporting ventures all the way to the final showcase, We believe innovation needs more than enthusiasm — it needs trusted knowledge, real enablement, and companionship that doesn't stop at the finish line. Amad is built to be your reference in the field before it is your program in the journey.",
+      "Amad brings people with ideas, innovations and ambition together in one journey, opening up what an idea needs to grow beyond its first limits: from knowledge and expertise, to opportunities and partnerships, all the way to impact that can be seen and built upon.",
+      "In partnership with Falak Holding, Amad is designed as an environment where talent, innovators and entrepreneurs meet what expands their potential, giving their ideas the space and resources they need to become real value.",
     ],
+    highlights: ["knowledge and expertise", "opportunities and partnerships", "impact that can be seen and built upon", "Falak Holding", "real value"],
   },
   whyAmad: {
     eyebrow: "Why Amad",
@@ -83,6 +84,7 @@ export const en: SiteContent = {
     hint: "Tap any program to see its path",
     standalone: "Standalone track",
     steps: { apply: "Apply directly", qualify: "Qualify", grow: "Grow your venture" },
+    comingSoon: { label: "Coming soon", text: "More programs and tracks on the way", cta: "Register your interest" },
   },
   programs: [
     {
@@ -414,16 +416,16 @@ export const en: SiteContent = {
     title: "Amad's journey",
     tagline: "One journey, an impact that endures.",
     milestones: [
-      { title: "Launch", timing: "October 4" },
-      { title: "Future Founders across three cities", timing: "November" },
-      { title: "Venture Clinic & Amad IP", timing: "Dec – Apr" },
-      { title: "Final showcase day", timing: "May" },
+      { title: "Launch", timing: "October 4, 2026" },
+      { title: "Future Founders across three cities", timing: "November 2026" },
+      { title: "Venture Clinic & Amad IP", timing: "Dec 2026 – Apr 2027" },
+      { title: "Final showcase day", timing: "May 2027" },
     ],
   },
   gallery: {
     title: "Our Success Stories",
     videoCaption: "Moments from the Amad Tech ceremony",
-    viewer: { previous: "Previous photo", next: "Next photo", close: "Close", expand: "View fullscreen" },
+    viewer: { previous: "Previous photo", next: "Next photo", close: "Close", expand: "View photo", viewAll: "View all photos" },
   },
   partners: {
     title: "Partners",

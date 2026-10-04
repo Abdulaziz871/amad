@@ -113,7 +113,6 @@ export interface SiteContent {
     langSwitch: string;
   };
   hero: {
-    eyebrow: string;
     title: string;
     titleHighlight: string;
     subtitle: string;
@@ -125,7 +124,10 @@ export interface SiteContent {
   };
   about: {
     title: string;
+    /** First entry is the lead statement; the rest are body paragraphs. */
     paragraphs: string[];
+    /** Phrases in the body paragraphs to colour, cycling through the brand tones in order. */
+    highlights: string[];
   };
   whyAmad: {
     eyebrow: string;
@@ -143,6 +145,7 @@ export interface SiteContent {
     hint: string;
     standalone: string;
     steps: { apply: string; qualify: string; grow: string };
+    comingSoon: { label: string; text: string; cta: string };
   };
   programs: ProgramSummary[];
   programDetails: Record<ProgramSlug, ProgramDetail>;
@@ -155,7 +158,7 @@ export interface SiteContent {
   gallery: {
     title: string;
     videoCaption: string;
-    viewer: { previous: string; next: string; close: string; expand: string };
+    viewer: { previous: string; next: string; close: string; expand: string; viewAll: string };
   };
   partners: {
     title: string;
