@@ -13,12 +13,12 @@ import type { AlfiaForm } from "@/lib/alfia";
 import type { Locale } from "@/i18n/config";
 
 const fieldFocus: Record<string, string> = {
-  ink: "focus:border-ink",
+  ink: "focus:border-fg",
   copper: "focus:border-copper",
   accent: "focus:border-accent",
 };
 const toneText: Record<string, string> = {
-  ink: "text-ink",
+  ink: "text-fg",
   copper: "text-copper",
   accent: "text-accent",
 };
@@ -49,7 +49,7 @@ export function ProgramApplicationForm({
   const [submitted, setSubmitted] = useState(false);
   const labels = content.applicationForm;
   const fieldClass = cn(
-    "rounded-xl border border-ink/15 bg-cream px-4 py-3 text-sm text-ink outline-none transition-colors",
+    "rounded-xl border border-fg/15 bg-cream px-4 py-3 text-sm text-fg outline-none transition-colors",
     fieldFocus[tone]
   );
 
@@ -74,14 +74,14 @@ export function ProgramApplicationForm({
             "relative mx-auto max-w-3xl",
             alfiaForm
               ? ""
-              : cn("rounded-3xl border border-ink/8 bg-white", detail.form.embedUrl ? "p-6 sm:p-8" : "p-6 sm:p-10")
+              : cn("rounded-3xl border border-fg/8 bg-surface", detail.form.embedUrl ? "p-6 sm:p-8" : "p-6 sm:p-10")
           )}
         >
           {alfiaForm ? (
             <h2 className="sr-only">{detail.form.title}</h2>
           ) : (
             <div className="text-center">
-              <h2 className="text-2xl font-bold text-ink sm:text-3xl">{detail.form.title}</h2>
+              <h2 className="text-2xl font-bold text-fg sm:text-3xl">{detail.form.title}</h2>
               <p className="mt-3 text-sm leading-relaxed text-brown sm:text-base">{detail.form.subtitle}</p>
             </div>
           )}
@@ -89,7 +89,7 @@ export function ProgramApplicationForm({
           {alfiaForm ? (
             <AlfiaApplicationForm form={alfiaForm} locale={locale} ui={content.alfiaForm} />
           ) : detail.form.embedUrl ? (
-            <div className="relative mt-8 h-[820px] w-full overflow-hidden rounded-2xl border border-ink/10 bg-cream">
+            <div className="relative mt-8 h-[820px] w-full overflow-hidden rounded-2xl border border-fg/10 bg-cream">
               <iframe
                 src={detail.form.embedUrl}
                 title={detail.form.title}
@@ -103,22 +103,22 @@ export function ProgramApplicationForm({
           ) : submitted ? (
             <div className="flex flex-col items-center py-10 text-center">
               <CheckCircle2 className={cn("h-12 w-12", toneText[tone])} aria-hidden />
-              <p className="mt-4 text-lg font-bold text-ink">{labels.successTitle}</p>
+              <p className="mt-4 text-lg font-bold text-fg">{labels.successTitle}</p>
               <p className="mt-2 text-sm text-brown">{labels.successBody}</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="mt-8 grid gap-5 sm:grid-cols-2">
-              <label className="flex flex-col gap-1.5 text-sm font-semibold text-ink">
+              <label className="flex flex-col gap-1.5 text-sm font-semibold text-fg">
                 {labels.nameLabel}
                 <input required type="text" name="name" className={fieldClass} />
               </label>
 
-              <label className="flex flex-col gap-1.5 text-sm font-semibold text-ink">
+              <label className="flex flex-col gap-1.5 text-sm font-semibold text-fg">
                 {labels.emailLabel}
                 <input required type="email" name="email" className={fieldClass} />
               </label>
 
-              <label className="flex flex-col gap-1.5 text-sm font-semibold text-ink">
+              <label className="flex flex-col gap-1.5 text-sm font-semibold text-fg">
                 {labels.phoneLabel}
                 <input required type="tel" name="phone" className={fieldClass} dir="ltr" />
               </label>
@@ -126,7 +126,7 @@ export function ProgramApplicationForm({
               {detail.form.extraFields.map((field) => {
                 if (field.type === "select") {
                   return (
-                    <label key={field.name} className="flex flex-col gap-1.5 text-sm font-semibold text-ink">
+                    <label key={field.name} className="flex flex-col gap-1.5 text-sm font-semibold text-fg">
                       {field.label}
                       <select name={field.name} className={fieldClass}>
                         {field.options?.map((option) => (
@@ -143,7 +143,7 @@ export function ProgramApplicationForm({
                   return (
                     <label
                       key={field.name}
-                      className="flex flex-col gap-1.5 text-sm font-semibold text-ink sm:col-span-2"
+                      className="flex flex-col gap-1.5 text-sm font-semibold text-fg sm:col-span-2"
                     >
                       {field.label}
                       <textarea
@@ -160,10 +160,10 @@ export function ProgramApplicationForm({
                   return (
                     <label
                       key={field.name}
-                      className="flex flex-col gap-1.5 text-sm font-semibold text-ink sm:col-span-2"
+                      className="flex flex-col gap-1.5 text-sm font-semibold text-fg sm:col-span-2"
                     >
                       {field.label}
-                      <span className="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-ink/20 bg-cream px-4 py-6 text-center">
+                      <span className="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-fg/20 bg-cream px-4 py-6 text-center">
                         <Upload className="h-5 w-5 text-brown/60" aria-hidden />
                         <input type="file" name={field.name} className="hidden" />
                         <span className="text-xs font-normal text-brown">{field.placeholder}</span>
@@ -173,7 +173,7 @@ export function ProgramApplicationForm({
                 }
 
                 return (
-                  <label key={field.name} className="flex flex-col gap-1.5 text-sm font-semibold text-ink">
+                  <label key={field.name} className="flex flex-col gap-1.5 text-sm font-semibold text-fg">
                     {field.label}
                     <input
                       type="text"

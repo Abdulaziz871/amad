@@ -27,10 +27,10 @@ const tones = [
     badge: "bg-copper/15 text-copper border-copper/40",
   },
   {
-    text: "text-ink",
-    ghost: "text-ink/[0.1]",
-    frameGhost: "text-ink/20",
-    badge: "bg-ink/10 text-ink border-ink/25",
+    text: "text-fg",
+    ghost: "text-fg/[0.1]",
+    frameGhost: "text-fg/20",
+    badge: "bg-fg/10 text-fg border-fg/25",
   },
   {
     text: "text-accent-dark",
@@ -40,7 +40,7 @@ const tones = [
   },
 ];
 
-const taglineTones = ["text-ink", "text-copper", "text-accent-dark"];
+const taglineTones = ["text-fg", "text-copper", "text-accent-dark"];
 
 function ColorfulTagline({ text }: { text: string }) {
   const parts = text.split(/([,،])/).filter((part) => part !== "");
@@ -74,6 +74,7 @@ export function JourneySteps({ content }: { content: SiteContent }) {
       number: String(i + 1).padStart(2, "0"),
       title: milestone.title,
       description: milestone.timing,
+      places: milestone.places,
       icon: <Icon className="h-28 w-28 text-white/25" strokeWidth={1.25} aria-hidden />,
       gradientClass: gradients[i % gradients.length],
       tone: tones[i % tones.length],
@@ -104,7 +105,7 @@ export function JourneySteps({ content }: { content: SiteContent }) {
       />
       <div className="container-amad relative overflow-hidden py-12 text-center">
         <PatternCross
-          className="pointer-events-none absolute bottom-2 end-6 h-11 w-11 rotate-6 text-ink opacity-[0.15] sm:h-16 sm:w-16 sm:end-10"
+          className="pointer-events-none absolute bottom-2 end-6 h-11 w-11 rotate-6 text-fg opacity-[0.15] sm:h-16 sm:w-16 sm:end-10"
           aria-hidden
         />
         <ColorfulTagline text={content.journey.tagline} />

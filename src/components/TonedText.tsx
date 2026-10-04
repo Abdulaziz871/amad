@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import type { TextHighlight } from "@/lib/content";
 
 const toneClass: Record<TextHighlight["tone"], string> = {
-  ink: "text-ink",
+  ink: "text-fg",
   copper: "text-copper",
   accent: "text-accent-dark",
 };

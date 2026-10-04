@@ -37,7 +37,7 @@ export function SectionHeading({
           {eyebrow}
         </span>
       )}
-      <h2 className="mt-4 text-3xl font-extrabold leading-[1.2] tracking-tight text-ink sm:text-4xl lg:text-[2.75rem]">
+      <h2 className="mt-4 text-3xl font-extrabold leading-[1.2] tracking-tight text-fg sm:text-4xl lg:text-[2.75rem]">
         <HighlightText text={title} highlight={highlight} />
       </h2>
       <HeadingAccent align={align} />

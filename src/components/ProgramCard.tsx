@@ -14,7 +14,7 @@ const toneChip: Record<string, string> = {
 };
 
 const toneButton: Record<string, string> = {
-  ink: "bg-white text-ink",
+  ink: "bg-surface text-fg",
   copper: "bg-copper text-white",
   accent: "bg-accent text-white",
 };
@@ -69,7 +69,7 @@ export function ProgramCard({
         aria-hidden
       />
       <div
-        className="absolute inset-0 -z-10 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/55"
+        className="absolute inset-0 -z-10 bg-fg/0 transition-colors duration-500 group-hover:bg-ink/55"
         aria-hidden
       />
 
@@ -86,7 +86,7 @@ export function ProgramCard({
         <span
           className={cn(
             "absolute top-5 end-5 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold backdrop-blur-md",
-            program.access === "open" ? "bg-white/90 text-ink" : "border border-white/25 bg-ink/50 text-white"
+            program.access === "open" ? "bg-surface/90 text-fg" : "border border-white/25 bg-ink/50 text-white"
           )}
         >
           {program.access === "open" ? (

@@ -16,7 +16,7 @@ export function Faq({ title, items }: { title: string; items: FaqItem[] }) {
     <section id="faq" className="relative overflow-hidden scroll-mt-24 py-12 sm:py-16">
       <div className="section-glow section-glow--light" aria-hidden />
       <PatternCross
-        className="pointer-events-none absolute bottom-6 start-6 h-12 w-12 -rotate-6 text-ink opacity-[0.14] sm:h-20 sm:w-20"
+        className="pointer-events-none absolute bottom-6 start-6 h-12 w-12 -rotate-6 text-fg opacity-[0.14] sm:h-20 sm:w-20"
         aria-hidden
       />
       <PatternFan

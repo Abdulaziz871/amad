@@ -11,7 +11,7 @@ const tones = [
   { chip: "bg-copper text-white", glow: "rgba(198,110,78,0.22)" },
   { chip: "bg-copper-light text-ink", glow: "rgba(255,163,139,0.18)" },
   { chip: "bg-accent text-white", glow: "rgba(139,132,215,0.18)" },
-  { chip: "bg-white text-ink", glow: "rgba(255,255,255,0.08)" },
+  { chip: "bg-surface text-fg", glow: "rgba(255,255,255,0.08)" },
   { chip: "bg-copper text-white", glow: "rgba(198,110,78,0.22)" },
   { chip: "bg-copper-light text-ink", glow: "rgba(255,163,139,0.18)" },
 ];
@@ -53,14 +53,14 @@ export function ProcessShowcase({ items }: { items: { title: string; description
                 className={cn(
                   "spotlight group relative flex w-full items-center gap-4 overflow-hidden rounded-2xl border px-5 py-3.5 text-start transition-all duration-500",
                   isActive
-                    ? "border-copper/30 bg-white shadow-[0_18px_40px_-26px_rgba(12,35,65,0.45)]"
-                    : "border-ink/[0.06] bg-white/55 hover:bg-white"
+                    ? "border-copper/30 bg-surface shadow-[0_18px_40px_-26px_rgba(12,35,65,0.45)]"
+                    : "border-fg/[0.06] bg-surface/55 hover:bg-surface"
                 )}
               >
                 <span
                   className={cn(
                     "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all duration-500 [&_svg]:h-5 [&_svg]:w-5",
-                    isActive ? "scale-110 bg-copper text-white" : "bg-ink/[0.06] text-ink/70 group-hover:bg-ink/10"
+                    isActive ? "scale-110 bg-copper text-white" : "bg-fg/[0.06] text-fg/70 group-hover:bg-fg/10"
                   )}
                 >
                   <StepIcon aria-hidden />
@@ -69,7 +69,7 @@ export function ProcessShowcase({ items }: { items: { title: string; description
                   <span
                     className={cn(
                       "block text-xs font-bold tracking-wider transition-colors",
-                      isActive ? "text-copper" : "text-ink/40"
+                      isActive ? "text-copper" : "text-fg/40"
                     )}
                     dir="ltr"
                   >
@@ -78,7 +78,7 @@ export function ProcessShowcase({ items }: { items: { title: string; description
                   <span
                     className={cn(
                       "block text-base font-bold leading-snug transition-colors sm:text-lg",
-                      isActive ? "text-ink" : "text-ink/70"
+                      isActive ? "text-fg" : "text-fg/70"
                     )}
                   >
                     {step.title}
@@ -87,13 +87,13 @@ export function ProcessShowcase({ items }: { items: { title: string; description
                 <span
                   className={cn(
                     "h-2 w-2 shrink-0 rounded-full transition-all duration-500",
-                    isActive ? "scale-100 bg-copper" : "scale-0 bg-ink/20"
+                    isActive ? "scale-100 bg-copper" : "scale-0 bg-fg/20"
                   )}
                   aria-hidden
                 />
 
                 {isActive && (
-                  <span className="absolute inset-x-0 bottom-0 h-[3px] bg-ink/[0.05]" aria-hidden>
+                  <span className="absolute inset-x-0 bottom-0 h-[3px] bg-fg/[0.05]" aria-hidden>
                     <span
                       key={active}
                       className="block h-full origin-left bg-linear-to-r from-copper to-copper-light rtl:origin-right"
@@ -167,7 +167,7 @@ export function ProcessShowcase({ items }: { items: { title: string; description
                   key={i}
                   className={cn(
                     "h-1.5 rounded-full transition-all duration-500",
-                    i === active ? "w-8 bg-white" : "w-1.5 bg-white/25"
+                    i === active ? "w-8 bg-surface" : "w-1.5 bg-white/25"
                   )}
                 />
               ))}

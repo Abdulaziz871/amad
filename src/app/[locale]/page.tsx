@@ -3,6 +3,7 @@ import { getContent } from "@/lib/content";
 import { galleryImages, ctaImage, clientLogos } from "@/lib/images";
 import { Hero } from "@/components/Hero";
 import { AboutSection } from "@/components/AboutSection";
+import { GoalsSection } from "@/components/GoalsSection";
 import { WhyAmad } from "@/components/WhyAmad";
 import { ProgramsOverview } from "@/components/ProgramsOverview";
 import { JourneySteps } from "@/components/JourneySteps";
@@ -30,6 +31,7 @@ export default async function HomePage({
     <>
       <Hero locale={locale} content={content} />
       <AboutSection content={content} />
+      <GoalsSection content={content} />
       <WhyAmad content={content} />
       <ProgramsOverview locale={locale} content={content} />
       <JourneySteps content={content} />

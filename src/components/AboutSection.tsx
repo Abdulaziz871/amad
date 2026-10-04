@@ -12,7 +12,7 @@ export function AboutSection({ content }: { content: SiteContent }) {
     <section id="about" className="relative overflow-hidden scroll-mt-24 py-14 sm:py-20">
       <div className="section-glow section-glow--light" aria-hidden />
       <PatternFan
-        className="pointer-events-none absolute top-10 start-6 h-9 w-9 rotate-6 text-ink opacity-[0.22] sm:h-14 sm:w-14 sm:start-10"
+        className="pointer-events-none absolute top-10 start-6 h-9 w-9 rotate-6 text-fg opacity-[0.22] sm:h-14 sm:w-14 sm:start-10"
         aria-hidden
       />
       <PatternCross
@@ -21,13 +21,13 @@ export function AboutSection({ content }: { content: SiteContent }) {
       />
       <div className="container-amad relative">
         <Reveal className="mx-auto max-w-5xl">
-          <h2 className="text-center text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-[2.75rem]">
+          <h2 className="text-center text-3xl font-extrabold tracking-tight text-fg sm:text-4xl lg:text-[2.75rem]">
             <HighlightText text={content.about.title} highlight={content.brandName} />
           </h2>
           <HeadingAccent align="center" />
           <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-14">
             {content.about.paragraphs[0] && (
-              <p className="text-balance text-center text-2xl font-bold leading-snug text-ink sm:text-3xl">
+              <p className="text-balance text-center text-2xl font-bold leading-snug text-fg sm:text-3xl">
                 {content.about.paragraphs[0]}
               </p>
             )}

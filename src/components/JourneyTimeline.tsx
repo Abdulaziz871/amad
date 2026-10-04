@@ -18,7 +18,7 @@ export function JourneyTimeline({ content }: { content: SiteContent }) {
         aria-hidden
       />
       <PatternFan
-        className="pointer-events-none absolute top-6 start-6 h-10 w-10 rotate-6 text-ink opacity-[0.2] sm:h-14 sm:w-14"
+        className="pointer-events-none absolute top-6 start-6 h-10 w-10 rotate-6 text-fg opacity-[0.2] sm:h-14 sm:w-14"
         aria-hidden
       />
       <div className="container-amad relative">
@@ -65,7 +65,7 @@ export function JourneyTimeline({ content }: { content: SiteContent }) {
                     <div className="absolute inset-0 bg-linear-to-t from-ink/60 via-ink/0 to-ink/0" aria-hidden />
                   </div>
 
-                  <h3 className="mt-4 text-base font-bold text-ink sm:text-lg">{milestone.title}</h3>
+                  <h3 className="mt-4 text-base font-bold text-fg sm:text-lg">{milestone.title}</h3>
                   <p className="mt-1 text-sm text-brown">{milestone.timing}</p>
                 </RevealItem>
               );
@@ -74,7 +74,7 @@ export function JourneyTimeline({ content }: { content: SiteContent }) {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-lg font-bold text-ink sm:text-xl">{content.journey.tagline}</p>
+          <p className="text-lg font-bold text-fg sm:text-xl">{content.journey.tagline}</p>
         </div>
       </div>
     </section>

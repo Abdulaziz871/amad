@@ -34,6 +34,8 @@ export interface ProgramSummary {
 /** A phrase to colour inside a text, in one of the brand tones. */
 export type TextHighlight = { text: string; tone: "ink" | "copper" | "accent" };
 
+export type GoalIcon = "ecosystem" | "nation" | "value" | "solutions" | "people" | "culture";
+
 export type BenefitIcon = "asset" | "market" | "route" | "network";
 
 export interface BenefitCard {
@@ -83,9 +85,19 @@ export interface ProgramDetail {
   showApplicationForm?: boolean;
 }
 
+export type LandmarkIcon = "riyadh" | "jeddah" | "eastern";
+
+export interface CityPlace {
+  name: string;
+  landmark: string;
+  icon: LandmarkIcon;
+}
+
 export interface JourneyMilestone {
   title: string;
   timing: string;
+  /** Host cities shown as landmark cards on the step. */
+  places?: CityPlace[];
 }
 
 export interface WhyAmadCard {
@@ -124,9 +136,9 @@ export interface SiteContent {
     gallery: string;
     registerInterest: string;
     langSwitch: string;
+    theme: { light: string; dark: string };
   };
   hero: {
-    eyebrow: string;
     title: string;
     titleHighlight: string;
     subtitle: string;
@@ -143,6 +155,10 @@ export interface SiteContent {
     paragraphs: string[];
     /** Phrases in the body paragraphs to colour, cycling through the brand tones in order. */
     highlights: string[];
+  };
+  goals: {
+    title: string;
+    items: { icon: GoalIcon; text: string }[];
   };
   whyAmad: {
     eyebrow: string;

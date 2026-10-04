@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ButtonLink } from "./Button";
+import { VideoButton } from "./VideoButton";
 import { Reveal } from "./Reveal";
 import { Tilt } from "./ui/tilt";
 import { HighlightText } from "./HighlightWord";
@@ -20,12 +21,9 @@ export function Hero({ locale, content }: { locale: Locale; content: SiteContent
         className="pointer-events-none absolute top-6 end-6 h-11 w-11 rotate-12 text-copper opacity-25 sm:h-16 sm:w-16"
         aria-hidden
       />
-      <div className="container-amad relative grid items-start gap-10 py-8 lg:grid-cols-[1.1fr_0.9fr] lg:py-10">
-        <Reveal y={20} className="lg:pt-10">
-          <span className="inline-flex items-center rounded-full border border-ink/10 bg-white px-4 py-1.5 text-xs font-semibold tracking-wide text-brown">
-            {content.hero.eyebrow}
-          </span>
-          <h1 className="mt-6 text-3xl font-extrabold leading-[1.2] text-ink sm:text-4xl lg:text-5xl">
+      <div className="container-amad relative grid items-start gap-10 py-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-10">
+        <Reveal y={20}>
+          <h1 className="text-3xl font-extrabold leading-[1.2] text-fg sm:text-4xl lg:text-5xl">
             <HighlightText text={content.hero.title} highlight={content.hero.titleHighlight} />
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-brown sm:text-lg">
@@ -39,6 +37,12 @@ export function Hero({ locale, content }: { locale: Locale; content: SiteContent
             <ButtonLink href={`/${locale}#programs`} variant="secondary">
               {content.hero.ctaSecondary}
             </ButtonLink>
+            <VideoButton
+              label={content.hero.ctaVideo}
+              closeLabel={content.hero.closeVideo}
+              src="/images/vid/amad-tech-ceremony.mp4"
+              className="border border-fg/20 bg-surface/60 py-0.5 ps-0.5 transition-all hover:border-fg/40 hover:bg-surface"
+            />
           </div>
         </Reveal>
 

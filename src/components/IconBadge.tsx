@@ -6,7 +6,7 @@ export type IconTone = "accent" | "copper" | "ink" | "accent-dark";
 const toneStyles: Record<IconTone, string> = {
   accent: "bg-accent/12 text-accent",
   copper: "bg-copper/15 text-copper",
-  ink: "bg-ink/10 text-ink",
+  ink: "bg-fg/10 text-fg",
   "accent-dark": "bg-accent-dark/12 text-accent-dark",
 };
 

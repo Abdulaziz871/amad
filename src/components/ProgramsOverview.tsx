@@ -40,17 +40,17 @@ export function ProgramsOverview({ locale, content }: { locale: Locale; content:
 
         {/* Teaser for upcoming programs. */}
         <Reveal className="mt-6">
-          <div className="group relative flex flex-col items-center gap-4 overflow-hidden rounded-[2rem] border-2 border-dashed border-copper/30 bg-white/60 px-5 py-6 text-center backdrop-blur transition-colors duration-300 hover:border-copper/60 sm:flex-row sm:gap-6 sm:px-7 sm:text-start">
+          <div className="group relative flex flex-col items-center gap-4 overflow-hidden rounded-[2rem] border-2 border-dashed border-copper/30 bg-surface/60 px-5 py-6 text-center backdrop-blur transition-colors duration-300 hover:border-copper/60 sm:flex-row sm:gap-6 sm:px-7 sm:text-start">
             <div className="flex items-center gap-4 sm:gap-6">
               <span className="whitespace-nowrap font-display text-3xl font-extrabold leading-tight text-copper sm:text-4xl">
                 {content.programsOverview.comingSoon.label}
               </span>
-              <span className="hidden h-10 w-px bg-ink/10 sm:block" aria-hidden />
+              <span className="hidden h-10 w-px bg-fg/10 sm:block" aria-hidden />
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-copper/10 text-copper transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
                 <Sparkles className="h-5 w-5" aria-hidden />
               </span>
             </div>
-            <p className="flex-1 text-base font-bold leading-snug text-ink sm:text-lg">
+            <p className="flex-1 text-base font-bold leading-snug text-fg sm:text-lg">
               {content.programsOverview.comingSoon.text}
             </p>
             <ButtonLink href={`/${locale}#interest`} variant="primary" className="shrink-0">

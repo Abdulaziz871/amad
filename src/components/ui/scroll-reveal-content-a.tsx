@@ -3,6 +3,8 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import { Calendar } from "lucide-react";
+import { CityLandmarks } from "@/components/CityLandmarks";
+import type { CityPlace } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { useMotionValueEvent, useScroll, motion } from "motion/react";
 
@@ -21,6 +23,8 @@ export interface ScrollRevealItem {
   gradientClass: string;
   tone: ScrollRevealTone;
   image?: string | null;
+  /** Optional host cities shown as landmark cards under the title. */
+  places?: CityPlace[];
 }
 
 interface Props extends Omit<React.ComponentProps<"div">, "children"> {
@@ -46,7 +50,7 @@ export function ScrollRevealContentA({ items, header, className, ...props }: Pro
             {header && <div className="mb-6 w-full shrink-0">{header}</div>}
             <div className="mb-6 flex w-full gap-1.5 shrink-0" aria-hidden>
               {items.map((item, i) => (
-                <div key={item.number} className="h-1 flex-1 overflow-hidden rounded-full bg-ink/10">
+                <div key={item.number} className="h-1 flex-1 overflow-hidden rounded-full bg-fg/10">
                   <motion.div
                     className="h-full rounded-full bg-accent"
                     style={{ width: `${getBarPercentageHeight(scrollProgress, i / n, (i + 1) / n)}%` }}
@@ -116,7 +120,7 @@ function PointItem({ item, total, isActive }: { item: ScrollRevealItem; total?: 
       <div className="relative flex flex-col gap-4">
         <div className="flex w-fit items-baseline gap-1.5 font-display tabular-nums" dir="ltr">
           <span className={cn("text-2xl font-bold sm:text-3xl", item.tone.text)}>{item.number}</span>
-          {total && <span className="text-base font-medium text-ink/35 sm:text-lg">/ {total}</span>}
+          {total && <span className="text-base font-medium text-fg/35 sm:text-lg">/ {total}</span>}
         </div>
         <span
           className={cn(
@@ -127,7 +131,8 @@ function PointItem({ item, total, isActive }: { item: ScrollRevealItem; total?: 
           <Calendar className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden />
           {item.description}
         </span>
-        <h3 className="text-2xl font-bold leading-snug text-ink sm:text-3xl lg:text-4xl">{item.title}</h3>
+        <h3 className="text-2xl font-bold leading-snug text-fg sm:text-3xl lg:text-4xl">{item.title}</h3>
+        {item.places && item.places.length > 0 && <CityLandmarks places={item.places} active={isActive} />}
       </div>
     </div>
   );

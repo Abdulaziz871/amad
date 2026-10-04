@@ -4,8 +4,20 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "motion/react";
 import { Play, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export function VideoButton({ label, closeLabel, src }: { label: string; closeLabel: string; src: string }) {
+export function VideoButton({
+  label,
+  closeLabel,
+  src,
+  className,
+}: {
+  label: string;
+  closeLabel: string;
+  src: string;
+  /** Extra classes for the trigger button, e.g. a border to match neighbouring buttons. */
+  className?: string;
+}) {
   const [open, setOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -38,11 +50,14 @@ export function VideoButton({ label, closeLabel, src }: { label: string; closeLa
         ref={triggerRef}
         type="button"
         onClick={() => setOpen(true)}
-        className="group inline-flex items-center gap-3 rounded-full py-1.5 pe-5 ps-1.5 text-sm font-semibold text-ink transition-colors hover:text-copper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-copper"
+        className={cn(
+          "group inline-flex items-center gap-3 rounded-full py-1.5 pe-5 ps-1.5 text-sm font-semibold text-fg transition-colors hover:text-copper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-copper",
+          className
+        )}
       >
         <span className="relative flex h-10 w-10 items-center justify-center">
           <span className="absolute inset-0 animate-ping rounded-full bg-copper/25 [animation-duration:2.2s] motion-reduce:hidden" aria-hidden />
-          <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white text-copper shadow-[0_8px_24px_-10px_rgba(198,110,78,0.6)] ring-1 ring-copper/20 transition-transform duration-300 group-hover:scale-110">
+          <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-surface text-copper shadow-[0_8px_24px_-10px_rgba(198,110,78,0.6)] ring-1 ring-copper/20 transition-transform duration-300 group-hover:scale-110">
             <Play className="h-4 w-4 translate-x-px fill-current" aria-hidden />
           </span>
         </span>

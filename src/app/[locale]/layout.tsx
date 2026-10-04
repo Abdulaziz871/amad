@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { locales, isLocale, dirFor, type Locale } from "@/i18n/config";
 import { getContent } from "@/lib/content";
 import { Header } from "@/components/Header";
+import { themeInitScript } from "@/components/ThemeToggle";
 import { Footer } from "@/components/Footer";
 import { SplashScreen } from "@/components/SplashScreen";
 import { SmoothScroll } from "@/components/SmoothScroll";
@@ -83,8 +84,11 @@ export default async function LocaleLayout({
       lang={locale}
       dir={dirFor(locale)}
       className={`${alinmaDisplay.variable} ${alinmaText.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col bg-cream text-ink" suppressHydrationWarning>
+      <body className="flex min-h-full flex-col bg-cream text-fg" suppressHydrationWarning>
+        {/* Applies the saved / system theme before first paint to avoid a light-to-dark flash. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <SmoothScroll />
         <SpotlightTracker />
         <SplashScreen />

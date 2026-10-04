@@ -188,7 +188,7 @@ function ArcCard({
     ([d, s]: number[]) => Math.max(-1.6, Math.min(1.6, d)) * MAX_TILT_DEG + s
   );
   const y = useTransform(distance, (d) => Math.min(d * d, 2.5) * MAX_DIP_PX);
-  const framed = index % 2 === 0 ? "bg-white" : "bg-copper";
+  const framed = index % 2 === 0 ? "bg-surface" : "bg-copper";
 
   // Each card floats on its own rhythm so the row never moves in lockstep.
   const floatStyle = {
@@ -382,7 +382,7 @@ function LightboxButton({
       type="button"
       aria-label={label}
       onClick={onClick}
-      className="flex h-11 w-11 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-white hover:text-ink focus-visible:ring-2 focus-visible:ring-copper focus-visible:outline-none"
+      className="flex h-11 w-11 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-surface hover:text-fg focus-visible:ring-2 focus-visible:ring-copper focus-visible:outline-none"
     >
       {children}
     </button>

@@ -30,7 +30,7 @@ export function ClientLogoMarquee({ logos }: { logos: string[] }) {
                 className="logo-marquee__img h-12 w-full object-contain sm:h-16"
               />
               <span
-                className="logo-marquee__name pointer-events-none absolute -bottom-5 whitespace-nowrap text-[0.7rem] font-semibold text-ink/60 sm:text-xs"
+                className="logo-marquee__name pointer-events-none absolute -bottom-5 whitespace-nowrap text-[0.7rem] font-semibold text-fg/60 sm:text-xs"
                 dir="auto"
               >
                 {name}

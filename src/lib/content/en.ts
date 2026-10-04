@@ -16,9 +16,9 @@ export const en: SiteContent = {
     gallery: "Graduates",
     registerInterest: "Register with us",
     langSwitch: "العربية",
+    theme: { light: "Light mode", dark: "Dark mode" },
   },
   hero: {
-    eyebrow: "Register your interest and be the first to know when applications open",
     title: "Your gateway to building\na sustainable future",
     titleHighlight: "a sustainable future",
     subtitle: "Amad, the innovation and entrepreneurship ecosystem by Alinma Bank",
@@ -36,6 +36,17 @@ export const en: SiteContent = {
       "In partnership with Falak Holding, Amad is designed as an environment where talent, innovators and entrepreneurs meet what expands their potential, giving their ideas the space and resources they need to become real value.",
     ],
     highlights: ["knowledge and expertise", "opportunities and partnerships", "impact that can be seen and built upon", "Falak Holding", "real value"],
+  },
+  goals: {
+    title: "Our goals",
+    items: [
+      { icon: "ecosystem", text: "Strengthen the innovation and entrepreneurship ecosystem in the fintech sector." },
+      { icon: "nation", text: "Contribute to achieving national development goals." },
+      { icon: "value", text: "Turn innovation and knowledge into sustainable economic value." },
+      { icon: "solutions", text: "Drive the development and adoption of innovative fintech solutions." },
+      { icon: "people", text: "Empower innovators, entrepreneurs and intellectual property owners." },
+      { icon: "culture", text: "Foster a culture of innovation, research and development, and entrepreneurship." },
+    ],
   },
   whyAmad: {
     eyebrow: "Why Amad",
@@ -440,8 +451,17 @@ export const en: SiteContent = {
     tagline: "One journey, an impact that endures.",
     milestones: [
       { title: "Launch", timing: "October 4, 2026" },
-      { title: "Future Founders across three cities", timing: "November 2026" },
-      { title: "Venture Clinic & Amad IP", timing: "Dec 2026 – Apr 2027" },
+      {
+        title: "Future Founders across three cities",
+        timing: "November 2026",
+        places: [
+          { name: "Riyadh", landmark: "Kingdom Centre", icon: "riyadh" },
+          { name: "Jeddah", landmark: "King Fahd's Fountain", icon: "jeddah" },
+          { name: "Eastern Province", landmark: "Khobar Water Tower", icon: "eastern" },
+        ],
+      },
+      { title: "Venture Clinic", timing: "Dec 2026 – Apr 2027" },
+      { title: "Amad IP", timing: "Dec 2026 – Apr 2027" },
       { title: "Final showcase day", timing: "May 2027" },
     ],
   },

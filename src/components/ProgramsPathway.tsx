@@ -59,7 +59,7 @@ export function ProgramsPathway({
   return (
     <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
       {/* The map: open programs on top; only feeder programs connect through the qualification gate to the clinic. */}
-      <div className="relative rounded-[2rem] bg-white/70 p-4 shadow-[0_24px_60px_-35px_rgba(12,35,65,0.35)] ring-1 ring-ink/5 backdrop-blur sm:p-6">
+      <div className="relative rounded-[2rem] bg-surface/70 p-4 shadow-[0_24px_60px_-35px_rgba(12,35,65,0.35)] ring-1 ring-fg/5 backdrop-blur sm:p-6">
         <StepLabel index={1} text={labels.steps.apply} />
         <div className="mt-3 grid grid-cols-2 gap-3 sm:gap-4">
           {openPrograms.map((program) => (
@@ -89,7 +89,7 @@ export function ProgramsPathway({
                         strokeWidth={2}
                         strokeDasharray="4 8"
                         vectorEffect="non-scaling-stroke"
-                        className="text-ink/20"
+                        className="text-fg/20"
                       />
                       {/* No non-scaling-stroke here: it breaks the pathLength draw animation in Chrome. */}
                       <motion.path
@@ -112,7 +112,7 @@ export function ProgramsPathway({
                   <span
                     key={program.slug}
                     className={cn(
-                      "absolute top-3 whitespace-nowrap rounded-full bg-ink/5 px-3 py-1 text-[0.7rem] font-semibold text-ink/55 ltr:-translate-x-1/2 rtl:translate-x-1/2",
+                      "absolute top-3 whitespace-nowrap rounded-full bg-fg/5 px-3 py-1 text-[0.7rem] font-semibold text-fg/55 ltr:-translate-x-1/2 rtl:translate-x-1/2",
                       columnCentres[i]
                     )}
                   >
@@ -140,14 +140,14 @@ export function ProgramsPathway({
                     "relative inline-flex items-center gap-2 rounded-full border-2 px-4 py-2 text-xs font-bold transition-colors duration-300 sm:text-sm",
                     routeOn
                       ? "border-copper bg-copper text-white shadow-lg shadow-copper/30 delay-500"
-                      : "border-dashed border-ink/20 bg-white text-ink/50"
+                      : "border-dashed border-fg/20 bg-surface text-fg/50"
                   )}
                 >
                   <Check className="h-4 w-4" aria-hidden />
                   {labels.pathwayNote}
                 </span>
               </div>
-              <div className="relative h-8 w-1 overflow-hidden rounded-full bg-ink/10 sm:h-10" aria-hidden>
+              <div className="relative h-8 w-1 overflow-hidden rounded-full bg-fg/10 sm:h-10" aria-hidden>
                 <motion.span
                   key={routeOn ? selected : "off"}
                   className="absolute inset-0 origin-top rounded-full bg-copper"
@@ -224,7 +224,7 @@ function StepLabel({
   className?: string;
 }) {
   return (
-    <div className={cn("flex items-center gap-2 text-xs font-bold text-ink/60", centered && "justify-center", className)}>
+    <div className={cn("flex items-center gap-2 text-xs font-bold text-fg/60", centered && "justify-center", className)}>
       <span className="flex h-5 w-5 items-center justify-center rounded-full bg-ink text-[0.65rem] text-white tabular-nums">
         {index}
       </span>
@@ -290,7 +290,7 @@ function ProgramNode({
       <span
         className={cn(
           "absolute top-2.5 end-2.5 inline-flex items-center gap-1 rounded-full px-2 py-1 text-[0.65rem] font-bold backdrop-blur-md sm:top-3 sm:end-3 sm:text-xs",
-          open ? "bg-white/90 text-ink" : "border border-white/25 bg-ink/50 text-white"
+          open ? "bg-surface/90 text-fg" : "border border-white/25 bg-ink/50 text-white"
         )}
       >
         {open ? (
@@ -356,7 +356,7 @@ function ProgramDetail({
             href={`/${locale}/programs/${program.slug}`}
             className={cn(
               "inline-flex w-fit items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-semibold transition-all hover:gap-2.5",
-              open ? "bg-copper text-white" : "bg-white text-ink"
+              open ? "bg-copper text-white" : "bg-surface text-fg"
             )}
           >
             {open ? program.cta : labels.learnMore}

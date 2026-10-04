@@ -35,10 +35,10 @@ export function InteractiveAccordion({
           <li
             key={item.id}
             className={cn(
-              "overflow-hidden rounded-2xl border bg-white transition-all duration-300",
+              "overflow-hidden rounded-2xl border bg-surface transition-all duration-300",
               isActive
                 ? "border-copper/30 shadow-[0_18px_40px_-28px_rgba(198,110,78,0.45)]"
-                : "border-ink/[0.07] hover:border-ink/15 hover:shadow-[0_12px_30px_-26px_rgba(12,35,65,0.35)]"
+                : "border-fg/[0.07] hover:border-fg/15 hover:shadow-[0_12px_30px_-26px_rgba(12,35,65,0.35)]"
             )}
           >
             <h3>
@@ -53,7 +53,7 @@ export function InteractiveAccordion({
                 <span
                   className={cn(
                     "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-xs font-bold transition-colors duration-300",
-                    isActive ? "bg-copper text-white" : "bg-ink/[0.05] text-ink/50 group-hover:bg-ink/[0.08]"
+                    isActive ? "bg-copper text-white" : "bg-fg/[0.05] text-fg/50 group-hover:bg-fg/[0.08]"
                   )}
                   dir="ltr"
                 >
@@ -62,7 +62,7 @@ export function InteractiveAccordion({
                 <span
                   className={cn(
                     "flex-1 text-base font-bold leading-snug transition-colors duration-300 sm:text-lg",
-                    isActive ? "text-ink" : "text-ink/80 group-hover:text-ink"
+                    isActive ? "text-fg" : "text-fg/80 group-hover:text-fg"
                   )}
                 >
                   {item.title}
@@ -72,7 +72,7 @@ export function InteractiveAccordion({
                     "flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300",
                     isActive
                       ? "rotate-45 border-copper bg-copper text-white"
-                      : "border-ink/15 text-ink/60 group-hover:border-ink/30"
+                      : "border-fg/15 text-fg/60 group-hover:border-fg/30"
                   )}
                   aria-hidden
                 >
@@ -93,7 +93,7 @@ export function InteractiveAccordion({
                   transition={{ duration: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
                   className="overflow-hidden"
                 >
-                  <p className="whitespace-pre-line border-t border-ink/[0.06] px-5 pb-5 pt-4 text-sm leading-relaxed text-brown sm:ps-[4.75rem] sm:pe-16 sm:text-base">
+                  <p className="whitespace-pre-line border-t border-fg/[0.06] px-5 pb-5 pt-4 text-sm leading-relaxed text-brown sm:ps-[4.75rem] sm:pe-16 sm:text-base">
                     {item.content}
                   </p>
                 </motion.div>

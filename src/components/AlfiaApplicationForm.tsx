@@ -242,9 +242,9 @@ export function AlfiaApplicationForm({
 
   if (!form.is_currently_accepting) {
     return (
-      <div className="mx-auto max-w-[720px] rounded-2xl bg-white px-6 py-12 text-center shadow-[0_28px_70px_-30px_rgba(12,35,65,0.35)]">
+      <div className="mx-auto max-w-[720px] rounded-2xl bg-surface px-6 py-12 text-center shadow-[0_28px_70px_-30px_rgba(12,35,65,0.35)]">
         <AlertCircle className="mx-auto h-12 w-12 text-copper" aria-hidden />
-        <p className="mt-4 text-lg font-bold text-ink">{ui.closedTitle}</p>
+        <p className="mt-4 text-lg font-bold text-fg">{ui.closedTitle}</p>
         <p className="mx-auto mt-2 max-w-md text-sm text-brown">{ui.closedBody}</p>
       </div>
     );
@@ -274,7 +274,7 @@ export function AlfiaApplicationForm({
   return (
     <div
       ref={cardRef}
-      className="mx-auto max-w-[720px] scroll-mt-28 overflow-hidden rounded-2xl bg-white text-ink shadow-[0_28px_70px_-30px_rgba(12,35,65,0.35)] ring-1 ring-ink/[0.05]"
+      className="mx-auto max-w-[720px] scroll-mt-28 overflow-hidden rounded-2xl bg-surface text-fg shadow-[0_28px_70px_-30px_rgba(12,35,65,0.35)] ring-1 ring-fg/[0.05]"
     >
       <AnimatePresence mode="wait">
         {stage === "welcome" && (
@@ -292,7 +292,7 @@ export function AlfiaApplicationForm({
             >
               🚀
             </div>
-            <h3 className="text-[clamp(1.6rem,4.5vw,2.35rem)] font-black leading-tight text-ink">{t(WELCOME.title)}</h3>
+            <h3 className="text-[clamp(1.6rem,4.5vw,2.35rem)] font-black leading-tight text-fg">{t(WELCOME.title)}</h3>
             <p className="mx-auto mt-4 max-w-[610px] text-[15px] leading-[1.8] text-[#626C80]">{t(WELCOME.body)}</p>
             <div className="mx-auto mb-7 mt-6 flex max-w-[610px] items-start gap-3 rounded-xl bg-[#F6F1EA] p-4 text-start">
               <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#C0703E]" aria-hidden />
@@ -332,7 +332,7 @@ export function AlfiaApplicationForm({
                     <p className="text-xs font-bold tracking-wider text-[#C0703E]">
                       {ui.step} {stepIndex + 1} / {stepCount}
                     </p>
-                    <h3 className="mt-2 text-2xl font-black text-ink">{t(step.title)}</h3>
+                    <h3 className="mt-2 text-2xl font-black text-fg">{t(step.title)}</h3>
                   </div>
 
                   {step.review ? (
@@ -358,7 +358,7 @@ export function AlfiaApplicationForm({
                         if (!memberFields.some(isVisible)) return null;
                         return (
                           <div key={n} className="rounded-2xl border border-[#E4D9CC] bg-[#FBF7F3] p-5">
-                            <p className="mb-4 flex items-center gap-2 text-sm font-bold text-ink">
+                            <p className="mb-4 flex items-center gap-2 text-sm font-bold text-fg">
                               <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#C0703E] text-white">
                                 <UserRound className="h-4 w-4" aria-hidden />
                               </span>
@@ -389,7 +389,7 @@ export function AlfiaApplicationForm({
                 <button
                   type="button"
                   onClick={() => (stepIndex === 0 ? setStage("welcome") : goTo(stepIndex - 1))}
-                  className="rounded-xl border border-[#E4D9CC] bg-white px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-[#C0703E]"
+                  className="rounded-xl border border-[#E4D9CC] bg-surface px-5 py-3 text-sm font-semibold text-fg transition-colors hover:border-[#C0703E]"
                 >
                   {ui.back}
                 </button>
@@ -420,7 +420,7 @@ export function AlfiaApplicationForm({
             <div className="mx-auto mb-6 flex h-[78px] w-[78px] items-center justify-center rounded-[22px] bg-[#FBF3EC] text-[#C0703E]">
               <CheckCircle2 className="h-10 w-10" aria-hidden />
             </div>
-            <h3 className="mx-auto max-w-md text-[1.6rem] font-black leading-snug text-ink">{t(WELCOME.success)}</h3>
+            <h3 className="mx-auto max-w-md text-[1.6rem] font-black leading-snug text-fg">{t(WELCOME.success)}</h3>
           </motion.section>
         )}
       </AnimatePresence>
@@ -436,7 +436,7 @@ function ReviewList({ rows, hint }: { rows: { label: string; value: string }[]; 
         {rows.map((r) => (
           <div key={r.label} className="rounded-xl border border-[#EFE7DD] bg-[#FBF7F3] px-4 py-3">
             <dt className="text-xs font-semibold text-[#8A7F73]">{r.label}</dt>
-            <dd className="mt-1 whitespace-pre-line text-sm font-medium text-ink">{r.value}</dd>
+            <dd className="mt-1 whitespace-pre-line text-sm font-medium text-fg">{r.value}</dd>
           </div>
         ))}
       </dl>
@@ -445,7 +445,7 @@ function ReviewList({ rows, hint }: { rows: { label: string; value: string }[]; 
 }
 
 const inputBase =
-  "w-full rounded-xl border bg-white px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-ink/35 focus:border-[#C0703E] focus:ring-2 focus:ring-[#C0703E]/15";
+  "w-full rounded-xl border bg-surface px-4 py-3 text-sm text-fg outline-none transition-colors placeholder:text-fg/35 focus:border-[#C0703E] focus:ring-2 focus:ring-[#C0703E]/15";
 
 function FieldControl({
   field,
@@ -476,7 +476,7 @@ function FieldControl({
   const describedBy = [help ? `${id}-help` : null, error ? `${id}-error` : null].filter(Boolean).join(" ") || undefined;
 
   const labelEl = (
-    <span className="text-sm font-bold text-ink">
+    <span className="text-sm font-bold text-fg">
       {label}
       {field.is_required && (
         <span className="ms-1 text-[#C44B4B]" aria-hidden>
@@ -504,7 +504,7 @@ function FieldControl({
               key={opt}
               className={cn(
                 "cursor-pointer rounded-xl border px-4 py-2.5 text-sm font-medium transition-all has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[#C0703E]/40",
-                checked ? "border-[#C0703E] bg-[#FBF3EC] text-[#A85A2F]" : "border-[#E4D9CC] bg-white text-ink/80 hover:border-[#C0703E]/60"
+                checked ? "border-[#C0703E] bg-[#FBF3EC] text-[#A85A2F]" : "border-[#E4D9CC] bg-surface text-fg/80 hover:border-[#C0703E]/60"
               )}
             >
               <input

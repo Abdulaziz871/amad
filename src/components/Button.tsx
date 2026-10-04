@@ -16,8 +16,8 @@ const variantStyles: Record<Variant, string> = {
   light:
     "bg-copper-light text-ink hover:bg-[#ff9275] shadow-[0_10px_30px_-12px_rgba(255,163,139,0.6)]",
   secondary:
-    "bg-transparent text-ink border border-ink/20 hover:border-ink/40 hover:bg-ink/5",
-  ghost: "bg-white text-ink hover:bg-cream border border-ink/10",
+    "bg-transparent text-fg border border-fg/20 hover:border-fg/40 hover:bg-fg/5",
+  ghost: "bg-surface text-fg hover:bg-cream border border-fg/10",
 };
 
 const base =

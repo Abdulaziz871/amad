@@ -10,9 +10,28 @@
   --color-copper-light: #ffa38b;
   --color-warm: #f9ebe0;
   --color-brown: #755750;
+  /* Theme-aware roles: text & fine lines (fg) and raised cards (surface). Navy panels keep using ink. */
+  --color-fg: #0c2341;
+  --color-surface: #ffffff;
+  color-scheme: light;
 }
 
+/* Dark mode: deep navy page, raised navy cards, soft-white text; brand copper / violet stay the same. */
+:root[data-theme="dark"] {
+  --color-cream: #07111f;
+  --color-surface: #0f1d33;
+  --color-fg: #e9eef6;
+  --color-brown: #b4b9c6;
+  --color-warm: #142238;
+  --color-accent-dark: #a49ee8;
+  color-scheme: dark;
+}
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @theme inline {
+  --color-fg: var(--color-fg);
+  --color-surface: var(--color-surface);
   --color-cream: var(--color-cream);
   --color-ink: var(--color-ink);
   --color-accent: var(--color-accent);
@@ -32,7 +51,8 @@ html {
 
 body {
   background: var(--color-cream);
-  color: var(--color-ink);
+  color: var(--color-fg);
+  transition: background-color 0.35s ease, color 0.35s ease;
   font-family: var(--font-sans), Arial, sans-serif;
 }
 
@@ -239,6 +259,14 @@ h6 {
 
 .logo-marquee__img {
   transition: transform 0.4s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+}
+
+/* Several logos are dark ink on transparent; in dark mode give each a soft light tile so they stay legible. */
+:root[data-theme="dark"] .logo-marquee__img {
+  background: #f6f1ec;
+  border-radius: 0.9rem;
+  padding: 0.45rem 0.7rem;
+  box-shadow: 0 10px 24px -16px rgba(0, 0, 0, 0.6);
 }
 
 .logo-marquee__name {

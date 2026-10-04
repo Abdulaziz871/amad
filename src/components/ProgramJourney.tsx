@@ -50,7 +50,7 @@ function IPJourney({ steps, locale }: JourneyProps) {
     <div className="mt-10">
       <div className="mb-5 grid gap-2" style={{ gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))` }}>
         {steps.map((step, i) => (
-          <div key={step.title} className="h-1 overflow-hidden rounded-full bg-ink/10">
+          <div key={step.title} className="h-1 overflow-hidden rounded-full bg-fg/10">
             <motion.div
               className="h-full rounded-full bg-ink"
               initial={false}
@@ -76,20 +76,20 @@ function IPJourney({ steps, locale }: JourneyProps) {
                 "group relative flex flex-col overflow-hidden rounded-3xl border p-6 text-start outline-none transition-all duration-500 ease-out sm:p-7",
                 isActive
                   ? "border-transparent bg-ink text-white lg:flex-[3]"
-                  : "border-ink/8 bg-white text-ink hover:border-ink/30 lg:flex-1"
+                  : "border-fg/8 bg-surface text-fg hover:border-fg/30 lg:flex-1"
               )}
             >
               <span
                 className={cn(
                   "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-colors duration-500",
-                  isActive ? "bg-white/12 text-white" : "bg-ink/8 text-ink"
+                  isActive ? "bg-white/12 text-white" : "bg-fg/8 text-fg"
                 )}
               >
                 <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden />
               </span>
 
               <span className="mt-6 flex flex-col lg:mt-auto">
-                <span className={cn("text-xs font-semibold", isActive ? "text-copper" : "text-ink/45")}>
+                <span className={cn("text-xs font-semibold", isActive ? "text-copper" : "text-fg/45")}>
                   {stageLabel(locale, i)}
                 </span>
                 <span className="mt-1.5 text-lg font-bold leading-snug sm:text-xl">{step.title}</span>
@@ -171,13 +171,13 @@ function RuwadJourney({ steps, locale }: JourneyProps) {
               className={cn(
                 "col-start-2 row-start-1 rounded-2xl border p-5 text-start outline-none transition-all duration-300 sm:p-6",
                 onEnd ? "lg:col-start-3" : "lg:col-start-1 lg:text-end",
-                isActive ? "border-transparent bg-copper text-white shadow-lg" : "border-ink/8 bg-white hover:border-copper/50"
+                isActive ? "border-transparent bg-copper text-white shadow-lg" : "border-fg/8 bg-surface hover:border-copper/50"
               )}
             >
               <span className={cn("block text-xs font-semibold", isActive ? "text-white/75" : "text-copper")}>
                 {stageLabel(locale, i)}
               </span>
-              <span className={cn("mt-1.5 block text-lg font-bold leading-snug", isActive ? "text-white" : "text-ink")}>
+              <span className={cn("mt-1.5 block text-lg font-bold leading-snug", isActive ? "text-white" : "text-fg")}>
                 {step.title}
               </span>
               <span className={cn("mt-2 block text-sm leading-relaxed", isActive ? "text-white/85" : "text-brown")}>
@@ -218,7 +218,7 @@ function ClinicJourney({ steps, locale }: JourneyProps) {
               aria-pressed={isActive}
               className={cn(
                 "flex items-center gap-4 rounded-2xl border p-4 text-start outline-none transition-all duration-300",
-                isActive ? "border-accent/50 bg-white shadow-md" : "border-transparent hover:bg-white/70"
+                isActive ? "border-accent/50 bg-surface shadow-md" : "border-transparent hover:bg-surface/70"
               )}
             >
               <span
@@ -230,10 +230,10 @@ function ClinicJourney({ steps, locale }: JourneyProps) {
                 <Icon className="h-5 w-5 -rotate-45" strokeWidth={1.8} aria-hidden />
               </span>
               <span className="min-w-0">
-                <span className={cn("block text-xs font-semibold", isActive ? "text-accent-dark" : "text-ink/40")}>
+                <span className={cn("block text-xs font-semibold", isActive ? "text-accent-dark" : "text-fg/40")}>
                   {stageLabel(locale, i)}
                 </span>
-                <span className={cn("block text-base font-bold leading-snug", isActive ? "text-ink" : "text-ink/60")}>
+                <span className={cn("block text-base font-bold leading-snug", isActive ? "text-fg" : "text-fg/60")}>
                   {step.title}
                 </span>
               </span>
@@ -276,7 +276,7 @@ function ClinicJourney({ steps, locale }: JourneyProps) {
             onClick={() => setActive((a) => Math.min(n - 1, a + 1))}
             disabled={active === n - 1}
             aria-label={nextLabel}
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-accent-dark transition-colors hover:bg-white/90 disabled:opacity-35"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-surface text-accent-dark transition-colors hover:bg-surface/90 disabled:opacity-35"
           >
             <ArrowLeft className="h-5 w-5 ltr:rotate-180" aria-hidden />
           </button>

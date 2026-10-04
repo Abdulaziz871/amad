@@ -22,7 +22,7 @@ const heroGradient: Record<string, string> = {
   accent: "from-accent via-accent-dark to-ink",
 };
 const toneText: Record<string, string> = {
-  ink: "text-ink",
+  ink: "text-fg",
   copper: "text-copper",
   accent: "text-accent",
 };
@@ -37,7 +37,7 @@ const toneOnDark: Record<string, string> = {
   accent: "!bg-accent/20 !text-accent",
 };
 const toneSoft: Record<string, string> = {
-  ink: "bg-ink/[0.07] text-ink",
+  ink: "bg-fg/[0.07] text-fg",
   copper: "bg-copper/10 text-copper",
   accent: "bg-accent/15 text-accent-dark",
 };
@@ -98,7 +98,7 @@ export function ProgramDetailView({
               </ButtonLink>
             </div>
 
-            <h1 className="mt-5 max-w-2xl text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
+            <h1 className="mt-5 max-w-2xl text-3xl font-extrabold leading-tight tracking-tight text-fg sm:text-4xl lg:text-5xl">
               <HighlightText text={detail.title} highlight={content.brandName} />
             </h1>
             {detail.tagline && (
@@ -161,7 +161,7 @@ export function ProgramDetailView({
             <p className="mt-3 text-xl font-semibold leading-relaxed sm:text-2xl">{audienceText}</p>
           </Reveal>
 
-          <Reveal delay={0.1} className="spotlight relative flex flex-col overflow-hidden rounded-3xl border border-ink/8 bg-cream p-8 sm:p-10">
+          <Reveal delay={0.1} className="spotlight relative flex flex-col overflow-hidden rounded-3xl border border-fg/8 bg-cream p-8 sm:p-10">
             <PatternCross
               className={cn(
                 "pointer-events-none absolute bottom-5 end-5 h-16 w-16 -rotate-6 opacity-[0.12] sm:h-20 sm:w-20",
@@ -169,7 +169,7 @@ export function ProgramDetailView({
               )}
               aria-hidden
             />
-            <h2 className="relative text-xl font-bold text-ink sm:text-2xl">{detail.benefits.title}</h2>
+            <h2 className="relative text-xl font-bold text-fg sm:text-2xl">{detail.benefits.title}</h2>
             {detail.benefits.cards ? (
               <ul className="relative mt-5 grid gap-3 sm:grid-cols-2">
                 {detail.benefits.cards.map((card) => {
@@ -177,7 +177,7 @@ export function ProgramDetailView({
                   return (
                     <li
                       key={card.title}
-                      className="group flex flex-col rounded-2xl border border-ink/[0.06] bg-white p-5 shadow-[0_12px_30px_-26px_rgba(12,35,65,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_-28px_rgba(12,35,65,0.45)]"
+                      className="group flex flex-col rounded-2xl border border-fg/[0.06] bg-surface p-5 shadow-[0_12px_30px_-26px_rgba(12,35,65,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_-28px_rgba(12,35,65,0.45)]"
                     >
                       <span
                         className={cn(
@@ -187,18 +187,18 @@ export function ProgramDetailView({
                       >
                         <CardIcon className="h-5 w-5" aria-hidden />
                       </span>
-                      <h3 className="mt-3.5 text-base font-bold leading-snug text-ink">{card.title}</h3>
+                      <h3 className="mt-3.5 text-base font-bold leading-snug text-fg">{card.title}</h3>
                       <p className="mt-1.5 text-sm leading-relaxed text-brown">{card.description}</p>
                     </li>
                   );
                 })}
               </ul>
             ) : (
-              <ul className="relative mt-5 divide-y divide-ink/8">
+              <ul className="relative mt-5 divide-y divide-fg/8">
                 {detail.benefits.items.map((item) => (
                   <li key={item} className="flex items-start gap-3 py-3.5 first:pt-0 last:pb-0">
                     <Check className={cn("mt-0.5 h-5 w-5 shrink-0", toneText[tone])} aria-hidden />
-                    <span className="text-sm leading-relaxed text-ink sm:text-base">{item}</span>
+                    <span className="text-sm leading-relaxed text-fg sm:text-base">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -229,7 +229,7 @@ export function ProgramDetailView({
               {detail.criteria.items.map((item, i) => (
                 <RevealItem
                   key={item.title}
-                  className="spotlight group relative flex flex-col rounded-3xl border border-ink/[0.06] bg-white p-7 shadow-[0_16px_40px_-32px_rgba(12,35,65,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-32px_rgba(12,35,65,0.4)] sm:p-8"
+                  className="spotlight group relative flex flex-col rounded-3xl border border-fg/[0.06] bg-surface p-7 shadow-[0_16px_40px_-32px_rgba(12,35,65,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-32px_rgba(12,35,65,0.4)] sm:p-8"
                 >
                   <span
                     className={cn("font-display text-4xl font-extrabold leading-none opacity-80", toneText[tone])}
@@ -237,7 +237,7 @@ export function ProgramDetailView({
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-5 text-lg font-bold leading-snug text-ink sm:text-xl">{item.title}</h3>
+                  <h3 className="mt-5 text-lg font-bold leading-snug text-fg sm:text-xl">{item.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-brown sm:text-base">{item.description}</p>
                 </RevealItem>
               ))}
@@ -257,7 +257,7 @@ export function ProgramDetailView({
         />
         <div className="container-amad relative">
           <Reveal>
-            <h2 className="text-2xl font-bold text-ink sm:text-3xl">{detail.journey.title}</h2>
+            <h2 className="text-2xl font-bold text-fg sm:text-3xl">{detail.journey.title}</h2>
           </Reveal>
 
           <ProgramJourney slug={detail.slug} steps={detail.journey.steps} locale={locale} />

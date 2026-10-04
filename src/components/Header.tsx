@@ -7,6 +7,7 @@ import { Menu, X, Globe } from "lucide-react";
 import { Logo } from "./Logo";
 import { ButtonLink } from "./Button";
 import { ScrollProgress } from "./ScrollProgress";
+import { ThemeToggle } from "./ThemeToggle";
 import type { Locale } from "@/i18n/config";
 import type { SiteContent } from "@/lib/content";
 
@@ -25,7 +26,7 @@ export function Header({ locale, content }: { locale: Locale; content: SiteConte
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-ink text-white">
+    <header className="sticky top-0 z-50 bg-ink text-white transition-colors duration-300 dark:bg-cream dark:shadow-[0_1px_0_rgba(255,255,255,0.07)]">
       <ScrollProgress />
       <div className="container-amad flex items-center justify-between py-4">
         <Logo locale={locale} />
@@ -43,6 +44,7 @@ export function Header({ locale, content }: { locale: Locale; content: SiteConte
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <ThemeToggle labels={content.nav.theme} />
           <Link
             href={otherHref}
             className="flex items-center gap-1.5 rounded-full border border-white/15 px-3.5 py-2 text-sm font-medium text-white/80 transition-colors hover:border-white/30 hover:text-white"
@@ -55,19 +57,22 @@ export function Header({ locale, content }: { locale: Locale; content: SiteConte
           </ButtonLink>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 text-white lg:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle labels={content.nav.theme} />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 text-white"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {open && (
-        <div className="border-t border-white/10 bg-ink lg:hidden">
+        <div className="border-t border-white/10 bg-ink lg:hidden dark:bg-cream">
           <div className="container-amad flex flex-col gap-1 py-4">
             {links.map((link) => (
               <Link

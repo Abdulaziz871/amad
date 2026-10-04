@@ -28,7 +28,7 @@ export function WhyAmad({ content }: { content: SiteContent }) {
         aria-hidden
       />
       <PatternCross
-        className="pointer-events-none absolute top-10 start-8 h-28 w-28 -rotate-6 text-ink opacity-[0.06] sm:h-40 sm:w-40"
+        className="pointer-events-none absolute top-10 start-8 h-28 w-28 -rotate-6 text-fg opacity-[0.06] sm:h-40 sm:w-40"
         aria-hidden
       />
       <PatternBars
@@ -50,13 +50,13 @@ export function WhyAmad({ content }: { content: SiteContent }) {
         </Reveal>
 
         <Reveal className="mt-14 sm:mt-16">
-          <div className="grid overflow-hidden rounded-[2.5rem] border border-ink/[0.06] bg-white shadow-[0_24px_60px_-45px_rgba(12,35,65,0.3)] lg:grid-cols-[0.85fr_1.15fr]">
-            <div className="relative isolate flex flex-col overflow-hidden bg-linear-to-br from-accent/[0.04] via-white to-copper-light/[0.07] p-8 sm:p-10 lg:p-12">
+          <div className="grid overflow-hidden rounded-[2.5rem] border border-fg/[0.06] bg-surface shadow-[0_24px_60px_-45px_rgba(12,35,65,0.3)] lg:grid-cols-[0.85fr_1.15fr]">
+            <div className="relative isolate flex flex-col overflow-hidden bg-linear-to-br from-accent/[0.04] via-surface to-copper-light/[0.07] p-8 sm:p-10 lg:p-12">
               <PatternCross
                 className="pointer-events-none absolute bottom-8 end-8 h-16 w-16 rotate-12 text-accent opacity-[0.14] sm:h-20 sm:w-20"
                 aria-hidden
               />
-              <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-ink/70 shadow-sm">
+              <span className="inline-flex w-fit items-center gap-2 rounded-full bg-surface px-4 py-1.5 text-xs font-semibold text-fg/70 shadow-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-copper" aria-hidden />
                 {content.whyAmad.statsTitle}
               </span>
@@ -64,19 +64,19 @@ export function WhyAmad({ content }: { content: SiteContent }) {
               <div className="mt-auto pt-12">
                 <AnimatedCounter
                   value={featured.value}
-                  className="block font-display text-6xl font-extrabold leading-none text-ink tabular-nums sm:text-7xl rtl:text-right ltr:text-left"
+                  className="block font-display text-6xl font-extrabold leading-none text-fg tabular-nums sm:text-7xl rtl:text-right ltr:text-left"
                   affixClassName="text-copper"
                 />
-                <p className="mt-5 max-w-xs text-lg font-bold leading-snug text-ink/80 sm:text-xl">{featured.label}</p>
+                <p className="mt-5 max-w-xs text-lg font-bold leading-snug text-fg/80 sm:text-xl">{featured.label}</p>
                 <span className="mt-6 flex items-center gap-1.5" aria-hidden>
                   <span className="h-1.5 w-12 rounded-full bg-copper" />
                   <span className="h-1.5 w-5 rounded-full bg-accent" />
-                  <span className="h-1.5 w-2 rounded-full bg-ink/15" />
+                  <span className="h-1.5 w-2 rounded-full bg-fg/15" />
                 </span>
               </div>
             </div>
 
-            <RevealGroup stagger={0.07} className="flex flex-col divide-y divide-ink/[0.07] p-6 sm:p-8 lg:p-10">
+            <RevealGroup stagger={0.07} className="flex flex-col divide-y divide-fg/[0.07] p-6 sm:p-8 lg:p-10">
               {rest.map(({ stat, index }) => {
                 const StatIcon = statIcons[index % statIcons.length];
                 const tone = statTones[index % statTones.length];
@@ -84,10 +84,10 @@ export function WhyAmad({ content }: { content: SiteContent }) {
                   <RevealItem key={stat.label} className="group flex items-center gap-5 py-5 first:pt-0 last:pb-0 sm:gap-7">
                     <AnimatedCounter
                       value={stat.value}
-                      className="w-24 shrink-0 font-display text-3xl font-extrabold leading-none text-ink tabular-nums sm:w-32 sm:text-4xl rtl:text-right ltr:text-left"
+                      className="w-24 shrink-0 font-display text-3xl font-extrabold leading-none text-fg tabular-nums sm:w-32 sm:text-4xl rtl:text-right ltr:text-left"
                       affixClassName={tone.text}
                     />
-                    <p className="flex-1 text-sm font-medium leading-relaxed text-ink/70 sm:text-base">{stat.label}</p>
+                    <p className="flex-1 text-sm font-medium leading-relaxed text-fg/70 sm:text-base">{stat.label}</p>
                     <span
                       className={cn(
                         "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-110",
