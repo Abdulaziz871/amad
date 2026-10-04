@@ -22,14 +22,22 @@ export function ScrollProgress() {
         className="relative w-full rounded-full bg-copper"
         style={{ height }}
       >
-        {/* The امد mark (tiles stacked ا / م / د) rides the tip of the fill. */}
+        {/* The امد mark (tiles stacked ا / م / د) rides the tip of the fill: colour in light mode, white in dark. */}
         <Image
           src="/logos/amad-mark-vertical.png"
           alt=""
           width={240}
           height={777}
           unoptimized
-          className="absolute top-full start-1/2 mt-1 h-auto w-4 max-w-none drop-shadow-[0_4px_8px_rgba(12,35,65,0.25)] ltr:-translate-x-1/2 rtl:translate-x-1/2 sm:w-5"
+          className="absolute top-full dark:hidden start-1/2 mt-1 h-auto w-4 max-w-none drop-shadow-[0_4px_8px_rgba(12,35,65,0.25)] ltr:-translate-x-1/2 rtl:translate-x-1/2 sm:w-5"
+        />
+        <Image
+          src="/logos/amad-mark-vertical-white.png"
+          alt=""
+          width={240}
+          height={777}
+          unoptimized
+          className="absolute top-full hidden dark:block start-1/2 mt-1 h-auto w-4 max-w-none drop-shadow-[0_4px_8px_rgba(12,35,65,0.25)] ltr:-translate-x-1/2 rtl:translate-x-1/2 sm:w-5"
         />
       </motion.div>
     </div>

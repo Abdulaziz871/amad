@@ -74,13 +74,13 @@ export function PartnersSection({ content }: { content: SiteContent }) {
             return (
               <RevealItem
                 key={partner.name}
-                className="spotlight relative flex h-full flex-col items-center rounded-3xl border border-fg/[0.06] bg-surface px-7 py-9 text-center shadow-[0_16px_40px_-30px_rgba(12,35,65,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(12,35,65,0.4)] sm:px-10"
+                className="spotlight relative flex h-full flex-col items-center rounded-3xl border border-fg/[0.06] bg-surface px-7 py-9 text-center shadow-[0_16px_40px_-30px_rgba(12,35,65,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(12,35,65,0.4)] sm:px-10 dark:border-transparent dark:bg-transparent dark:shadow-none dark:hover:shadow-none"
               >
                 {logo && (
-                  <span className="flex h-16 w-44 items-center justify-center rounded-2xl bg-ink px-6">
+                  <span className="flex h-16 w-44 items-center justify-center rounded-2xl bg-ink px-6 dark:bg-transparent">
                     <Image
                       src={logo}
-                      alt=""
+                      alt={partner.name}
                       width={160}
                       height={48}
                       unoptimized
@@ -88,8 +88,7 @@ export function PartnersSection({ content }: { content: SiteContent }) {
                     />
                   </span>
                 )}
-                <h3 className="mt-5 text-lg font-bold text-fg">{partner.name}</h3>
-                <span className="mt-3 h-1 w-8 rounded-full bg-copper/70" aria-hidden />
+                <span className="mt-5 h-1 w-8 rounded-full bg-copper/70" aria-hidden />
                 <p className="mt-4 max-w-md text-sm leading-relaxed text-brown sm:text-base">{partner.description}</p>
               </RevealItem>
             );
