@@ -45,7 +45,7 @@ function LogoMarks({ white, className }: { white: boolean; className: string }) 
       <span className={`h-6 w-px ${white ? "bg-white/20" : "bg-ink/15"}`} aria-hidden />
       <Image
         src={white ? "/logos/partners/falak-white.png" : "/logos/partners/falak-black.png"}
-        alt="فلك"
+        alt="فلك القابضة"
         width={470}
         height={237}
         className="h-6 w-auto shrink-0 object-contain"

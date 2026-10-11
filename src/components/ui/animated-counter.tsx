@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { animate, useInView } from "motion/react";
 
+// Renders the real number from the start (server render, previews, screenshots) and plays a
+// one-time count-up the first time the stat scrolls into view.
 export function AnimatedCounter({
   value,
   className,
@@ -13,24 +15,22 @@ export function AnimatedCounter({
   affixClassName?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: false, margin: "-10% 0px" });
-  const [display, setDisplay] = useState(0);
+  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
 
   const match = value.match(/^(\D*)(\d+)(\D*)$/);
   const prefix = match?.[1] ?? "";
   const target = match ? parseInt(match[2], 10) : null;
   const suffix = match?.[3] ?? "";
+  const [display, setDisplay] = useState(target ?? 0);
 
   useEffect(() => {
-    if (target === null) return;
-    const to = inView ? target : 0;
-    const controls = animate(inView ? 0 : display, to, {
-      duration: inView ? 2.8 : 0.4,
+    if (!inView || target === null) return;
+    const controls = animate(0, target, {
+      duration: 2,
       ease: [0.16, 1, 0.3, 1],
       onUpdate: (v) => setDisplay(Math.round(v)),
     });
     return () => controls.stop();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, target]);
 
   if (target === null) {

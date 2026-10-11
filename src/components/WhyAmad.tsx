@@ -1,4 +1,4 @@
-import { Briefcase, Presentation, Handshake, TrendingUp, Users, Rocket } from "lucide-react";
+import { Briefcase, Presentation, Handshake, TrendingUp, Rocket } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 import { Reveal, RevealGroup, RevealItem } from "./Reveal";
 import { ProcessShowcase } from "./ProcessShowcase";
@@ -7,7 +7,8 @@ import { AnimatedCounter } from "./ui/animated-counter";
 import { cn } from "@/lib/utils";
 import type { SiteContent } from "@/lib/content";
 
-const statIcons = [Briefcase, Presentation, Handshake, TrendingUp, Users, Rocket];
+// One icon per stat, in the same order as content.whyAmad.stats.
+const statIcons = [Briefcase, Presentation, Handshake, TrendingUp, Rocket];
 const statTones = [
   { text: "text-accent", icon: "bg-accent/10 text-accent-dark" },
   { text: "text-copper", icon: "bg-copper-light/20 text-copper" },

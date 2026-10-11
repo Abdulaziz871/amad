@@ -54,12 +54,14 @@ export function ProgramDetailView({
   detail,
   heroImage,
   alfiaForm,
+  alfiaEmbedHtml,
 }: {
   locale: Locale;
   content: SiteContent;
   detail: ProgramDetail;
   heroImage?: string | null;
   alfiaForm?: AlfiaForm | null;
+  alfiaEmbedHtml?: string | null;
 }) {
   const Icon = programIcons[detail.slug];
   const tone = toneForSlug(detail.slug);
@@ -267,7 +269,7 @@ export function ProgramDetailView({
       {detail.faq && detail.faq.length > 0 && <Faq title={content.faq.title} items={detail.faq} />}
 
       {detail.showApplicationForm !== false && (
-        <ProgramApplicationForm detail={detail} content={content} tone={tone} locale={locale} alfiaForm={alfiaForm} />
+        <ProgramApplicationForm detail={detail} content={content} tone={tone} locale={locale} alfiaForm={alfiaForm} alfiaEmbedHtml={alfiaEmbedHtml} />
       )}
     </>
   );

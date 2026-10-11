@@ -4,6 +4,7 @@ import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getContent } from "@/lib/content";
 import { programHeroImage } from "@/lib/images";
 import { ProgramDetailView } from "@/components/ProgramDetailView";
+import { getAmadIpEmbedHtml } from "@/lib/alfia";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -29,6 +30,7 @@ export default async function IpProgramPage({
   if (!isLocale(rawLocale)) notFound();
   const locale: Locale = rawLocale;
   const content = getContent(locale);
+  const alfiaEmbedHtml = await getAmadIpEmbedHtml();
 
   return (
     <ProgramDetailView
@@ -36,6 +38,7 @@ export default async function IpProgramPage({
       content={content}
       detail={content.programDetails.ip}
       heroImage={programHeroImage("ip")}
+      alfiaEmbedHtml={alfiaEmbedHtml}
     />
   );
 }

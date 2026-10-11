@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import type { ProgramDetail, SiteContent } from "@/lib/content";
 import type { IconTone } from "./IconBadge";
 import { AlfiaApplicationForm } from "./AlfiaApplicationForm";
+import { AlfiaEmbed } from "./AlfiaEmbed";
 import type { AlfiaForm } from "@/lib/alfia";
 import type { Locale } from "@/i18n/config";
 
@@ -39,12 +40,15 @@ export function ProgramApplicationForm({
   tone = "accent",
   locale,
   alfiaForm,
+  alfiaEmbedHtml,
 }: {
   detail: ProgramDetail;
   content: SiteContent;
   tone?: IconTone;
   locale: Locale;
   alfiaForm?: AlfiaForm | null;
+  /** An Alfia landing page shown as-is (Amad IP). */
+  alfiaEmbedHtml?: string | null;
 }) {
   const [submitted, setSubmitted] = useState(false);
   const labels = content.applicationForm;
@@ -72,12 +76,12 @@ export function ProgramApplicationForm({
         <Reveal
           className={cn(
             "relative mx-auto max-w-3xl",
-            alfiaForm
+            alfiaForm || alfiaEmbedHtml
               ? ""
               : cn("rounded-3xl border border-fg/8 bg-surface", detail.form.embedUrl ? "p-6 sm:p-8" : "p-6 sm:p-10")
           )}
         >
-          {alfiaForm ? (
+          {alfiaForm || alfiaEmbedHtml ? (
             <h2 className="sr-only">{detail.form.title}</h2>
           ) : (
             <div className="text-center">
@@ -88,6 +92,8 @@ export function ProgramApplicationForm({
 
           {alfiaForm ? (
             <AlfiaApplicationForm form={alfiaForm} locale={locale} ui={content.alfiaForm} />
+          ) : alfiaEmbedHtml ? (
+            <AlfiaEmbed html={alfiaEmbedHtml} title={detail.form.title} />
           ) : detail.form.embedUrl ? (
             <div className="relative mt-8 h-[820px] w-full overflow-hidden rounded-2xl border border-fg/10 bg-cream">
               <iframe

@@ -119,6 +119,20 @@ export interface AlfiaFormUi {
   chooseAtLeastOne: string;
   closedTitle: string;
   closedBody: string;
+  edit: string;
+  change: string;
+  programPeriod: string;
+  cityLabel: string;
+  chooseCity: string;
+  choosePath: string;
+  chooseOption: string;
+  signatureName: string;
+  signatureImage: string;
+  signatureHint: string;
+  signatureTooShort: string;
+  signatureType: string;
+  signatureSize: string;
+  confirmCommitment: string;
 }
 
 export interface SiteContent {
@@ -216,9 +230,6 @@ export interface SiteContent {
     subtitle: string;
     nameLabel: string;
     emailLabel: string;
-    trackLabel: string;
-    trackPlaceholder: string;
-    qualifiedNote: string;
     submit: string;
     notice: string;
   };
