@@ -28,7 +28,7 @@ export function Faq({ title, items }: { title: string; items: FaqItem[] }) {
           <SectionHeading title={title} align="center" className="mx-auto" />
         </Reveal>
         <Reveal delay={0.1} className="mx-auto mt-10 max-w-3xl">
-          <InteractiveAccordion items={accordionItems} defaultOpenId={accordionItems[0]?.id} />
+          <InteractiveAccordion items={accordionItems} />
         </Reveal>
       </div>
     </section>

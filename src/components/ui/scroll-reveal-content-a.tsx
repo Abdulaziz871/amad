@@ -58,8 +58,8 @@ export function ScrollRevealContentA({ items, header, className, ...props }: Pro
                 </div>
               ))}
             </div>
-            <div className="grid w-full items-center gap-6 lg:grid-cols-2 lg:gap-16">
-              <div className="relative min-h-[170px] w-full lg:min-h-[300px]">
+            <div className="grid w-full items-center gap-4 sm:gap-6 lg:grid-cols-2 lg:gap-16">
+              <div className="grid w-full items-center lg:min-h-[300px]">
                 {items.map((item, i) => (
                   <PointItem
                     key={item.number}
@@ -70,7 +70,7 @@ export function ScrollRevealContentA({ items, header, className, ...props }: Pro
                 ))}
               </div>
 
-              <div className="relative flex h-56 w-full items-center justify-center sm:h-72 lg:h-[min(62vh,32rem)]">
+              <div className="relative flex h-44 w-full items-center justify-center sm:h-72 lg:h-[min(62vh,32rem)]">
                 {items.map((item, i) => {
                   const active = scrollProgress >= i / n && scrollProgress < (i + 1) / n;
                   return (
@@ -113,11 +113,11 @@ function PointItem({ item, total, isActive }: { item: ScrollRevealItem; total?: 
   return (
     <div
       className={cn(
-        "absolute inset-0 flex w-full flex-col justify-center transition-opacity duration-500",
+        "col-start-1 row-start-1 flex w-full flex-col justify-center transition-opacity duration-500",
         isActive ? "opacity-100" : "pointer-events-none opacity-0"
       )}
     >
-      <div className="relative flex flex-col gap-4">
+      <div className="relative flex flex-col gap-3 sm:gap-4">
         <div className="flex w-fit items-baseline gap-1.5 font-display tabular-nums" dir="ltr">
           <span className={cn("text-2xl font-bold sm:text-3xl", item.tone.text)}>{item.number}</span>
           {total && <span className="text-base font-medium text-fg/35 sm:text-lg">/ {total}</span>}

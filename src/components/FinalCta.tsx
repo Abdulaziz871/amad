@@ -1,21 +1,13 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
-import { CheckCircle2, ArrowLeft } from "lucide-react";
-import { Button } from "./Button";
+import { ArrowUpLeft } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { PatternCross, PatternFan } from "./ui/brand-patterns";
 import type { SiteContent } from "@/lib/content";
 
+// Registering interest happens on the Amad team's Google Form, opened in a new tab.
+const INTEREST_FORM_URL = "https://forms.gle/BYQK8FEHqBpXjDGU6";
+
 export function FinalCta({ content, backgroundImage }: { content: SiteContent; backgroundImage?: string | null }) {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
-
   return (
     <section id="interest" className="scroll-mt-20 py-12 sm:py-16">
       <div className="container-amad">
@@ -35,45 +27,18 @@ export function FinalCta({ content, backgroundImage }: { content: SiteContent; b
             className="pointer-events-none absolute start-6 top-1/2 h-40 w-40 -translate-y-1/2 text-copper opacity-20 sm:h-56 sm:w-56"
             aria-hidden
           />
-          <div className="relative mx-auto max-w-2xl text-center">
+          <div className="relative mx-auto flex max-w-2xl flex-col items-center text-center">
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-[2.75rem]">{content.finalCta.title}</h2>
             <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-base">{content.finalCta.subtitle}</p>
-          </div>
-
-          <div className="relative mx-auto mt-9 max-w-xl">
-            {submitted ? (
-              <div className="flex flex-col items-center gap-2 rounded-2xl bg-white/5 px-6 py-8 text-center backdrop-blur-sm">
-                <CheckCircle2 className="h-9 w-9 text-copper-light" aria-hidden />
-                <p className="text-sm font-semibold text-white">{content.finalCta.notice}</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="grid gap-3 sm:grid-cols-2">
-                <label className="sr-only" htmlFor="finalcta-name">
-                  {content.finalCta.nameLabel}
-                </label>
-                <input
-                  id="finalcta-name"
-                  required
-                  type="text"
-                  placeholder={content.finalCta.nameLabel}
-                  className="min-w-0 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white placeholder:text-white/50 outline-none backdrop-blur-sm focus:border-copper-light"
-                />
-                <label className="sr-only" htmlFor="finalcta-email">
-                  {content.finalCta.emailLabel}
-                </label>
-                <input
-                  id="finalcta-email"
-                  required
-                  type="email"
-                  placeholder={content.finalCta.emailLabel}
-                  className="min-w-0 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm text-white placeholder:text-white/50 outline-none backdrop-blur-sm focus:border-copper-light"
-                />
-                <Button type="submit" variant="light" className="w-full sm:col-span-2">
-                  {content.finalCta.submit}
-                  <ArrowLeft className="h-4 w-4 ltr:rotate-180" aria-hidden />
-                </Button>
-              </form>
-            )}
+            <a
+              href={INTEREST_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-copper-light px-8 py-3.5 text-sm font-bold text-ink shadow-[0_10px_30px_-12px_rgba(255,163,139,0.6)] transition-colors hover:bg-[#ff9275] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-copper-light sm:text-base"
+            >
+              {content.finalCta.cta}
+              <ArrowUpLeft className="h-4 w-4 ltr:-scale-x-100" aria-hidden />
+            </a>
           </div>
         </Reveal>
       </div>

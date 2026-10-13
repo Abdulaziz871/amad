@@ -3,10 +3,9 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
-  FileEdit,
   ScanSearch,
-  ShieldCheck,
   Rocket,
+  FlaskConical,
   Send,
   MapPin,
   Hammer,
@@ -41,7 +40,7 @@ interface JourneyProps {
 /* ---------------------------------------------------------------------------------------------
  * Amad IP — horizontal expanding panels. The chosen stage widens to reveal its details.
  * ------------------------------------------------------------------------------------------- */
-const ipIcons: LucideIcon[] = [FileEdit, ScanSearch, ShieldCheck, Rocket];
+const ipIcons: LucideIcon[] = [ScanSearch, FlaskConical, Rocket];
 
 function IPJourney({ steps, locale }: JourneyProps) {
   const [active, setActive] = useState(0);

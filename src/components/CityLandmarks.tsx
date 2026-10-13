@@ -41,7 +41,7 @@ const landmarkPaths: Record<LandmarkIcon, string[]> = {
 
 export function CityLandmarks({ places, active }: { places: CityPlace[]; active: boolean }) {
   return (
-    <ul className="relative flex items-stretch gap-2.5 pt-3 sm:gap-3">
+    <ul className="relative grid w-full grid-cols-3 items-stretch gap-2 pt-3 sm:gap-3">
       {/* Dashed route behind the cards, drawing across as the step opens. */}
       <motion.span
         className="pointer-events-none absolute inset-x-6 top-[58%] h-0 border-t-2 border-dashed border-copper/40 ltr:origin-left rtl:origin-right"
@@ -65,7 +65,7 @@ function CityCard({ place, index, active }: { place: CityPlace; index: number; a
 
   return (
     <motion.li
-      className="relative flex-1"
+      className="relative min-w-0"
       initial={false}
       animate={{ opacity: active ? 1 : 0, y: active ? 0 : 16 }}
       transition={{ duration: 0.5, delay, ease }}
@@ -82,7 +82,7 @@ function CityCard({ place, index, active }: { place: CityPlace; index: number; a
         animate={{ y: hovered ? -6 : 0 }}
         transition={{ type: "spring", stiffness: 320, damping: 22 }}
         className={cn(
-          "group relative flex h-full flex-col items-center rounded-2xl border bg-surface px-2 pb-3 pt-4 text-center outline-none transition-[border-color,box-shadow] duration-300 focus-visible:ring-2 focus-visible:ring-copper sm:px-3",
+          "group relative flex h-full flex-col items-center rounded-2xl border bg-surface px-1.5 pb-2.5 pt-4 text-center outline-none transition-[border-color,box-shadow] duration-300 focus-visible:ring-2 focus-visible:ring-copper sm:px-3",
           hovered
             ? "border-copper/50 shadow-[0_18px_40px_-22px_rgba(198,110,78,0.6)]"
             : "border-fg/[0.08] shadow-[0_12px_30px_-24px_rgba(12,35,65,0.45)]"
@@ -111,7 +111,7 @@ function CityCard({ place, index, active }: { place: CityPlace; index: number; a
           key={drawKey}
           viewBox="0 0 64 64"
           className={cn(
-            "h-14 w-14 transition-colors duration-300 sm:h-16 sm:w-16",
+            "h-10 w-10 transition-colors duration-300 sm:h-16 sm:w-16",
             hovered ? "text-copper" : "text-fg/70"
           )}
           fill="none"
@@ -135,7 +135,7 @@ function CityCard({ place, index, active }: { place: CityPlace; index: number; a
 
         <span
           className={cn(
-            "mt-1.5 text-sm font-bold transition-colors duration-300 sm:text-base",
+            "mt-1 text-xs font-bold leading-tight transition-colors duration-300 sm:text-base",
             hovered ? "text-copper" : "text-fg"
           )}
         >

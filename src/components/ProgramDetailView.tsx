@@ -14,7 +14,6 @@ import { cn } from "@/lib/utils";
 import type { Locale } from "@/i18n/config";
 import type { BenefitIcon, ProgramDetail, SiteContent } from "@/lib/content";
 import { programIcons } from "@/lib/program-icons";
-import type { AlfiaForm } from "@/lib/alfia";
 
 const heroGradient: Record<string, string> = {
   ink: "from-ink via-[#16325a] to-ink",
@@ -53,14 +52,12 @@ export function ProgramDetailView({
   content,
   detail,
   heroImage,
-  alfiaForm,
   alfiaEmbedHtml,
 }: {
   locale: Locale;
   content: SiteContent;
   detail: ProgramDetail;
   heroImage?: string | null;
-  alfiaForm?: AlfiaForm | null;
   alfiaEmbedHtml?: string | null;
 }) {
   const Icon = programIcons[detail.slug];
@@ -260,6 +257,9 @@ export function ProgramDetailView({
         <div className="container-amad relative">
           <Reveal>
             <h2 className="text-2xl font-bold text-fg sm:text-3xl">{detail.journey.title}</h2>
+            {detail.journey.subtitle && (
+              <p className="mt-2 text-base font-semibold text-brown sm:text-lg">{detail.journey.subtitle}</p>
+            )}
           </Reveal>
 
           <ProgramJourney slug={detail.slug} steps={detail.journey.steps} locale={locale} />
@@ -269,7 +269,7 @@ export function ProgramDetailView({
       {detail.faq && detail.faq.length > 0 && <Faq title={content.faq.title} items={detail.faq} />}
 
       {detail.showApplicationForm !== false && (
-        <ProgramApplicationForm detail={detail} content={content} tone={tone} locale={locale} alfiaForm={alfiaForm} alfiaEmbedHtml={alfiaEmbedHtml} />
+        <ProgramApplicationForm detail={detail} content={content} tone={tone} alfiaEmbedHtml={alfiaEmbedHtml} />
       )}
     </>
   );

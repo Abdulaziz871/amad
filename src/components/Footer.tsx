@@ -24,17 +24,18 @@ export function Footer({ locale, content }: { locale: Locale; content: SiteConte
         className="pointer-events-none absolute bottom-8 start-6 h-9 w-9 rotate-6 text-copper opacity-[0.22] sm:h-14 sm:w-14"
         aria-hidden
       />
-      <div className="container-amad relative grid gap-10 py-14 md:grid-cols-[1.2fr_1fr_1fr]">
-        <div>
+      <div className="container-amad relative grid grid-cols-2 gap-x-6 gap-y-10 py-12 md:grid-cols-[1.2fr_1fr_1fr] md:py-14">
+        {/* On phones the logo and social links share the first row, start and end. */}
+        <div className="col-span-2 flex items-end justify-between gap-4 md:col-span-1 md:block">
           <Image
             src="/logos/amad-lockup-white-padded.png"
             alt={locale === "ar" ? "امد — من الإنماء" : "Amad — by Alinma"}
             width={2643}
             height={1415}
-            className="h-20 w-auto sm:h-24"
+            className="h-16 w-auto sm:h-24"
             unoptimized
           />
-          <div className="mt-7">
+          <div className="md:mt-7">
             <SocialLinks label={content.footer.followUs} />
           </div>
         </div>
@@ -54,7 +55,7 @@ export function Footer({ locale, content }: { locale: Locale; content: SiteConte
           </ul>
         </div>
 
-        <div>
+        <div className="text-end md:text-start">
           <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-white/50">
             {content.footer.registerInterest}
           </p>

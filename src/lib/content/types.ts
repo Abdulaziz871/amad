@@ -69,6 +69,7 @@ export interface ProgramDetail {
   };
   journey: {
     title: string;
+    subtitle?: string;
     steps: JourneyStep[];
   };
   faq?: FaqItem[];
@@ -103,36 +104,6 @@ export interface JourneyMilestone {
 export interface WhyAmadCard {
   title: string;
   description: string;
-}
-
-export interface AlfiaFormUi {
-  step: string;
-  next: string;
-  back: string;
-  reviewHint: string;
-  member: string;
-  selectPlaceholder: string;
-  submit: string;
-  submitting: string;
-  errorFields: string;
-  errorGeneric: string;
-  chooseAtLeastOne: string;
-  closedTitle: string;
-  closedBody: string;
-  edit: string;
-  change: string;
-  programPeriod: string;
-  cityLabel: string;
-  chooseCity: string;
-  choosePath: string;
-  chooseOption: string;
-  signatureName: string;
-  signatureImage: string;
-  signatureHint: string;
-  signatureTooShort: string;
-  signatureType: string;
-  signatureSize: string;
-  confirmCommitment: string;
 }
 
 export interface SiteContent {
@@ -228,12 +199,9 @@ export interface SiteContent {
   finalCta: {
     title: string;
     subtitle: string;
-    nameLabel: string;
-    emailLabel: string;
-    submit: string;
-    notice: string;
+    /** Button that opens the Google Form for registering interest. */
+    cta: string;
   };
-  alfiaForm: AlfiaFormUi;
   applicationForm: {
     nameLabel: string;
     emailLabel: string;
